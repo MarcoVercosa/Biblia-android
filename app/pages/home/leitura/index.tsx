@@ -7,7 +7,7 @@ export default function Leitura(): JSX.Element {
 
     const [modalLeitura, setModalLeitura] = useState<boolean>(false)
 
-    function OpenCloseModalLeitura() {
+    function OpenCloseModalLeitura(dadosSelecionadosModal?: []) {
         setModalLeitura(!modalLeitura)
     }
 

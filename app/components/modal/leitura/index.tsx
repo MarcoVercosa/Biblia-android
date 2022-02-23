@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import RNPickerSelect from 'react-native-picker-select';
 import { Picker } from '@react-native-picker/picker';
-import { View, Text, Modal, SafeAreaView, Alert, StyleSheet, Image, TouchableOpacity } from "react-native"
+import { View, Text, Modal, TouchableOpacity, Alert } from "react-native"
 import { GetApi } from "../../../api/index"
+import { styles } from "./funcoes/style"
 
 interface IModalLeitura {
     modalLeitura: boolean;
@@ -14,41 +15,61 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
     const [testamentoFetch, setTestamentoFetch] = useState([]);
     const [livroFetch, setLivroFetch] = useState([]);
     const [capituloFetch, setCapituloFetch] = useState<any>(false);
-    const [renderizaCapitulos, setRenderizaCapitulos] = useState<any>([])
 
-    const [valoresArmazenados, setValoresArmazenados] = useState({
+    const [valoresArmazenados, setValoresArmazenados] = useState<any>({
         versao: {
             versao_id: undefined,
             versao_nome: "undefined"
         },
-        versao_id: undefined,
         testamento: {
             testamento_id: undefined,
             testamento_nome: "undefined"
         },
-        testamento_id: undefined,
+        testamentoLimpaCampos() {
+            setLivroFetch([])
+            setCapituloFetch(false)
+        },
         livro: {
             livro_id: undefined,
             livro_testamento_id: undefined,
             livro_posicao: undefined,
-            livro_nome: "String",
-            livro_abreviado: "String",
+            livro_nome: "undefined",
+            livro_abreviado: "undefined",
         },
-        livro_id: undefined,
-        capitulo: undefined,
-        conteudo: "selecione",
-        conteudo_id: undefined
+        livroLimpaCampos() {
+            setCapituloFetch(false)
+        },
+        capitulo: false
     })
 
-
-    async function PreencheCampos(path: string, setState: any): Promise<any> {
+    async function FetchData(path: string, setState: any): Promise<any> {
         let { data } = await GetApi(path)
         setState(data)
     }
 
+    //faz um loop no var que contem os dados da Api. faz um Find para armazenar os Obj respectivos ao valor selecionado e armazena no useState
+    //valueSelect: valor campo selecionado - nameObject: nome da keyObject da var valoresArmazenados
+    //dataFetch: var onde estão armazenados os dados do campo buscados na Api - objDataFetch: nome da keyObject dentro do dataFetch
+    function ArmazenaSelecao(valueSelect: string, nameObject: string, dataFetch: Array<{}>, objDataFetch: string, functionLimpaCampo?: any) {
+        setValoresArmazenados((prevState: any) => {
+            return {
+                ...prevState, [nameObject]: dataFetch.find((data: any) => data[objDataFetch] == valueSelect ? data : "")
+            }
+        })
+        //limpa os demais campos
+        if (functionLimpaCampo == "testamentoLimpaCampos") {
+            return valoresArmazenados.testamentoLimpaCampos()
+        }
+        //limpa os demais campos
+        if (functionLimpaCampo == "livroLimpaCampos") {
+            return valoresArmazenados.livroLimpaCampos()
+        }
+    }
+
+    //cria componente que renderiza os numeros do capitulo
     function RenderizaCapitulos() {
         let armazena = []
-        for (let i = 0; i < capituloFetch[capituloFetch.length - 1]?.capitulo; i++) {
+        for (let i = 1; i < capituloFetch[capituloFetch.length - 1]?.capitulo; i++) {
             armazena.push(<Picker.Item label={String(i)} value={i} />)
         }
         return armazena
@@ -75,13 +96,9 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
                     <Picker
                         style={styles.picker}
                         selectedValue={valoresArmazenados.versao.versao_nome}
-                        // o value é o nome, filtra o array, se o nome dentro do array, for igual ao value, armazena os objeto da vez do loop
-                        onValueChange={(value) => setValoresArmazenados((prevState: any) => {
-                            return {
-                                ...prevState, versao: versaoFetch.find((data: any) => data.versao_nome == value ? data : "")
-                            }
-                        })}
-                        onFocus={() => PreencheCampos("mais/buscaversao", setVersaoFetch)}
+                        // ao selecionar um item, chama a função para armazenar
+                        onValueChange={(value: string) => ArmazenaSelecao(value, "versao", versaoFetch, "versao_nome")}
+                        onFocus={() => FetchData("mais/buscaversao", setVersaoFetch)}
                         mode="dropdown"
                     >
                         {versaoFetch.map((data: any) => {
@@ -94,13 +111,8 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
                     <Picker
                         style={styles.picker}
                         selectedValue={valoresArmazenados.testamento.testamento_nome}
-                        onValueChange={(value) => setValoresArmazenados((prevState: any) => {
-                            return {
-                                ...prevState, testamento: testamentoFetch.find((data: any) =>
-                                    data.testamento_nome == value ? data : "")
-                            }
-                        })}
-                        onFocus={() => PreencheCampos("mais/buscatestamento", setTestamentoFetch)}
+                        onValueChange={(value: string) => ArmazenaSelecao(value, "testamento", testamentoFetch, "testamento_nome", "testamentoLimpaCampos")}
+                        onFocus={() => FetchData("mais/buscatestamento", setTestamentoFetch)}
                         mode="dropdown"
                     >
                         {testamentoFetch.map((data: any) => {
@@ -114,13 +126,8 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
                     <Picker
                         style={styles.picker}
                         selectedValue={valoresArmazenados.livro.livro_nome}
-                        onValueChange={(value) => setValoresArmazenados((prevState: any) => {
-                            return {
-                                ...prevState, livro: livroFetch.find((data: any) =>
-                                    data.livro_nome == value ? data : "")
-                            }
-                        })}
-                        onFocus={() => PreencheCampos(`mais/buscalivros/${valoresArmazenados.testamento.testamento_id}`, setLivroFetch)}
+                        onValueChange={(value: string) => ArmazenaSelecao(value, "livro", livroFetch, "livro_nome", "livroLimpaCampos")}
+                        onFocus={() => FetchData(`mais/buscalivros/${valoresArmazenados.testamento.testamento_id}`, setLivroFetch)}
                         mode="dropdown"
                     >
                         {livroFetch.map((data: any) => {
@@ -134,12 +141,8 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
                     <Picker
                         style={styles.picker}
                         selectedValue={valoresArmazenados.capitulo}
-                        onValueChange={(value) => setValoresArmazenados((prevState: any) => {
-                            return {
-                                ...prevState, capitulo: value
-                            }
-                        })}
-                        onFocus={() => PreencheCampos(`mais/buscacapitulo/${valoresArmazenados.versao.versao_id}/${valoresArmazenados.livro.livro_id}`, setCapituloFetch)}
+                        onValueChange={(value: number) => setValoresArmazenados((prevState: any) => { return { ...prevState, capitulo: value } })}
+                        onFocus={() => FetchData(`mais/buscacapitulo/${valoresArmazenados.versao.versao_id}/${valoresArmazenados.livro.livro_id}`, setCapituloFetch)}
                         mode="dropdown"
                     >
                         {capituloFetch &&
@@ -147,7 +150,6 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
                         }
                     </Picker>
                 </View>
-
 
                 <View style={styles.view_botoes}>
                     <TouchableOpacity
@@ -159,6 +161,7 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
 
                     <TouchableOpacity
                         style={[styles.view_botoes_Buscar, styles.view_botoes_ambos]}
+                        disabled={!valoresArmazenados.capitulo}
                     //onPressOut={ }
                     >
                         <Text style={styles.view_botoes_text}>BUSCAR</Text>
@@ -167,63 +170,4 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
             </View>
         </Modal>
     )
-
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    view_titulo: {
-        backgroundColor: "#08a0ff",
-        height: "10%",
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    view_titulo_text: {
-        fontSize: 23,
-        textAlign: "center",
-        fontWeight: "bold",
-        color: "white"
-    },
-    view_selects: {
-        height: "65%",
-        width: "95%",
-        alignSelf: "center"
-
-    },
-    view_selects_text: {
-        fontSize: 20,
-        marginTop: "7%",
-        textAlign: "center",
-        marginBottom: "2%",
-        fontWeight: "bold"
-    },
-    picker: {
-        backgroundColor: "#e5e5e5",
-    },
-    view_botoes: {
-        height: "25%",
-        justifyContent: "space-around",
-        alignItems: "center",
-        flexDirection: "row"
-    },
-    view_botoes_ambos: {
-        width: "40%",
-        textAlign: "center",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "25%",
-        borderRadius: 30,
-    },
-    view_botoes_Buscar: {
-        backgroundColor: "#03fa54",
-    },
-    view_botoes_Cancelar: {
-        backgroundColor: "#ff3f69",
-    },
-    view_botoes_text: {
-        fontSize: 20,
-        fontWeight: "bold"
-    }
-})
