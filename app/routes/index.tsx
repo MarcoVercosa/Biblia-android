@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
 import Home from "../pages/home";
-import Leitura from "../pages/home/leitura";
+import Leitura from "../pages/leitura";
 
 
 
@@ -28,10 +28,14 @@ export default function Routes(): JSX.Element {
                         headerTitleStyle: {
                             fontWeight: 'bold',
                         },
-                        headerTitleAlign: "center"
+                        headerTitleAlign: "center",
                     }}
                 />
-                <Tab.Screen name="Leitura" component={Leitura} />
+                <Tab.Screen name="Leitura" component={Leitura}
+                    options={{
+                        headerShown: false
+                    }}
+                />
             </Tab.Navigator>
 
         </NavigationContainer>

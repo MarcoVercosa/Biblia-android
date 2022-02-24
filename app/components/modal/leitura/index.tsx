@@ -3,11 +3,12 @@ import RNPickerSelect from 'react-native-picker-select';
 import { Picker } from '@react-native-picker/picker';
 import { View, Text, Modal, TouchableOpacity, Alert } from "react-native"
 import { GetApi } from "../../../api/index"
-import { styles } from "./funcoes/style"
+import { styles } from "./style"
+import { IValoresArmazenados } from "../../../interface/ImodalLeitura"
 
 interface IModalLeitura {
     modalLeitura: boolean;
-    OpenCloseModalLeitura: () => void
+    OpenCloseModalLeitura: (dadosSelecionadosModal?: IValoresArmazenados | boolean) => void
 }
 
 export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IModalLeitura): JSX.Element {
@@ -16,7 +17,7 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
     const [livroFetch, setLivroFetch] = useState([]);
     const [capituloFetch, setCapituloFetch] = useState<any>(false);
 
-    const [valoresArmazenados, setValoresArmazenados] = useState<any>({
+    const [valoresArmazenados, setValoresArmazenados] = useState<IValoresArmazenados>({
         versao: {
             versao_id: undefined,
             versao_nome: "undefined"
@@ -154,7 +155,7 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
                 <View style={styles.view_botoes}>
                     <TouchableOpacity
                         style={[styles.view_botoes_Cancelar, styles.view_botoes_ambos]}
-                        onPressOut={OpenCloseModalLeitura}
+                        onPressOut={() => OpenCloseModalLeitura(false)}
                     >
                         <Text style={styles.view_botoes_text}>SAIR</Text>
                     </TouchableOpacity>
@@ -162,7 +163,7 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
                     <TouchableOpacity
                         style={[styles.view_botoes_Buscar, styles.view_botoes_ambos]}
                         disabled={!valoresArmazenados.capitulo}
-                    //onPressOut={ }
+                        onPressOut={() => { OpenCloseModalLeitura(valoresArmazenados) }}
                     >
                         <Text style={styles.view_botoes_text}>BUSCAR</Text>
                     </TouchableOpacity>
