@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { View, Text, SafeAreaView, Image, TouchableOpacity, ScrollView } from "react-native"
+import { Picker } from '@react-native-picker/picker';
 import ModalLeitura from "../../components/modal/leitura"
 import { styles } from "./style"
 import { GetApi } from "../../api"
@@ -11,19 +12,23 @@ export default function Leitura(): JSX.Element {
 
     const [modalLeitura, setModalLeitura] = useState<boolean>(false)
     const [dadosSelecionadosModal, setDadosSelecionadosModal] = useState<IRetornoApiLeitura>()
+    const [selectOptionCapitulo, setSelectOptionCapitulo] = useState<number>(0)
 
     async function OpenCloseModalLeitura(dataToFetch?: IValoresArmazenados | any) {
-        console.log("chamou OpenCloseModalLeitura")
-        console.log(dataToFetch)
         setModalLeitura(!modalLeitura)
-
         if (dataToFetch) {
-            console.log("chamou OpenCloseModalLeitura dentro do if")
             console.log(dataToFetch)
             let { data } = await GetApi(`mais/buscaconteudo/${dataToFetch.versao.versao_id}/${dataToFetch.testamento.testamento_id}/${dataToFetch.livro.livro_id}/${dataToFetch.capitulo}`)
-            console.log(data)
             setDadosSelecionadosModal(data)
         }
+    }
+
+    function RenderizaSelectCapitulo() {
+        let renderiza = []
+        for (let i = 1; i < dadosSelecionadosModal!.quantidadecapitulo[0].capitulo; i++) {
+            renderiza.push(<Picker.Item label={String(i)} value={i} />)
+        }
+        return renderiza
     }
 
     return (
@@ -50,7 +55,7 @@ export default function Leitura(): JSX.Element {
                                 {dadosSelecionadosModal.nomeVersao[0].versao_nome}
                             </Text>
                         </View>
-                        <ScrollView>
+                        <ScrollView >
                             <View style={styles.viewContainerLeituraVersiculos}>
                                 {dadosSelecionadosModal.conteudo.map((data, index) => {
                                     return (
@@ -61,9 +66,42 @@ export default function Leitura(): JSX.Element {
                                         </TouchableOpacity>
                                     )
                                 })
-
                                 }
                             </View>
+                            <View style={styles.viewContainerArrows}>
+                                <TouchableOpacity style={styles.arrowsButton}>
+                                    <Image
+                                        source={require("../../assets/images/left_arrow.jpg")}
+                                        style={styles.arrows}
+                                    />
+                                    <Text style={styles.arrowsText}>
+                                        {dadosSelecionadosModal.nomeLivro[0].livro_nome} - {dadosSelecionadosModal.capituloAtual - 1}
+                                    </Text>
+                                </TouchableOpacity>
+                                <View style={styles.viewSelectCapitulo}>
+                                    <Picker
+                                        style={styles.selectCapitulo}
+                                        selectedValue={dadosSelecionadosModal?.capituloAtual}
+                                        onValueChange={(value: number) => { }}
+                                        mode="dropdown"
+                                    >
+                                        {dadosSelecionadosModal.quantidadecapitulo[0].capitulo &&
+                                            RenderizaSelectCapitulo()
+                                        }
+                                    </Picker>
+                                </View>
+
+                                <TouchableOpacity style={styles.arrowsButton}>
+                                    <Image
+                                        source={require("../../assets/images/right_arrow.jpg")}
+                                        style={styles.arrows}
+                                    />
+                                    <Text style={styles.arrowsText}>
+                                        {dadosSelecionadosModal.nomeLivro[0].livro_nome} - {dadosSelecionadosModal.capituloAtual + 1}
+                                    </Text >
+                                </TouchableOpacity>
+                            </View>
+
                         </ScrollView>
                     </>
 

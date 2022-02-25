@@ -29,6 +29,7 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
         testamentoLimpaCampos() {
             setLivroFetch([])
             setCapituloFetch(false)
+            setValoresArmazenados(prevState => { return { ...prevState, capitulo: false } })
         },
         livro: {
             livro_id: undefined,
@@ -39,6 +40,7 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
         },
         livroLimpaCampos() {
             setCapituloFetch(false)
+            setValoresArmazenados(prevState => { return { ...prevState, capitulo: false } })
         },
         capitulo: false
     })
@@ -96,7 +98,7 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
                     <Text style={styles.view_selects_text}>Versão</Text>
                     <Picker
                         style={styles.picker}
-                        selectedValue={valoresArmazenados.versao.versao_nome}
+                        selectedValue={valoresArmazenados.versao?.versao_nome}
                         // ao selecionar um item, chama a função para armazenar
                         onValueChange={(value: string) => ArmazenaSelecao(value, "versao", versaoFetch, "versao_nome")}
                         onFocus={() => FetchData("mais/buscaversao", setVersaoFetch)}
@@ -111,7 +113,7 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
                     <Text style={styles.view_selects_text}>Testamento</Text>
                     <Picker
                         style={styles.picker}
-                        selectedValue={valoresArmazenados.testamento.testamento_nome}
+                        selectedValue={valoresArmazenados.testamento?.testamento_nome}
                         onValueChange={(value: string) => ArmazenaSelecao(value, "testamento", testamentoFetch, "testamento_nome", "testamentoLimpaCampos")}
                         onFocus={() => FetchData("mais/buscatestamento", setTestamentoFetch)}
                         mode="dropdown"
@@ -126,7 +128,7 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
                     <Text style={styles.view_selects_text}>Livro</Text>
                     <Picker
                         style={styles.picker}
-                        selectedValue={valoresArmazenados.livro.livro_nome}
+                        selectedValue={valoresArmazenados.livro?.livro_nome}
                         onValueChange={(value: string) => ArmazenaSelecao(value, "livro", livroFetch, "livro_nome", "livroLimpaCampos")}
                         onFocus={() => FetchData(`mais/buscalivros/${valoresArmazenados.testamento.testamento_id}`, setLivroFetch)}
                         mode="dropdown"
