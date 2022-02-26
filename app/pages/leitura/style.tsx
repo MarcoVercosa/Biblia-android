@@ -45,12 +45,6 @@ const styles = StyleSheet.create({
         alignSelf: "center"
 
     },
-    textContainerLeituraVersiculos: {
-        marginBottom: "5%",
-        fontFamily: "Open Sans",
-        fontSize: 20,
-        color: "black",
-    },
     viewContainerArrows: {
         height: 160,
         width: "97%",
@@ -63,8 +57,6 @@ const styles = StyleSheet.create({
         borderColor: "#c7d5e8",
         borderRadius: 30,
         padding: "2%",
-        //        backgroundColor: "#c7d5e8",
-
     },
     arrowsButton: {
         height: 120,
@@ -88,19 +80,22 @@ const styles = StyleSheet.create({
         textAlign: "center",
         textAlignVertical: "center",
     },
-
     selectCapitulo: {
-        backgroundColor: "#00c4ff",
+        backgroundColor: "#afcfff",
         width: "100%",
         borderRadius: 30,
         height: "50%",
         fontSize: 25
-
-
     },
-
-
-
+    viewCuriosidades: {
+        justifyContent: "center",
+        alignContent: "center",
+        alignItems: "center"
+    },
+    tituloCuriosidades: {
+        marginTop: "5%",
+        fontSize: 25
+    },
 })
 
 export { styles }

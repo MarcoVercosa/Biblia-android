@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import RNPickerSelect from 'react-native-picker-select';
 import { Picker } from '@react-native-picker/picker';
-import { View, Text, Modal, TouchableOpacity, Alert } from "react-native"
+import { View, Text, Modal, TouchableOpacity } from "react-native"
 import { GetApi } from "../../../api/index"
 import { styles } from "./style"
 import { IValoresArmazenados } from "../../../interface/ImodalLeitura"
@@ -72,7 +72,7 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
     //cria componente que renderiza os numeros do capitulo
     function RenderizaCapitulos() {
         let armazena = []
-        for (let i = 1; i < capituloFetch[capituloFetch.length - 1]?.capitulo; i++) {
+        for (let i = 1; i <= capituloFetch[capituloFetch.length - 1]?.capitulo; i++) {
             armazena.push(<Picker.Item label={String(i)} value={i} />)
         }
         return armazena
