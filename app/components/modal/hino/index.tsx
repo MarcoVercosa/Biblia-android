@@ -5,15 +5,12 @@ import { GetApi } from "../../../api/index"
 import { IResutadoPorPalavra } from "../../../interface/IResultadoPorPalavra";
 import RenderizaHinoPorPalavra from "../../harpa/renderizaPesquisaporPalavra";
 
-
-
-function ModalHino({ modalHinoSelect, OpenCloseModalHino }: any) {
+function ModalHino({ modalHinoSelect, OpenCloseModalHino }: { modalHinoSelect: boolean, OpenCloseModalHino: (numeroHino: boolean | Number) => void }) {
 
     const [numerosHinoAPI, setNumerosHinoAPI] = useState<Array<number>>([])
     const [hinosBuscaPorPalavraAPI, setHinosBuscaPorPalavraAPI] = useState<Array<IResutadoPorPalavra>>()
     const [numeroHinoSelect, setNumeroHinoSelect] = useState<number>(1)
     const [letraHinoBusca, setLetraHinoBusca] = useState<string>("")
-
 
     useEffect(() => {
         const FetchNumerosAPI = async (): Promise<void> => {
@@ -24,8 +21,8 @@ function ModalHino({ modalHinoSelect, OpenCloseModalHino }: any) {
     }, [])
 
     async function BuscaHinosPorPalavra(): Promise<void> {
-        if (letraHinoBusca.length < 3 || letraHinoBusca.length > 15) {
-            Alert.alert("Digite ao menos 2 letras ou no máximo 15 letras")
+        if (letraHinoBusca.length < 3 || letraHinoBusca.length > 20) {
+            Alert.alert("Digite ao menos 2 letras ou no máximo 20 letras")
             return
         }
         let { data } = await GetApi(`hinoharpa/buscatituloporpalavra/${letraHinoBusca}`)
@@ -35,8 +32,6 @@ function ModalHino({ modalHinoSelect, OpenCloseModalHino }: any) {
         }
         setHinosBuscaPorPalavraAPI(await data)
     }
-
-
     return (
         <SafeAreaView>
             <Modal
@@ -73,7 +68,7 @@ function ModalHino({ modalHinoSelect, OpenCloseModalHino }: any) {
                         mode="dropdown"
                     >
                         {numerosHinoAPI.length > 0 &&
-                            numerosHinoAPI.map((data: any) => <Picker.Item label={String(data.numero)} value={data.numero} />)
+                            numerosHinoAPI.map((data: any, index: number) => <Picker.Item key={index} label={String(data.numero)} value={data.numero} />)
                         }
                     </Picker>
                 </View>
@@ -92,11 +87,15 @@ function ModalHino({ modalHinoSelect, OpenCloseModalHino }: any) {
                     />
                 </View>
 
-                <FlatList
-                    data={hinosBuscaPorPalavraAPI}
-                    renderItem={({ item }) => <RenderizaHinoPorPalavra item={item} />}
-                    keyExtractor={({ item, index }: any) => index}
-                />
+                <View style={styles.viewRenderizaCuriosidades}>
+                    <FlatList
+                        numColumns={2}
+                        contentContainerStyle={styles.renderizaCuriosidades}
+                        data={hinosBuscaPorPalavraAPI}
+                        renderItem={({ item, index }) => <RenderizaHinoPorPalavra item={item} index={index} OpenCloseModalHino={OpenCloseModalHino} />}
+                        keyExtractor={(item, index): any => index}
+                    />
+                </View>
 
                 <TouchableOpacity
                     style={styles.botaoBuscaPorPalavraHino}
@@ -106,8 +105,6 @@ function ModalHino({ modalHinoSelect, OpenCloseModalHino }: any) {
                         Buscar
                     </Text>
                 </TouchableOpacity>
-
-
             </Modal>
         </SafeAreaView >
     )
@@ -174,6 +171,16 @@ const styles = StyleSheet.create({
         width: "45%",
         backgroundColor: "#e5e5e5",
         fontSize: 21
+    },
+    viewRenderizaCuriosidades: {
+        justifyContent: "space-around",
+        alignItems: "center",
+        height: "61%",
+
+    },
+    renderizaCuriosidades: {
+        justifyContent: "space-around",
+
     },
     botaoBuscaPorPalavraHino: {
         backgroundColor: "#03fa54",

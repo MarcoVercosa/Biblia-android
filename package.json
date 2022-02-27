@@ -18,7 +18,6 @@
     "axios": "^0.26.0",
     "react": "17.0.2",
     "react-native": "0.67.2",
-    "react-native-picker-select": "^8.0.4",
     "react-native-safe-area-context": "^3.4.1",
     "react-native-screens": "^3.12.0"
   },

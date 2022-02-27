@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import RNPickerSelect from 'react-native-picker-select';
 import { Picker } from '@react-native-picker/picker';
 import { View, Text, Modal, TouchableOpacity } from "react-native"
 import { GetApi } from "../../../api/index"
@@ -73,7 +72,7 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
     function RenderizaCapitulos() {
         let armazena = []
         for (let i = 1; i <= capituloFetch[capituloFetch.length - 1]?.capitulo; i++) {
-            armazena.push(<Picker.Item label={String(i)} value={i} />)
+            armazena.push(<Picker.Item key={i} label={String(i)} value={i} />)
         }
         return armazena
     }
@@ -104,9 +103,9 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
                         onFocus={() => FetchData("mais/buscaversao", setVersaoFetch)}
                         mode="dropdown"
                     >
-                        {versaoFetch.map((data: any) => {
+                        {versaoFetch.map((data: any, index: number) => {
                             return (
-                                <Picker.Item label={data.versao_nome} value={data.versao_nome} />
+                                <Picker.Item key={index} label={data.versao_nome} value={data.versao_nome} />
                             )
                         })}
                     </Picker>
@@ -118,9 +117,9 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
                         onFocus={() => FetchData("mais/buscatestamento", setTestamentoFetch)}
                         mode="dropdown"
                     >
-                        {testamentoFetch.map((data: any) => {
+                        {testamentoFetch.map((data: any, index: number) => {
                             return (
-                                <Picker.Item label={data.testamento_nome} value={data.testamento_nome} />
+                                <Picker.Item key={index} label={data.testamento_nome} value={data.testamento_nome} />
                             )
                         })}
                     </Picker>
@@ -133,9 +132,9 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
                         onFocus={() => FetchData(`mais/buscalivros/${valoresArmazenados.testamento.testamento_id}`, setLivroFetch)}
                         mode="dropdown"
                     >
-                        {livroFetch.map((data: any) => {
+                        {livroFetch.map((data: any, index: number) => {
                             return (
-                                <Picker.Item label={data.livro_nome} value={data.livro_nome} />
+                                <Picker.Item key={index} label={data.livro_nome} value={data.livro_nome} />
                             )
                         })}
                     </Picker>

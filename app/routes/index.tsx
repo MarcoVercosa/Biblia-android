@@ -8,6 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from "../pages/home";
 import Leitura from "../pages/leitura";
 import Harpa from "../pages/harpa";
+import Sobre from "../pages/sobre";
 
 
 
@@ -38,6 +39,11 @@ export default function Routes(): JSX.Element {
                     }}
                 />
                 <Tab.Screen name="Harpa" component={Harpa}
+                    options={{
+                        headerShown: false
+                    }}
+                />
+                <Tab.Screen name="Sobre" component={Sobre}
                     options={{
                         headerShown: false
                     }}
