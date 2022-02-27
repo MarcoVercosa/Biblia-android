@@ -1,5 +1,5 @@
 import React from "react"
-import { View, Text, SafeAreaView, Image, TouchableOpacity, ScrollView, StyleSheet } from "react-native"
+import { View, Text, SafeAreaView, ScrollView, StyleSheet } from "react-native"
 
 
 export default function Sobre(): JSX.Element {
@@ -32,6 +32,7 @@ export default function Sobre(): JSX.Element {
                     <Text style={styles.viewConteudo}> NÃO SE ESQUEÇA: VOCÊ É MUITO AMADO E ESPECIAL PRA DEUS. SEMPRE !</Text>
 
                     <Text style={styles.viewConteudo}> Um forte abraço a todos.</Text>
+
                 </ScrollView>
             </View>
         </SafeAreaView>

@@ -4,6 +4,8 @@ import { Picker } from '@react-native-picker/picker';
 import { GetApi } from "../../../api/index"
 import { IResutadoPorPalavra } from "../../../interface/IResultadoPorPalavra";
 import RenderizaHinoPorPalavra from "../../harpa/renderizaPesquisaporPalavra";
+import Loading from "../../loading";
+import { styles } from "./style"
 
 function ModalHino({ modalHinoSelect, OpenCloseModalHino }: { modalHinoSelect: boolean, OpenCloseModalHino: (numeroHino: boolean | Number) => void }) {
 
@@ -11,6 +13,7 @@ function ModalHino({ modalHinoSelect, OpenCloseModalHino }: { modalHinoSelect: b
     const [hinosBuscaPorPalavraAPI, setHinosBuscaPorPalavraAPI] = useState<Array<IResutadoPorPalavra>>()
     const [numeroHinoSelect, setNumeroHinoSelect] = useState<number>(1)
     const [letraHinoBusca, setLetraHinoBusca] = useState<string>("")
+    const [loading, setLoading] = useState<boolean>(false)
 
     useEffect(() => {
         const FetchNumerosAPI = async (): Promise<void> => {
@@ -25,12 +28,29 @@ function ModalHino({ modalHinoSelect, OpenCloseModalHino }: { modalHinoSelect: b
             Alert.alert("Digite ao menos 2 letras ou no máximo 20 letras")
             return
         }
+        setLoading(true)
         let { data } = await GetApi(`hinoharpa/buscatituloporpalavra/${letraHinoBusca}`)
         if (await data.length < 1) {// se não retornar nada
+            setLoading(false)
             Alert.alert(`Não foi encontrado nenhum hino com a palavra ${letraHinoBusca}`)
+            setHinosBuscaPorPalavraAPI([])
             return
         }
         setHinosBuscaPorPalavraAPI(await data)
+        setLoading(false)
+    }
+
+    if (loading) {
+        return (
+            <Modal
+                animationType="slide"
+                transparent={false}
+                visible={modalHinoSelect}
+                onRequestClose={() => OpenCloseModalHino(false)}
+            >
+                <Loading />
+            </Modal>
+        )
     }
     return (
         <SafeAreaView>
@@ -63,8 +83,11 @@ function ModalHino({ modalHinoSelect, OpenCloseModalHino }: { modalHinoSelect: b
                     <Picker
                         style={styles.selectNumeroHino}
                         selectedValue={numeroHinoSelect}
-                        onValueChange={(value: number) => { setNumeroHinoSelect(value) }}
-                        //onFocus={() => console.log(hino)}
+                        onValueChange={(value: number) => {
+                            setNumeroHinoSelect(value)
+                            OpenCloseModalHino(value)
+                        }}
+
                         mode="dropdown"
                     >
                         {numerosHinoAPI.length > 0 &&
@@ -87,10 +110,10 @@ function ModalHino({ modalHinoSelect, OpenCloseModalHino }: { modalHinoSelect: b
                     />
                 </View>
 
-                <View style={styles.viewRenderizaCuriosidades}>
+                <View style={styles.viewRenderizaHinos}>
                     <FlatList
                         numColumns={2}
-                        contentContainerStyle={styles.renderizaCuriosidades}
+                        contentContainerStyle={styles.renderizaHinos}
                         data={hinosBuscaPorPalavraAPI}
                         renderItem={({ item, index }) => <RenderizaHinoPorPalavra item={item} index={index} OpenCloseModalHino={OpenCloseModalHino} />}
                         keyExtractor={(item, index): any => index}
@@ -109,96 +132,5 @@ function ModalHino({ modalHinoSelect, OpenCloseModalHino }: { modalHinoSelect: b
         </SafeAreaView >
     )
 }
-
-const styles = StyleSheet.create({
-    viewHeader: {
-        flexDirection: "row",
-        height: "8%",
-        justifyContent: "space-between",
-        paddingTop: "1%"
-    },
-    botaoSair: {
-        width: "20%",
-        justifyContent: "center",
-        alignItems: "center",
-        alignSelf: "center",
-        height: "100%",
-        borderRadius: 30,
-    },
-    viewHeaderImage: {
-        height: "100%",
-        width: "70%",
-    },
-
-    titulo: {
-        fontSize: 28,
-        textAlign: "center",
-        textAlignVertical: "center",
-        backgroundColor: "#08a0ff",
-        height: "100%",
-        width: "80%",
-        borderRadius: 30
-    },
-    viewBuscaPorNumero: {
-        marginTop: "5%",
-        flexDirection: "row",
-        justifyContent: "center",
-        alignContent: "center",
-        alignItems: "center",
-
-    },
-    textSelectNumeroHino: {
-        fontSize: 25,
-        width: "45%",
-
-    },
-    selectNumeroHino: {
-        width: "45%",
-        backgroundColor: "#e5e5e5",
-    },
-    viewBuscaPorPalavra: {
-        marginTop: "5%",
-        flexDirection: "row",
-        justifyContent: "center",
-        alignContent: "center",
-        alignItems: "center",
-    },
-    textBuscaPorPalavraHino: {
-        fontSize: 25,
-        width: "45%",
-    },
-    inputBuscaPorPalavraHino: {
-        width: "45%",
-        backgroundColor: "#e5e5e5",
-        fontSize: 21
-    },
-    viewRenderizaCuriosidades: {
-        justifyContent: "space-around",
-        alignItems: "center",
-        height: "61%",
-
-    },
-    renderizaCuriosidades: {
-        justifyContent: "space-around",
-
-    },
-    botaoBuscaPorPalavraHino: {
-        backgroundColor: "#03fa54",
-        marginTop: "5%",
-        width: "40%",
-        justifyContent: "center",
-        alignItems: "center",
-        alignSelf: "center",
-        height: "8%",
-        borderRadius: 30,
-    },
-    view_botoes_text: {
-        fontSize: 20,
-        fontWeight: "bold"
-    },
-
-
-
-})
 
 export { ModalHino }

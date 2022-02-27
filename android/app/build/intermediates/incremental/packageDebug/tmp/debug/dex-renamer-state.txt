@@ -1,11 +1,11 @@
-#Mon Feb 21 01:15:06 BRT 2022
-path.3=0/classes.dex
-path.2=14/classes.dex
+#Sat Feb 26 21:57:08 BRT 2022
+path.3=14/classes.dex
+path.2=0/classes.dex
 path.1=0/classes.dex
 path.0=classes.dex
-base.3=C\:\\Users\\marco\\Documents\\projetos\\reactNative\\BibliaForAndroid\\BibliaForAndroid\\android\\app\\build\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
-base.2=C\:\\Users\\marco\\Documents\\projetos\\reactNative\\BibliaForAndroid\\BibliaForAndroid\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
-base.1=C\:\\Users\\marco\\Documents\\projetos\\reactNative\\BibliaForAndroid\\BibliaForAndroid\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.3=C\:\\Users\\marco\\Documents\\projetos\\reactNative\\BibliaForAndroid\\BibliaForAndroid\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
+base.2=C\:\\Users\\marco\\Documents\\projetos\\reactNative\\BibliaForAndroid\\BibliaForAndroid\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.1=C\:\\Users\\marco\\Documents\\projetos\\reactNative\\BibliaForAndroid\\BibliaForAndroid\\android\\app\\build\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
 base.0=C\:\\Users\\marco\\Documents\\projetos\\reactNative\\BibliaForAndroid\\BibliaForAndroid\\android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 renamed.3=classes4.dex
 renamed.2=classes3.dex

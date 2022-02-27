@@ -10,12 +10,8 @@ import Leitura from "../pages/leitura";
 import Harpa from "../pages/harpa";
 import Sobre from "../pages/sobre";
 
-
-
 export default function Routes(): JSX.Element {
-    const Stack = createNativeStackNavigator();
     const Tab = createBottomTabNavigator();
-
 
     return (
         <NavigationContainer>

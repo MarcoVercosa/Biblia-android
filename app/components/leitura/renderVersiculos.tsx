@@ -2,8 +2,6 @@ import React from 'react';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 function RenderizaVersiculos({ data, index }: { data: any, index: number }): JSX.Element {
-    console.log(data)
-    console.log(index)
     return (
         <TouchableOpacity>
             <Text key={index} style={styles.textContainerLeituraVersiculos}>

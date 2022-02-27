@@ -1,6 +1,7 @@
 import * as React from "react"
 import { Image, SafeAreaView, View, StyleSheet, } from "react-native";
 import ArticlesHome from "../../components/articlesHome";
+import { styles } from "./style"
 
 export default function Home(): JSX.Element {
     return (
@@ -15,20 +16,3 @@ export default function Home(): JSX.Element {
         </SafeAreaView >
     )
 }
-
-const styles = StyleSheet.create({
-
-    safeContainer: {
-        flex: 1,
-    },
-    viewImage: {
-        height: "30%",
-        marginTop: "2%",
-        padding: "1%",
-    },
-    viewImageImage: {
-        height: "100%",
-        width: "100%",
-        borderRadius: 30
-    },
-})

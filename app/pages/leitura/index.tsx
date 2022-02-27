@@ -6,30 +6,31 @@ import { styles } from "./style"
 import { GetApi } from "../../api"
 import { RenderizaVersiculos } from "../../components/leitura/renderVersiculos";
 import { RenderizaCuriosidades } from "../../components/leitura/renderizaCuriosidades";
+import Loading from "../../components/loading";
 import { IValoresArmazenados } from "../../interface/ImodalLeitura"
 import { IRetornoApiLeitura } from "../../interface/IRetornoApiLeitura"
 import { ICuriosidades } from "../../interface/ICuriosidades";
 
-
 export default function Leitura(): JSX.Element {
-
     const [modalLeitura, setModalLeitura] = useState<boolean>(false)
     const [dadosLeituraRetornoApi, setDadosLeituraRetornoApi] = useState<IRetornoApiLeitura>()
     const [dadosSelecionadosModal, setDadosSelecionadosModal] = useState<IValoresArmazenados>()
     const [curiosidades, setCuriosidades] = useState<any | Array<ICuriosidades>>(false)
+    const [loading, setLoading] = useState<boolean>(false)
     const scrollRef: any = useRef();
 
     async function OpenCloseModalLeitura(dataToFetch?: IValoresArmazenados | any) {
         setModalLeitura(!modalLeitura)
         if (dataToFetch) {
+            setLoading(true)
             let { data } = await GetApi(`mais/buscaconteudo/${dataToFetch.versao.versao_id}/${dataToFetch.testamento.testamento_id}/${dataToFetch.livro.livro_id}/${dataToFetch.capitulo}`)
             setDadosSelecionadosModal(dataToFetch)
             setDadosLeituraRetornoApi(data)
             let resultado = await GetApi(`curiosidades/buscacuriosidade/${dataToFetch?.livro.livro_nome}`)
             setCuriosidades(resultado)
+            setLoading(false)
         }
     }
-
     function RenderizaSelectCapitulo() {
         let renderiza = []
         for (let i = 1; i <= dadosLeituraRetornoApi!.quantidadecapitulo[0].capitulo; i++) {
@@ -37,26 +38,37 @@ export default function Leitura(): JSX.Element {
         }
         return renderiza
     }
+    //usado nas funções para que o scrollview role para o início
     const ScrollToTop = () => {
         scrollRef.current.scrollTo({
             y: 0,
-            animated: true,
+            animated: false,
         });
     }
     async function AvancaCapitulo() {
+        setLoading(true)
         let { data } = await GetApi(`mais/buscaconteudo/${dadosSelecionadosModal!.versao.versao_id}/${dadosSelecionadosModal!.testamento.testamento_id}/${dadosSelecionadosModal!.livro.livro_id}/${dadosLeituraRetornoApi!.capituloAtual + 1}`)
         setDadosLeituraRetornoApi(data)
+        setLoading(false)
         ScrollToTop()
     }
     async function RetornaCapitulo() {
+        setLoading(true)
         let { data } = await GetApi(`mais/buscaconteudo/${dadosSelecionadosModal!.versao.versao_id}/${dadosSelecionadosModal!.testamento.testamento_id}/${dadosSelecionadosModal!.livro.livro_id}/${dadosLeituraRetornoApi!.capituloAtual - 1}`)
         setDadosLeituraRetornoApi(data)
+        setLoading(false)
         ScrollToTop()
     }
     async function NavegaPorSelect(capituloValor: number) {
+        setLoading(true)
         let { data } = await GetApi(`mais/buscaconteudo/${dadosSelecionadosModal!.versao.versao_id}/${dadosSelecionadosModal!.testamento.testamento_id}/${dadosSelecionadosModal!.livro.livro_id}/${capituloValor}`)
         setDadosLeituraRetornoApi(data)
+        setLoading(false)
         ScrollToTop()
+    }
+
+    if (loading) {
+        return (<Loading />)
     }
     return (
         <SafeAreaView style={styles.safeContainer}>
@@ -132,6 +144,7 @@ export default function Leitura(): JSX.Element {
                             <View style={styles.viewCuriosidades}>
                                 <Text style={styles.tituloCuriosidades} >CURIOSIDADES</Text>
                                 {curiosidades && curiosidades.data.map((data: any) => <RenderizaCuriosidades data={data} />)}
+
                             </View>
                         </ScrollView>
                     </>

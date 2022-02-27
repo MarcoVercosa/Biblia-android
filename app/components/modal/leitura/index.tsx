@@ -75,6 +75,7 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
             armazena.push(<Picker.Item key={i} label={String(i)} value={i} />)
         }
         return armazena
+
     }
 
     return (

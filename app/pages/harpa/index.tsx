@@ -1,31 +1,42 @@
 import React, { useState, useRef } from "react"
-import { View, Text, SafeAreaView, Image, TouchableOpacity, StyleSheet, FlatList } from "react-native"
-import { Picker } from '@react-native-picker/picker';
+import { View, Text, SafeAreaView, Image, TouchableOpacity, FlatList } from "react-native"
 import { GetApi } from "../../api";
 import { ModalHino } from "../../components/modal/hino";
+import { styles } from "./style"
+import Loading from "../../components/loading/index"
 
 interface IResultado {
     letra: string;
-    titulo: string
+    titulo: string,
+}
+
+interface IRetorno {
+    letra: [];
+    titulo: string,
+    numero: Number
 }
 
 export default function Harpa(): JSX.Element {
     const [modalHinoSelect, setModalHinoSelect] = useState<boolean>(false)
-    const [letraBuscaAPI, setLetraBuscaAPI] = useState<Array<{ letra: [], titulo: string }>>([])
+    const [letraBuscaAPI, setLetraBuscaAPI] = useState<Array<IRetorno>>([])
+    const [loading, setLoading] = useState<boolean>(false)
 
 
     async function OpenCloseModalHino(numeroHino: boolean | Number) {
         setModalHinoSelect(!modalHinoSelect)
         if (numeroHino) {
+            setLoading(true)
             let { data }: { data: IResultado[] } = await GetApi(`hinoharpa/buscatitulopornumero/${numeroHino}`)
             let separaLinhas: Array<any> = data[0].letra.split("%")
-            let resultado: Array<any> = data.map((dados: any) => { return { letra: separaLinhas, titulo: dados.titulo } })
+            let resultado: Array<any> = data.map((dados: any) => { return { letra: separaLinhas, titulo: dados.titulo, numero: numeroHino } })
             setLetraBuscaAPI(resultado)
-
-            console.log(resultado)
+            setLoading(false)
         }
     }
 
+    if (loading) {
+        return (<Loading />)
+    }
     return (
         <SafeAreaView style={styles.safeContainer}>
             <View style={styles.viewHeader}>
@@ -44,7 +55,7 @@ export default function Harpa(): JSX.Element {
                     letraBuscaAPI.length > 0 &&
                     <>
                         <Text style={styles.tituloLetraHino}>
-                            {letraBuscaAPI[0].titulo}
+                            {letraBuscaAPI[0].titulo} - {letraBuscaAPI[0].numero}
                         </Text>
                         <FlatList
                             contentContainerStyle={styles.renderizaConteudos}
@@ -59,51 +70,3 @@ export default function Harpa(): JSX.Element {
     )
 }
 
-const styles = StyleSheet.create({
-    safeContainer: {
-        flex: 1,
-        backgroundColor: "#e2e2e2",
-    },
-    viewHeader: {
-        height: "10%",
-        justifyContent: "center",
-        borderWidth: 3,
-        borderColor: "#c7d5e8",
-        borderRadius: 50,
-        backgroundColor: "#c7d5e8",
-        marginTop: "0.7%"
-    },
-    modalPesquisaHino: {
-        alignItems: "center",
-        marginTop: "1%",
-    },
-    viewHinoModalImage: {
-        width: "15%",
-        height: "100%",
-        marginLeft: "2%",
-    },
-    viewLetraHino: {
-        height: "85.5%",
-        backgroundColor: "#00e3ab",
-        borderRadius: 50,
-        width: "95%",
-        marginTop: "5%",
-        alignSelf: "center"
-    },
-    tituloLetraHino: {
-        fontSize: 25,
-        textAlign: "center",
-        marginTop: "10%",
-        marginBottom: "5%"
-    },
-    renderizaConteudos: {
-        width: "95%"
-    },
-    conteudoLetraHino: {
-        width: "100%",
-        textAlign: "center",
-        fontSize: 18,
-    }
-
-
-})

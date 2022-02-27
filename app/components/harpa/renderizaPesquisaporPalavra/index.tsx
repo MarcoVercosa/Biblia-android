@@ -9,7 +9,6 @@ interface IRenderizaHinoPorPalavra {
 }
 
 export default function RenderizaHinoPorPalavra({ item, index, OpenCloseModalHino }: IRenderizaHinoPorPalavra) {
-
     return (
         <TouchableOpacity
             style={styles.renderizaPorPalavra}
