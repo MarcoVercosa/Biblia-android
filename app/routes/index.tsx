@@ -1,7 +1,6 @@
 import * as React from "react"
-
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
@@ -15,37 +14,63 @@ export default function Routes(): JSX.Element {
 
     return (
         <NavigationContainer>
-            <Tab.Navigator>
+            <Tab.Navigator
+                screenOptions={({ route }) => ({
+                    tabBarIcon: ({ color, size }) => {
+                        let iconName;
+
+                        switch (route.name) {
+                            case 'Home':
+                                iconName = 'home';
+                                break;
+                            case 'Leitura':
+                                iconName = 'book';
+                                break;
+                            case 'Harpa':
+                                iconName = 'music';
+                                break;
+                            case 'Sobre':
+                                iconName = 'thumbs-up';
+                                break;
+                            default:
+                                iconName = 'circle';
+                                break;
+                        }
+
+                        return <FontAwesome name={iconName} size={35} color={color} />;
+                    },
+                    tabBarActiveTintColor: '#43ffce',
+                    tabBarInactiveTintColor: "#777",
+                })}
+
+            >
+
                 <Tab.Screen name="Home" component={Home}
                     options={{
-                        title: 'Home',
-                        headerStyle: {
-                            backgroundColor: "#08a0ff",
-                        },
-                        headerTintColor: '#fff',
-                        headerTitleStyle: {
-                            fontWeight: 'bold',
-                        },
-                        headerTitleAlign: "center",
+                        title: '',
+                        headerShown: false,
                     }}
                 />
                 <Tab.Screen name="Leitura" component={Leitura}
                     options={{
-                        headerShown: false
+                        title: '',
+                        headerShown: false,
+
                     }}
                 />
                 <Tab.Screen name="Harpa" component={Harpa}
                     options={{
+                        title: '',
                         headerShown: false
                     }}
                 />
                 <Tab.Screen name="Sobre" component={Sobre}
                     options={{
+                        title: '',
                         headerShown: false
                     }}
                 />
             </Tab.Navigator>
-
         </NavigationContainer>
 
     )

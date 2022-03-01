@@ -51,18 +51,18 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
 
     //faz um loop no var que contem os dados da Api. faz um Find para armazenar os Obj respectivos ao valor selecionado e armazena no useState
     //valueSelect: valor campo selecionado - nameObject: nome da keyObject da var valoresArmazenados
-    //dataFetch: var onde estão armazenados os dados do campo buscados na Api - objDataFetch: nome da keyObject dentro do dataFetch
+    //dataFetch: var onde estão armazenados os dados do campo buscado na Api - objDataFetch: nome da keyObject dentro do dataFetch
     function ArmazenaSelecao(valueSelect: string, nameObject: string, dataFetch: Array<{}>, objDataFetch: string, functionLimpaCampo?: any) {
         setValoresArmazenados((prevState: any) => {
             return {
                 ...prevState, [nameObject]: dataFetch.find((data: any) => data[objDataFetch] == valueSelect ? data : "")
             }
         })
-        //limpa os demais campos
+        //limpa os demais campos se estivem dados
         if (functionLimpaCampo == "testamentoLimpaCampos") {
             return valoresArmazenados.testamentoLimpaCampos()
         }
-        //limpa os demais campos
+        //limpa os demais campos se estivem dados
         if (functionLimpaCampo == "livroLimpaCampos") {
             return valoresArmazenados.livroLimpaCampos()
         }

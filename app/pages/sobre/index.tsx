@@ -15,10 +15,9 @@ export default function Sobre(): JSX.Element {
                     <Text style={styles.viewConteudo}>  E como gosto muito de tecnologia, resolvi criar algo relacionado que agradasse a Deus.</Text>
                     <Text style={styles.viewConteudo}> E foi com muito orgulho e suor que criei o site FONTE DE VIDA, para que você possa de forma dinâmica, fácil e intuitiva
                         ler a palavra de Deus, pois Sua palavra é vida e vida em abunbdância e deve ser acessível de forma prática e fácil. </Text>
-                    <Text style={styles.viewConteudo}>  O site FONTE DE VIDA foi criado para poder levar a palavra, conhecimento e a vontade de Deus para qualquer lugar do mundo. </Text>
+                    <Text style={styles.viewConteudo}>  O site FONTE DE VIDA e o aplicativo foram criadoa para poderem levar a palavra, conhecimento e a vontade de Deus para qualquer lugar do mundo. </Text>
                     <Text style={styles.viewConteudo}> Aqui você tem acesso às 13 versões da biblia sagrada totalmente online.</Text>
-                    <Text style={styles.viewConteudo}> O site FONTE DE VIDA permite você a encontrar de forma fácil o livro, capítulo e versículo e também via pesquisa por palavra,</Text>
-                    <Text style={styles.viewConteudo}> onde a pesquisa lhe mostrará livro, capítulo e versículo relacionado a palavra desejada e te direcionará até o caminho correto onde se encontra na bíblia.</Text>
+                    <Text style={styles.viewConteudo}> O site FONTE DE VIDAe o aplcativo permitem você a encontrar de forma fácil o livro, capítulo e versículo.</Text>
 
                     <Text style={styles.viewConteudo}> Há também acesso aos 524 Hinos da Harpa Cristã. </Text>
                     <Text style={styles.viewConteudo}> Onde você pode buscar o hino desejado tanto por número, quanto pela pesquisa por palavra contida no Hino.</Text>

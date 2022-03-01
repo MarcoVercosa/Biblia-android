@@ -25,17 +25,29 @@ const styles = StyleSheet.create({
     },
     viewLetraHino: {
         height: "85.5%",
-        backgroundColor: "#00e3ab",
-        borderRadius: 50,
         width: "95%",
-        marginTop: "5%",
-        alignSelf: "center"
+        alignSelf: "center",
+
     },
     tituloLetraHino: {
         fontSize: 32,
         textAlign: "center",
-        marginTop: "10%",
-        marginBottom: "5%"
+        marginTop: "5%",
+        marginBottom: "5%",
+        height: "14%",
+
+    },
+    conteudoLetraHinoButtonShare: {
+        height: "8%",
+        justifyContent: "center",
+        alignItems: "flex-start",
+        width: "13%"
+    },
+    conteudoLetraHinoShare: {
+        height: 40,
+        width: 40,
+
+
     },
     renderizaConteudos: {
         width: "95%"
@@ -43,8 +55,10 @@ const styles = StyleSheet.create({
     conteudoLetraHino: {
         width: "100%",
         textAlign: "center",
-        fontSize: 18,
-    }
+        fontSize: 20,
+        color: "black"
+    },
+
 })
 
 export { styles }
