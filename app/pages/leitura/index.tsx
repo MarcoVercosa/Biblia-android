@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { View, Text, SafeAreaView, Image, TouchableOpacity, ScrollView } from "react-native"
 import { Picker } from '@react-native-picker/picker';
 import ModalLeitura from "../../components/modal/leitura"
@@ -11,21 +11,55 @@ import { IValoresArmazenados } from "../../interface/ImodalLeitura"
 import { IRetornoApiLeitura } from "../../interface/IRetornoApiLeitura"
 import { ICuriosidades } from "../../interface/ICuriosidades";
 
-export default function Leitura(): JSX.Element {
+export default function Leitura({ route }: any): JSX.Element {
     const [modalLeitura, setModalLeitura] = useState<boolean>(false)
     const [dadosLeituraRetornoApi, setDadosLeituraRetornoApi] = useState<IRetornoApiLeitura>()
-    const [dadosSelecionadosModal, setDadosSelecionadosModal] = useState<IValoresArmazenados>()
+    const [dadosSelecionadosModal, setDadosSelecionadosModal] = useState<any | IValoresArmazenados>()
     const [curiosidades, setCuriosidades] = useState<any | Array<ICuriosidades>>(false)
     const [loading, setLoading] = useState<boolean>(false)
     const scrollRef: any = useRef();
 
+    useEffect(() => {
+
+        //ao selecionar uma conteudo no componente "Pesquisar", ele direcionará para esse componente, e passará os dados via props (route)
+        // se houver dados nos params da rota, significa que houve um direcionamento do componente Pesquisa
+        if (route.params != undefined) {
+            BuscaPalavraPesquisada()
+        }
+        async function BuscaPalavraPesquisada() {
+            setLoading(true) //chama o componente para loading
+            let { data } = await GetApi(`mais/buscaconteudo/${route.params.versao_id}/${route.params.livro_testamento_id}/${route.params.livro_id}/${route.params.capitulo}`)
+            //aqui montamos um obj não qual as funções de avançar e voltar as utilizam
+            setDadosSelecionadosModal({
+                versao: {
+                    versao_id: route.params.versao_id
+                },
+                testamento: {
+                    testamento_id: route.params.livro_testamento_id
+                },
+                livro: {
+                    livro_id: route.params.livro_id
+                }
+
+            })  // armazena a selação para leitura
+            setDadosLeituraRetornoApi(data) // armazena o retorno da api
+            let resultado = await GetApi(`curiosidades/buscacuriosidade/${route.params?.livro_nome}`)
+            setCuriosidades(resultado)
+            setLoading(false)
+        }
+        //se houver alteração no params da props, o useEffect irá executar
+    }, [route.params])
+
+
+
     async function OpenCloseModalLeitura(dataToFetch?: IValoresArmazenados | any) {
+        //fecha o modal
         setModalLeitura(!modalLeitura)
         if (dataToFetch) {
-            setLoading(true)
+            setLoading(true) //chama o componente para loading
             let { data } = await GetApi(`mais/buscaconteudo/${dataToFetch.versao.versao_id}/${dataToFetch.testamento.testamento_id}/${dataToFetch.livro.livro_id}/${dataToFetch.capitulo}`)
-            setDadosSelecionadosModal(dataToFetch)
-            setDadosLeituraRetornoApi(data)
+            setDadosSelecionadosModal(dataToFetch) // armazena a selação para leitura
+            setDadosLeituraRetornoApi(data) // armazena o retorno da api
             let resultado = await GetApi(`curiosidades/buscacuriosidade/${dataToFetch?.livro.livro_nome}`)
             setCuriosidades(resultado)
             setLoading(false)

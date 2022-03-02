@@ -8,6 +8,7 @@ import Home from "../pages/home";
 import Leitura from "../pages/leitura";
 import Harpa from "../pages/harpa";
 import Sobre from "../pages/sobre";
+import Pesquisa from "../pages/pesquisa";
 
 export default function Routes(): JSX.Element {
     const Tab = createBottomTabNavigator();
@@ -25,6 +26,9 @@ export default function Routes(): JSX.Element {
                                 break;
                             case 'Leitura':
                                 iconName = 'book';
+                                break;
+                            case 'Pesquisa':
+                                iconName = 'search';
                                 break;
                             case 'Harpa':
                                 iconName = 'music';
@@ -52,6 +56,13 @@ export default function Routes(): JSX.Element {
                     }}
                 />
                 <Tab.Screen name="Leitura" component={Leitura}
+                    options={{
+                        title: '',
+                        headerShown: false,
+
+                    }}
+                />
+                <Tab.Screen name="Pesquisa" component={Pesquisa}
                     options={{
                         title: '',
                         headerShown: false,
