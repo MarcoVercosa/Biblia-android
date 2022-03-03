@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
         marginTop: "5%",
         fontSize: 25
     },
+
 })
 
 export { styles }

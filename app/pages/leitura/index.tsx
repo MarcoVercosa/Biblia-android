@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react"
-import { View, Text, SafeAreaView, Image, TouchableOpacity, ScrollView } from "react-native"
+import { View, Text, SafeAreaView, Image, TouchableOpacity, ScrollView, FlatList } from "react-native"
 import { Picker } from '@react-native-picker/picker';
 import ModalLeitura from "../../components/modal/leitura"
 import { styles } from "./style"
@@ -20,9 +20,8 @@ export default function Leitura({ route }: any): JSX.Element {
     const scrollRef: any = useRef();
 
     useEffect(() => {
-
-        //ao selecionar uma conteudo no componente "Pesquisar", ele direcionará para esse componente, e passará os dados via props (route)
-        // se houver dados nos params da rota, significa que houve um direcionamento do componente Pesquisa
+        // ===== >>> ao selecionar uma conteudo no componente "Pesquisar", ele direcionará para esse componente, e passará os dados via props (route)
+        //  ===== >>>> se houver dados nos params da rota, significa que houve um direcionamento do componente Pesquisa
         if (route.params != undefined) {
             BuscaPalavraPesquisada()
         }
@@ -39,18 +38,19 @@ export default function Leitura({ route }: any): JSX.Element {
                 },
                 livro: {
                     livro_id: route.params.livro_id
-                }
+                },
+                capitulo: route.params.capitulo
 
             })  // armazena a selação para leitura
             setDadosLeituraRetornoApi(data) // armazena o retorno da api
             let resultado = await GetApi(`curiosidades/buscacuriosidade/${route.params?.livro_nome}`)
             setCuriosidades(resultado)
+            //setVersiculoPesquisaPorPalavra(route.params.versiculo)
+            // route.params.versiculo = 0
             setLoading(false)
         }
         //se houver alteração no params da props, o useEffect irá executar
     }, [route.params])
-
-
 
     async function OpenCloseModalLeitura(dataToFetch?: IValoresArmazenados | any) {
         //fecha o modal
@@ -83,11 +83,15 @@ export default function Leitura({ route }: any): JSX.Element {
         setLoading(true)
         let { data } = await GetApi(`mais/buscaconteudo/${dadosSelecionadosModal!.versao.versao_id}/${dadosSelecionadosModal!.testamento.testamento_id}/${dadosSelecionadosModal!.livro.livro_id}/${dadosLeituraRetornoApi!.capituloAtual + 1}`)
         setDadosLeituraRetornoApi(data)
+        route.params.versiculo = 0 // > se houver dados nos params da rota, significa que houve um direcionamento do componente Pesquisa
+        //ao avançar ou voltar, não precisamos mais do versiculo chamativo, então para avançar ou voltar garantimos que a route.params.versiculo fique 0 (null)
+
         setLoading(false)
         ScrollToTop()
     }
     async function RetornaCapitulo() {
         setLoading(true)
+        route.params.versiculo = 0
         let { data } = await GetApi(`mais/buscaconteudo/${dadosSelecionadosModal!.versao.versao_id}/${dadosSelecionadosModal!.testamento.testamento_id}/${dadosSelecionadosModal!.livro.livro_id}/${dadosLeituraRetornoApi!.capituloAtual - 1}`)
         setDadosLeituraRetornoApi(data)
         setLoading(false)
@@ -95,6 +99,7 @@ export default function Leitura({ route }: any): JSX.Element {
     }
     async function NavegaPorSelect(capituloValor: number) {
         setLoading(true)
+        route.params.versiculo = 0
         let { data } = await GetApi(`mais/buscaconteudo/${dadosSelecionadosModal!.versao.versao_id}/${dadosSelecionadosModal!.testamento.testamento_id}/${dadosSelecionadosModal!.livro.livro_id}/${capituloValor}`)
         setDadosLeituraRetornoApi(data)
         setLoading(false)
@@ -130,7 +135,7 @@ export default function Leitura({ route }: any): JSX.Element {
                         </View>
                         <ScrollView ref={scrollRef} >
                             <View style={styles.viewContainerLeituraVersiculos}>
-                                {dadosLeituraRetornoApi.conteudo.map((data, index) => <RenderizaVersiculos data={data} index={index} />)}
+                                {dadosLeituraRetornoApi.conteudo.map((data, index) => <RenderizaVersiculos data={data} index={index} versiculoPesquisa={route.params.versiculo} />)}
                             </View>
                             <View style={styles.viewContainerArrows}>
                                 <TouchableOpacity style={styles.arrowsButton}

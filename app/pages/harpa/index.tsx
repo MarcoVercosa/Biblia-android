@@ -68,11 +68,11 @@ export default function Harpa(): JSX.Element {
 
                         </Text>
                         <TouchableOpacity style={styles.conteudoLetraHinoButtonShare}
-                            onPressOut={() => { onClick(letraBuscaAPI[0].titulo, String(letraBuscaAPI[0].numero)) }}
+                            onPress={() => { onClick(letraBuscaAPI[0].titulo, String(letraBuscaAPI[0].numero)) }}
                         >
                             <Image
                                 source={require("../../assets/images/share.jpg")}
-                                style={styles.conteudoLetraHinoShare}
+                                style={styles.conteudoLetraHinoImageShare}
                             />
                         </TouchableOpacity>
 

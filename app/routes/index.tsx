@@ -9,6 +9,7 @@ import Leitura from "../pages/leitura";
 import Harpa from "../pages/harpa";
 import Sobre from "../pages/sobre";
 import Pesquisa from "../pages/pesquisa";
+import Configuracao from "../pages/configuracao";
 
 export default function Routes(): JSX.Element {
     const Tab = createBottomTabNavigator();
@@ -33,6 +34,9 @@ export default function Routes(): JSX.Element {
                             case 'Harpa':
                                 iconName = 'music';
                                 break;
+                            case 'Configuracao':
+                                iconName = 'gear';
+                                break;
                             case 'Sobre':
                                 iconName = 'thumbs-up';
                                 break;
@@ -45,10 +49,9 @@ export default function Routes(): JSX.Element {
                     },
                     tabBarActiveTintColor: '#43ffce',
                     tabBarInactiveTintColor: "#777",
+                    tabBarStyle: { height: 60, padding: 0, marginBottom: "-3%" }
                 })}
-
             >
-
                 <Tab.Screen name="Home" component={Home}
                     options={{
                         title: '',
@@ -70,6 +73,12 @@ export default function Routes(): JSX.Element {
                     }}
                 />
                 <Tab.Screen name="Harpa" component={Harpa}
+                    options={{
+                        title: '',
+                        headerShown: false
+                    }}
+                />
+                <Tab.Screen name="Configuracao" component={Configuracao}
                     options={{
                         title: '',
                         headerShown: false

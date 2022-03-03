@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         marginLeft: "2%",
     },
     viewLetraHino: {
-        height: "85.5%",
+        height: "89.0%",
         width: "95%",
         alignSelf: "center",
 
@@ -33,21 +33,18 @@ const styles = StyleSheet.create({
         fontSize: 32,
         textAlign: "center",
         marginTop: "5%",
-        marginBottom: "5%",
+        marginBottom: "2%",
         height: "14%",
-
     },
     conteudoLetraHinoButtonShare: {
         height: "8%",
         justifyContent: "center",
-        alignItems: "flex-start",
-        width: "13%"
+        alignItems: "flex-end",
+        width: "100%",
     },
-    conteudoLetraHinoShare: {
+    conteudoLetraHinoImageShare: {
         height: 40,
         width: 40,
-
-
     },
     renderizaConteudos: {
         width: "95%"

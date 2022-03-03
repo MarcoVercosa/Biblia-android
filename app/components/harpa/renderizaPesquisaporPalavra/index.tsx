@@ -13,7 +13,7 @@ export default function RenderizaHinoPorPalavra({ item, index, OpenCloseModalHin
         <TouchableOpacity
             style={styles.renderizaPorPalavra}
             key={index}
-            onPressOut={() => OpenCloseModalHino(item.numero)}
+            onPress={() => OpenCloseModalHino(item.numero)}
         >
             <Text style={styles.numeroRenderizaPorPalavra}>
                 {item.numero}

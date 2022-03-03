@@ -1,3 +1,5 @@
-ao segurar algum capitulo, dar a opção de compartilhar
+Afinar curiosidades por livro - DONE
+implantar pesquisar na biblia por palavra - DONE
+aba opções: tema escuro e tamanho da fonte
 colocar mais curiosidades no BD
-implantar pesquisar na biblia por palavra
+ao segurar algum capitulo, dar a opção de compartilhar

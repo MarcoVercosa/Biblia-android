@@ -64,7 +64,7 @@ function ModalHino({ modalHinoSelect, OpenCloseModalHino }: { modalHinoSelect: b
                 <View style={styles.viewHeader}>
                     <TouchableOpacity
                         style={[styles.botaoSair]}
-                        onPressOut={() => OpenCloseModalHino(false)}
+                        onPress={() => OpenCloseModalHino(false)}
                     >
                         <Image
                             source={require("../../../assets/images/back.jpg")}
