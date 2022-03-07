@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         width: "95%",
         alignSelf: "center",
-        height: "10%",
+        height: "13%",
         justifyContent: "space-around",
         marginTop: "5%"
     },

@@ -19,6 +19,7 @@ export default function Leitura({ route }: any): JSX.Element {
     const [loading, setLoading] = useState<boolean>(false)
     const scrollRef: any = useRef();
 
+
     useEffect(() => {
         // ===== >>> ao selecionar uma conteudo no componente "Pesquisar", ele direcionará para esse componente, e passará os dados via props (route)
         //  ===== >>>> se houver dados nos params da rota, significa que houve um direcionamento do componente Pesquisa
@@ -39,14 +40,14 @@ export default function Leitura({ route }: any): JSX.Element {
                 livro: {
                     livro_id: route.params.livro_id
                 },
-                capitulo: route.params.capitulo
+                capitulo: route.params.capitulo,
+                versiculo: route.params.versiculo
 
             })  // armazena a selação para leitura
             setDadosLeituraRetornoApi(data) // armazena o retorno da api
             let resultado = await GetApi(`curiosidades/buscacuriosidade/${route.params?.livro_nome}`)
             setCuriosidades(resultado)
-            //setVersiculoPesquisaPorPalavra(route.params.versiculo)
-            // route.params.versiculo = 0
+
             setLoading(false)
         }
         //se houver alteração no params da props, o useEffect irá executar
@@ -82,25 +83,28 @@ export default function Leitura({ route }: any): JSX.Element {
     async function AvancaCapitulo() {
         setLoading(true)
         let { data } = await GetApi(`mais/buscaconteudo/${dadosSelecionadosModal!.versao.versao_id}/${dadosSelecionadosModal!.testamento.testamento_id}/${dadosSelecionadosModal!.livro.livro_id}/${dadosLeituraRetornoApi!.capituloAtual + 1}`)
+        setDadosSelecionadosModal((prevState: IValoresArmazenados) => { return { ...prevState, versiculo: 0 } })
+        //versiculo = 0 // > se houver dados nos params da rota,significa que houve um direcionamento do componente Pesquisa
+        //ao avançar ou voltar, não precisamos mais do versiculo chamativo, então para avançar ou voltar garantimos que a versiculo fique 0 (null)
         setDadosLeituraRetornoApi(data)
-        route.params.versiculo = 0 // > se houver dados nos params da rota, significa que houve um direcionamento do componente Pesquisa
-        //ao avançar ou voltar, não precisamos mais do versiculo chamativo, então para avançar ou voltar garantimos que a route.params.versiculo fique 0 (null)
-
         setLoading(false)
         ScrollToTop()
+
+
     }
     async function RetornaCapitulo() {
         setLoading(true)
-        route.params.versiculo = 0
         let { data } = await GetApi(`mais/buscaconteudo/${dadosSelecionadosModal!.versao.versao_id}/${dadosSelecionadosModal!.testamento.testamento_id}/${dadosSelecionadosModal!.livro.livro_id}/${dadosLeituraRetornoApi!.capituloAtual - 1}`)
+        setDadosSelecionadosModal((prevState: IValoresArmazenados) => { return { ...prevState, versiculo: 0 } })
         setDadosLeituraRetornoApi(data)
         setLoading(false)
         ScrollToTop()
+
     }
     async function NavegaPorSelect(capituloValor: number) {
         setLoading(true)
-        route.params.versiculo = 0
         let { data } = await GetApi(`mais/buscaconteudo/${dadosSelecionadosModal!.versao.versao_id}/${dadosSelecionadosModal!.testamento.testamento_id}/${dadosSelecionadosModal!.livro.livro_id}/${capituloValor}`)
+        setDadosSelecionadosModal((prevState: IValoresArmazenados) => { return { ...prevState, versiculo: 0 } })
         setDadosLeituraRetornoApi(data)
         setLoading(false)
         ScrollToTop()
@@ -135,7 +139,7 @@ export default function Leitura({ route }: any): JSX.Element {
                         </View>
                         <ScrollView ref={scrollRef} >
                             <View style={styles.viewContainerLeituraVersiculos}>
-                                {dadosLeituraRetornoApi.conteudo.map((data, index) => <RenderizaVersiculos data={data} index={index} versiculoPesquisa={route.params.versiculo} />)}
+                                {dadosLeituraRetornoApi.conteudo.map((data, index) => <RenderizaVersiculos data={data} index={index} versiculoPesquisa={dadosSelecionadosModal.versiculo} />)}
                             </View>
                             <View style={styles.viewContainerArrows}>
                                 <TouchableOpacity style={styles.arrowsButton}
@@ -179,12 +183,13 @@ export default function Leitura({ route }: any): JSX.Element {
                                     </Text >
                                 </TouchableOpacity>
                             </View>
+                            {curiosidades &&
+                                <View style={styles.viewCuriosidades}>
+                                    <Text style={styles.tituloCuriosidades} >CURIOSIDADES</Text>
+                                    {curiosidades.data.map((data: any) => <RenderizaCuriosidades data={data} />)}
 
-                            <View style={styles.viewCuriosidades}>
-                                <Text style={styles.tituloCuriosidades} >CURIOSIDADES</Text>
-                                {curiosidades && curiosidades.data.map((data: any) => <RenderizaCuriosidades data={data} />)}
-
-                            </View>
+                                </View>
+                            }
                         </ScrollView>
                     </>
                 }

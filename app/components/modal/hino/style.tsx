@@ -3,12 +3,13 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     viewHeader: {
         flexDirection: "row",
-        height: "8%",
+        height: "12%",
+        width: "95%",
         justifyContent: "space-between",
         paddingTop: "1%"
     },
     botaoSair: {
-        width: "20%",
+        width: "25%",
         justifyContent: "center",
         alignItems: "center",
         alignSelf: "center",
@@ -16,7 +17,7 @@ const styles = StyleSheet.create({
         borderRadius: 30,
     },
     viewHeaderImage: {
-        height: "100%",
+        height: "80%",
         width: "70%",
     },
 
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#e5e5e5",
     },
     viewBuscaPorPalavra: {
-        marginTop: "5%",
+        marginTop: "2.5%",
         flexDirection: "row",
         justifyContent: "center",
         alignContent: "center",
@@ -60,12 +61,12 @@ const styles = StyleSheet.create({
     inputBuscaPorPalavraHino: {
         width: "45%",
         backgroundColor: "#e5e5e5",
-        fontSize: 21
+        fontSize: 21,
     },
     viewRenderizaHinos: {
         justifyContent: "space-around",
         alignItems: "center",
-        height: "61%",
+        height: "58%",
 
     },
     renderizaHinos: {
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
     },
     botaoBuscaPorPalavraHino: {
         backgroundColor: "#03fa54",
-        marginTop: "5%",
+        marginTop: "1.5%",
         width: "40%",
         justifyContent: "center",
         alignItems: "center",

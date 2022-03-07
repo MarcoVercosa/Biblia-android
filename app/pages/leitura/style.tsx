@@ -28,11 +28,11 @@ const styles = StyleSheet.create({
         height: "90%"
     },
     viewContainerLeituraInfo: {
-        height: "8%",
         justifyContent: "center",
         alignItems: "center",
         marginTop: "1%",
         marginBottom: "2%",
+        width: "97%"
 
     },
     textContainerLeituraInfo: {
@@ -90,7 +90,8 @@ const styles = StyleSheet.create({
     viewCuriosidades: {
         justifyContent: "center",
         alignContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        marginBottom: "3%"
     },
     tituloCuriosidades: {
         marginTop: "5%",
