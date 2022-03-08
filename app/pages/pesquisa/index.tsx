@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { View, Text, SafeAreaView, TouchableOpacity, TextInput, StyleSheet, FlatList, Alert } from "react-native"
+import { View, Text, SafeAreaView, TouchableOpacity, TextInput, FlatList, Alert } from "react-native"
 import { GetApi } from "../../api"
 import Loading from "../../components/loading/index"
 import { IResultadoAPI, IFlatListConteudo } from "../../interface/IRetornoApiPesquisa"

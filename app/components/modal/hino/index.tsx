@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { View, Text, Modal, TouchableOpacity, SafeAreaView, StyleSheet, TextInput, Image, Alert, FlatList } from "react-native"
+import { View, Text, Modal, TouchableOpacity, SafeAreaView, TextInput, Image, Alert, FlatList } from "react-native"
 import { Picker } from '@react-native-picker/picker';
 import { GetApi } from "../../../api/index"
 import { IResutadoPorPalavra } from "../../../interface/IResultadoPorPalavra";
