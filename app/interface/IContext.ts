@@ -1,5 +1,6 @@
 export interface IContext {
     lightTheme: boolean;
-    fonte: number;
+    fonteSizeLeituraBiblia: number,
+    fonteSizeHino: number,
     keepScreenOn: boolean;
 }

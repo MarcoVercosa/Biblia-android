@@ -3,12 +3,13 @@ import { View, Text, SafeAreaView, TouchableOpacity, TextInput, FlatList, Alert 
 import { GetApi } from "../../api"
 import Loading from "../../components/loading/index"
 import { IResultadoAPI, IFlatListConteudo } from "../../interface/IRetornoApiPesquisa"
-import { styles } from "./style"
+import { Styles } from "./style"
 
 export default function Pesquisa({ navigation }: any): JSX.Element {
     const [palavraDigitada, setPalavraDigitada] = useState<string>("")
     const [loading, setLoading] = useState<boolean>(false)
     const [dataApi, setDataApi] = useState<Array<IResultadoAPI>>()
+    let styles = Styles()
 
     async function BuscarPesquisa() {
         if (palavraDigitada.length < 3 || palavraDigitada.length > 20) {
@@ -27,6 +28,7 @@ export default function Pesquisa({ navigation }: any): JSX.Element {
     if (loading) {
         return <Loading />
     }
+
     return (
         <SafeAreaView>
             <View style={styles.container}>

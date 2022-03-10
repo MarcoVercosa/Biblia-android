@@ -1,15 +1,13 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { View, Text, SafeAreaView, Image, TouchableOpacity, FlatList, Share } from "react-native"
 import { GetApi } from "../../api";
 import { ModalHino } from "../../components/modal/hino";
-import { styles } from "./style"
+import { Styles } from "./style"
 import Loading from "../../components/loading/index"
-
 interface IResultado {
     letra: string;
     titulo: string,
 }
-
 interface IRetorno {
     letra: [];
     titulo: string,
@@ -20,6 +18,7 @@ export default function Harpa(): JSX.Element {
     const [modalHinoSelect, setModalHinoSelect] = useState<boolean>(false)
     const [letraBuscaAPI, setLetraBuscaAPI] = useState<Array<IRetorno>>([])
     const [loading, setLoading] = useState<boolean>(false)
+    const styles = Styles()
 
     function onClick(titulo: string, nmeroHino: string) {
         Share.share({
@@ -29,8 +28,6 @@ export default function Harpa(): JSX.Element {
         },
         )
     }
-
-
     async function OpenCloseModalHino(numeroHino: boolean | Number) {
         setModalHinoSelect(!modalHinoSelect)
         if (numeroHino) {

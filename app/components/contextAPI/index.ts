@@ -3,7 +3,8 @@ import { IContext } from "../../interface/IContext"
 
 let values: IContext = {
     lightTheme: true,
-    fonte: 18,
+    fonteSizeLeituraBiblia: 20,
+    fonteSizeHino: 22,
     keepScreenOn: false,
 
 }

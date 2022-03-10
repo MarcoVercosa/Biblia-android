@@ -3,3 +3,4 @@ implantar pesquisar na biblia por palavra - DONE
 aba opções: tema escuro, tamanho da fonte, não deixar a tela apagar
 colocar mais curiosidades no BD
 ao segurar algum capitulo, dar a opção de compartilhar
+testar lib para textfield e ver se o bug do teclado se resolve

@@ -8,22 +8,19 @@ import { styles } from "./style"
 
 interface IValues {
     context: IContext
-    setContext: (value: any) => void
 }
 
 export default function Home(): JSX.Element {
-    const { context, setContext }: IValues = useContext(Context) as any
-    const [theme, setTheme] = useState<boolean>(context.lightTheme)
-
+    const { context }: IValues = useContext(Context) as any
+    let lightTheme = context.lightTheme ? "white" : "#13192a"
     return (
-        <SafeAreaView style={styles.safeContainer}>
+        <SafeAreaView style={[styles.safeContainer, { backgroundColor: lightTheme }]}>
             <View style={styles.viewImage}>
                 <Image
                     source={require("../../assets/images/biblia_home.jpg")}
                     style={styles.viewImageImage}
                 />
             </View>
-            <Text>{context.lightTheme ? "TRUE" : "FALSE"}</Text>
 
             <ArticlesHome />
         </SafeAreaView >

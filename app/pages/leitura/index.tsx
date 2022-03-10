@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from "react"
-import { View, Text, SafeAreaView, Image, TouchableOpacity, ScrollView, FlatList } from "react-native"
+import React, { useState, useRef, useEffect, useContext } from "react"
+import { View, Text, SafeAreaView, Image, TouchableOpacity, ScrollView } from "react-native"
 import { Picker } from '@react-native-picker/picker';
 import ModalLeitura from "../../components/modal/leitura"
-import { styles } from "./style"
+//import { styles } from "./style"
+import { Styles } from "./style";
 import { GetApi } from "../../api"
 import { RenderizaVersiculos } from "../../components/leitura/renderVersiculos";
 import { RenderizaCuriosidades } from "../../components/leitura/renderizaCuriosidades";
@@ -12,13 +13,14 @@ import { IRetornoApiLeitura } from "../../interface/IRetornoApiLeitura"
 import { ICuriosidades } from "../../interface/ICuriosidades";
 
 export default function Leitura({ route }: any): JSX.Element {
+
+    let styles = Styles()
     const [modalLeitura, setModalLeitura] = useState<boolean>(false)
     const [dadosLeituraRetornoApi, setDadosLeituraRetornoApi] = useState<IRetornoApiLeitura>()
     const [dadosSelecionadosModal, setDadosSelecionadosModal] = useState<any | IValoresArmazenados>()
     const [curiosidades, setCuriosidades] = useState<any | Array<ICuriosidades>>(false)
     const [loading, setLoading] = useState<boolean>(false)
     const scrollRef: any = useRef();
-
 
     useEffect(() => {
         // ===== >>> ao selecionar uma conteudo no componente "Pesquisar", ele direcionará para esse componente, e passará os dados via props (route)

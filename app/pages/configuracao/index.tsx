@@ -3,7 +3,7 @@ import { View, Text, Image, SafeAreaView, Switch } from "react-native"
 import RadioGroup, { RadioButtonProps } from 'react-native-radio-buttons-group';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Picker } from '@react-native-picker/picker';
-import { styles } from "./style"
+import { Styles } from "./style"
 import { Context } from "../../routes";
 import { IContext } from "../../interface/IContext";
 
@@ -14,26 +14,24 @@ interface IValues {
 
 export default function Configuracao(): JSX.Element {
     const { context, setContext }: IValues = useContext(Context) as any
-    // const [lightThemeState, setLightThemeState] = useState<boolean>(context.lightTheme)
-    // const [fontSizeState, setFontSizeState] = useState<number>(context.fonte)
-    // const [keepScreenOnState, setKeepScreenOnState] = useState<boolean>(context.keepScreenOn)
+
+    const styles = Styles()
 
     async function ChangeTheme(checked: boolean) {
-        setLightThemeState(checked)
         setContext((prevState: any) => { return { ...prevState, lightTheme: checked } })
         await AsyncStorage.setItem("lightTheme", JSON.stringify(checked))
-        console.log(context)
     }
     async function ChangeOnOffScreen(checked: boolean) {
-        setKeepScreenOnState(checked);
         setContext((prevState: any) => { return { ...prevState, keepScreenOn: checked } })
         //await AsyncStorage.setItem("ChangeOnOffScreen", JSON.stringify(checked))
-        console.log(context)
     }
-    function ChangeFontSize(value: number) {
-        setFontSizeState(value)
-        setContext((prevState: any) => { return { ...prevState, fonte: value } })
-        console.log(context)
+    function ChangeFontSizeBiblia(value: number) {
+        setContext((prevState: any) => { return { ...prevState, fonteSizeLeituraBiblia: value } })
+
+    }
+    function ChangeFontSizeHino(value: number) {
+        setContext((prevState: any) => { return { ...prevState, fonteSizeHino: value } })
+
     }
 
     function GerarNumerosFontSize() {
@@ -44,10 +42,8 @@ export default function Configuracao(): JSX.Element {
         return armazena
     }
 
-
-
     return (
-        <SafeAreaView>
+        <SafeAreaView >
             <View style={styles.container}>
                 <View style={styles.viewOptionTema}>
                     <View style={styles.viewImageThemeHeader}>
@@ -77,16 +73,40 @@ export default function Configuracao(): JSX.Element {
                         />
                     </View>
                     <View style={styles.viewOptionFonteSizeOptions}>
-                        <Text style={styles.viewOptionFonteSizeText}>Fonte: </Text>
+                        <Text style={styles.viewOptionFonteSizeText}>Fonte Biblia: </Text>
                         <Picker
                             style={styles.viewOptionFonteSizeOptionsPicker}
-                            selectedValue={context.fonte}
-                            onValueChange={(value: number) => { ChangeFontSize(value) }}
+                            selectedValue={context.fonteSizeLeituraBiblia}
+                            onValueChange={(value: number) => { ChangeFontSizeBiblia(value) }}
                             mode="dropdown"
                         >
                             {GerarNumerosFontSize()}
                         </Picker>
+
                     </View>
+
+                </View>
+                <View style={styles.viewOptionFontSize}>
+
+                    <View style={styles.viewOptionFontSizeImage} >
+                        <Image
+                            source={require("../../assets/images/musicFont.jpg")}
+                            style={styles.imageHeader}
+                        />
+                    </View>
+                    <View style={styles.viewOptionFonteSizeOptions}>
+                        <Text style={styles.viewOptionFonteSizeText}>Fonte Hino: </Text>
+                        <Picker
+                            style={styles.viewOptionFonteSizeOptionsPicker}
+                            selectedValue={context.fonteSizeHino}
+                            onValueChange={(value: number) => { ChangeFontSizeHino(value) }}
+                            mode="dropdown"
+                        >
+                            {GerarNumerosFontSize()}
+                        </Picker>
+
+                    </View>
+
                 </View>
                 <View style={styles.viewOptionTelaLigada}>
 
