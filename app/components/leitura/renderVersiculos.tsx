@@ -18,7 +18,7 @@ function RenderizaVersiculos({ data, index, versiculoPesquisa }: IRenderizaVersi
     return (
         <TouchableOpacity
             //se vier valor no versiculoPesquisa, é pq houve uma pesquisa por palavra
-            style={{ backgroundColor: versiculoPesquisa == index + 1 ? "#6ef1d8" : "none", borderRadius: 30 }}
+            style={{ backgroundColor: versiculoPesquisa == index + 1 ? "#cfafce" : "none", borderRadius: 30 }}
         >
             <Text key={index} style={[styles.textContainerLeituraVersiculos, { color: fontColor, fontSize: fontSize }]}
             >

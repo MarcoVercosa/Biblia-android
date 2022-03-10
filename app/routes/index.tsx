@@ -21,7 +21,7 @@ export default function Routes(): JSX.Element {
     return (
         <Context.Provider value={{ context, setContext } as any}>
             <NavigationContainer>
-                <Tab.Navigator
+                <Tab.Navigator initialRouteName="Configuracao"
                     screenOptions={({ route }) => ({
                         tabBarIcon: ({ color, size }) => {
                             let iconName;
@@ -54,7 +54,8 @@ export default function Routes(): JSX.Element {
                         },
                         tabBarActiveTintColor: '#43ffce',
                         tabBarInactiveTintColor: "#777",
-                        tabBarStyle: { height: 60, padding: 0, marginBottom: "-3%" }
+                        tabBarStyle: { height: 60, padding: 0, marginBottom: "-3%" },
+
                     })}
                 >
                     <Tab.Screen name="Home" component={Home}
@@ -95,6 +96,7 @@ export default function Routes(): JSX.Element {
                             headerShown: false
                         }}
                     />
+
                 </Tab.Navigator>
             </NavigationContainer>
         </Context.Provider>

@@ -1,8 +1,7 @@
-import React, { useState, useRef, useEffect, useContext } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { View, Text, SafeAreaView, Image, TouchableOpacity, ScrollView } from "react-native"
 import { Picker } from '@react-native-picker/picker';
 import ModalLeitura from "../../components/modal/leitura"
-//import { styles } from "./style"
 import { Styles } from "./style";
 import { GetApi } from "../../api"
 import { RenderizaVersiculos } from "../../components/leitura/renderVersiculos";
@@ -172,7 +171,7 @@ export default function Leitura({ route }: any): JSX.Element {
                                 </View>
 
                                 <TouchableOpacity style={styles.arrowsButton}
-                                    onPressOut={() => AvancaCapitulo()}
+                                    onPress={() => AvancaCapitulo()}
                                     //se o capitulo for o ultimo, desative a seta para avançar
                                     disabled={dadosLeituraRetornoApi.capituloAtual == dadosLeituraRetornoApi.quantidadecapitulo[0].capitulo ? true : false}
                                 >

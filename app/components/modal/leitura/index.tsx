@@ -2,27 +2,23 @@ import React, { useState, useContext } from "react"
 import { Picker } from '@react-native-picker/picker';
 import { View, Text, Modal, TouchableOpacity } from "react-native"
 import { GetApi } from "../../../api/index"
-import { styles } from "./style"
+import { Styles } from "./style"
 import { IValoresArmazenados } from "../../../interface/ImodalLeitura"
-import { Context } from "../../../routes";
-import { IContext } from "../../../interface/IContext";
 
-interface IValues {
-    context: IContext
-}
 interface IModalLeitura {
     modalLeitura: boolean;
     OpenCloseModalLeitura: (dadosSelecionadosModal?: IValoresArmazenados | boolean) => void
 }
 
 export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IModalLeitura): JSX.Element {
-    const { context }: IValues = useContext(Context) as any
+
     const [versaoFetch, setVersaoFetch] = useState([]);
     const [testamentoFetch, setTestamentoFetch] = useState([]);
     const [livroFetch, setLivroFetch] = useState([]);
     const [capituloFetch, setCapituloFetch] = useState<any>(false);
+    let styles = Styles()
 
-    let lightTheme = context.lightTheme ? "white" : "#13192a"
+
 
     const [valoresArmazenados, setValoresArmazenados] = useState<IValoresArmazenados>({
         versao: {
@@ -53,10 +49,7 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
     })
 
     async function FetchData(path: string, setState: any): Promise<any> {
-        console.log("await data")
         let { data } = await GetApi(path)
-
-        console.log(await data)
         setState(data)
     }
 
@@ -86,7 +79,6 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
             armazena.push(<Picker.Item key={i} label={String(i)} value={i} />)
         }
         return armazena
-
     }
 
     return (
@@ -98,7 +90,7 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
                 OpenCloseModalLeitura
             }}
         >
-            <View style={[styles.container, { backgroundColor: lightTheme }]}>
+            <View style={styles.container}>
                 <View style={styles.view_titulo}>
                     <Text style={styles.view_titulo_text}>
                         Selecione suas opções para leitura

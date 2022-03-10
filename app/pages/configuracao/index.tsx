@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react"
-import { View, Text, Image, SafeAreaView, Switch } from "react-native"
+import { View, Text, Image, SafeAreaView, Switch, ScrollView } from "react-native"
 import RadioGroup, { RadioButtonProps } from 'react-native-radio-buttons-group';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Picker } from '@react-native-picker/picker';
@@ -43,8 +43,9 @@ export default function Configuracao(): JSX.Element {
     }
 
     return (
-        <SafeAreaView >
-            <View style={styles.container}>
+        < View style={styles.container} >
+            <ScrollView >
+
                 <View style={styles.viewOptionTema}>
                     <View style={styles.viewImageThemeHeader}>
                         <Image
@@ -108,17 +109,17 @@ export default function Configuracao(): JSX.Element {
                     </View>
 
                 </View>
-                <View style={styles.viewOptionTelaLigada}>
+                <View style={styles.viewOptionTema}>
 
-                    <View style={styles.viewOptionTelaLigadaImage} >
+                    <View style={styles.viewImageThemeHeader} >
                         <Image
                             source={require("../../assets/images/light.jpg")}
                             style={styles.imageHeader}
                         />
                     </View>
 
-                    <View style={styles.viewOptionTelaLigadaOptions}>
-                        <Text style={styles.viewOptionTelaLigadaText}>Tela ligada durante leitura: </Text>
+                    <View style={styles.viewOptionTemaOptions}>
+                        <Text style={styles.viewOptionTemaText}>Tela ligada: </Text>
                         <Switch
                             thumbColor={context.keepScreenOn ? "#00f689" : "#f4f3f4"}
                             onValueChange={(value) => {
@@ -129,9 +130,14 @@ export default function Configuracao(): JSX.Element {
                         />
 
                     </View>
+
                 </View>
-            </View>
-        </SafeAreaView >
+
+            </ScrollView >
+
+        </View >
+
+
     )
 }
 

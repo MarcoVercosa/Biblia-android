@@ -72,7 +72,7 @@ function ModalHino({ modalHinoSelect, OpenCloseModalHino }: { modalHinoSelect: b
                             />
                         </TouchableOpacity>
                         <Text style={styles.titulo}>
-                            Selecione suas opções:
+                            Selecione:
                         </Text>
 
                     </View>

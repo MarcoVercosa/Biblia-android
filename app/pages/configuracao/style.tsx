@@ -13,30 +13,33 @@ function Styles() {
     let lightTheme = context.lightTheme ? "white" : "#13192a"
 
     const styles = StyleSheet.create({
+        SafeAreaView: {
+            flex: 1,
+        },
         container: {
             height: "100%",
             width: "100%",
             backgroundColor: lightTheme
         },
         viewOptionTema: {
-            height: "23%",
+            //: "23%",
             marginTop: "3%",
             justifyContent: "center",
-            borderBottomColor: "#8a8477",
+            borderBottomColor: "#e2dfed",
             borderBottomWidth: 2,
         },
         viewImageThemeHeader: {
-            height: "75%"
+            //height: "75%"
         },
         viewOptionTemaOptions: {
             flexDirection: "row",
-            marginBottom: "4%"
+            marginBottom: "4%",
         },
         imageHeader: {
-            height: "85%",
-            width: "20%",
-            alignSelf: "flex-end",
-            marginRight: "5%"
+            height: 50,
+            width: 50,
+            alignSelf: "center",
+            marginBottom: "10%"
 
         },
         viewOptionTemaText: {
@@ -46,14 +49,14 @@ function Styles() {
             color: fontColor
         },
         viewOptionFontSize: {
-            height: "23%",
+            //height: "23%",
             justifyContent: "center",
             marginTop: "3%",
-            borderBottomColor: "#8a8477",
+            borderBottomColor: "#e2dfed",
             borderBottomWidth: 2,
         },
         viewOptionFontSizeImage: {
-            height: "60%"
+            //height: "60%"
         },
         viewOptionFonteSizeOptions: {
             flexDirection: "row",
@@ -74,25 +77,21 @@ function Styles() {
 
 
         viewOptionTelaLigada: {
-            height: "23%",
-            //width: "95%",
+            //height: "23%",
+
             justifyContent: "center",
             marginTop: "3%",
-            borderBottomColor: "#8a8477",
+            borderBottomColor: "#e2dfed",
             borderBottomWidth: 2,
 
         },
         viewOptionTelaLigadaImage: {
-            height: "70%",
-            alignContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-            textAlignVertical: "center",
-            justifyContent: "center",
+
         },
         viewOptionTelaLigadaOptions: {
             flexDirection: "row",
-            marginBottom: "4%"
+            marginBottom: "4%",
+            backgroundColor: "red"
         },
         viewOptionTelaLigadaText: {
             width: "50%",

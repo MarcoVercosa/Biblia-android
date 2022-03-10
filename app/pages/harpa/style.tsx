@@ -47,7 +47,6 @@ function Styles() {
             textAlign: "center",
             marginTop: "5%",
             marginBottom: "2%",
-            //height: "14%",
             color: fontColor
         },
         conteudoLetraHinoButtonShare: {
