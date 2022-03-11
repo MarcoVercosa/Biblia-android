@@ -7,7 +7,7 @@ import { createContext } from "react";
 import Home from "../pages/home";
 import Leitura from "../pages/leitura";
 import Harpa from "../pages/harpa";
-import Sobre from "../pages/sobre";
+import Favoritos from "../pages/favoritos";
 import Pesquisa from "../pages/pesquisa";
 import Configuracao from "../pages/configuracao";
 import { values } from "../components/contextAPI";
@@ -90,7 +90,7 @@ export default function Routes(): JSX.Element {
                             headerShown: false
                         }}
                     />
-                    <Tab.Screen name="Sobre" component={Sobre}
+                    <Tab.Screen name="Sobre" component={Favoritos}
                         options={{
                             title: '',
                             headerShown: false

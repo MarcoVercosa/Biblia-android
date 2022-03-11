@@ -22,86 +22,62 @@ function Styles() {
             backgroundColor: lightTheme
         },
         viewOptionTema: {
-            //: "23%",
+            height: 125,
             marginTop: "3%",
             justifyContent: "center",
             borderBottomColor: "#e2dfed",
             borderBottomWidth: 2,
+
+
         },
         viewImageThemeHeader: {
-            //height: "75%"
-        },
-        viewOptionTemaOptions: {
-            flexDirection: "row",
-            marginBottom: "4%",
+
         },
         imageHeader: {
             height: 50,
             width: 50,
-            alignSelf: "center",
-            marginBottom: "10%"
+            alignSelf: "flex-start",
+            marginBottom: "6%",
+            marginLeft: "2%",
+        },
+        viewOptionTemaOptions: {
+            flexDirection: "row",
+            marginBottom: "2%",
 
         },
+
         viewOptionTemaText: {
             fontSize: 25,
             marginLeft: "2%",
             marginRight: "5%",
-            color: fontColor
-        },
-        viewOptionFontSize: {
-            //height: "23%",
-            justifyContent: "center",
-            marginTop: "3%",
-            borderBottomColor: "#e2dfed",
-            borderBottomWidth: 2,
-        },
-        viewOptionFontSizeImage: {
-            //height: "60%"
-        },
-        viewOptionFonteSizeOptions: {
-            flexDirection: "row",
-            marginBottom: "2%"
-
-        },
-        viewOptionFonteSizeText: {
-            marginLeft: "2%",
-            marginRight: "8%",
-            marginTop: "4.5%",
-            fontSize: 25,
-            color: fontColor
+            color: fontColor,
+            width: "50%",
         },
         viewOptionFonteSizeOptionsPicker: {
-            width: "30%",
+            width: "25%",
             backgroundColor: "#e5e5e5",
-        },
-
-
-        viewOptionTelaLigada: {
-            //height: "23%",
-
             justifyContent: "center",
-            marginTop: "3%",
-            borderBottomColor: "#e2dfed",
-            borderBottomWidth: 2,
+            alignContent: "center",
+            textAlign: "center",
+            textAlignVertical: "center"
 
         },
-        viewOptionTelaLigadaImage: {
-
+        viewOptionTemaButtontSobre: {
+            width: "30%",
         },
-        viewOptionTelaLigadaOptions: {
-            flexDirection: "row",
-            marginBottom: "4%",
-            backgroundColor: "red"
-        },
-        viewOptionTelaLigadaText: {
-            width: "50%",
+        viewOptionTemaTextSobre: {
             fontSize: 25,
+            color: fontColor,
+            justifyContent: "center",
+            backgroundColor: "#3fc2ff",
+            marginLeft: "0%",
+            marginRight: "0%",
             marginBottom: "2%",
-            marginLeft: "2%",
-            color: fontColor
-
-        },
-
+            padding: "4%",
+            borderRadius: 10,
+            width: "100%",
+            textAlign: "center",
+        }
     })
 
     return styles

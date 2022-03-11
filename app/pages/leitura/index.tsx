@@ -1,7 +1,9 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState, useRef, useEffect, useContext } from "react"
+import KeepAwake from 'react-native-keep-awake';
 import { View, Text, SafeAreaView, Image, TouchableOpacity, ScrollView } from "react-native"
 import { Picker } from '@react-native-picker/picker';
 import ModalLeitura from "../../components/modal/leitura"
+import { Context } from "../../routes";
 import { Styles } from "./style";
 import { GetApi } from "../../api"
 import { RenderizaVersiculos } from "../../components/leitura/renderVersiculos";
@@ -11,8 +13,13 @@ import { IValoresArmazenados } from "../../interface/ImodalLeitura"
 import { IRetornoApiLeitura } from "../../interface/IRetornoApiLeitura"
 import { ICuriosidades } from "../../interface/ICuriosidades";
 
+import { IContext } from "../../interface/IContext";
+interface IValues {
+    context: IContext
+}
 export default function Leitura({ route }: any): JSX.Element {
-
+    const { context }: IValues = useContext(Context) as any
+    context.keepScreenOn ? KeepAwake.activate() : KeepAwake.deactivate()//tela sempre ligada ou não    
     let styles = Styles()
     const [modalLeitura, setModalLeitura] = useState<boolean>(false)
     const [dadosLeituraRetornoApi, setDadosLeituraRetornoApi] = useState<IRetornoApiLeitura>()
@@ -51,7 +58,7 @@ export default function Leitura({ route }: any): JSX.Element {
 
             setLoading(false)
         }
-        //se houver alteração no params da props, o useEffect irá executar
+        //se houver alteração no params da props (componente pesquisa), o useEffect irá executar
     }, [route.params])
 
     async function OpenCloseModalLeitura(dataToFetch?: IValoresArmazenados | any) {
@@ -90,8 +97,6 @@ export default function Leitura({ route }: any): JSX.Element {
         setDadosLeituraRetornoApi(data)
         setLoading(false)
         ScrollToTop()
-
-
     }
     async function RetornaCapitulo() {
         setLoading(true)
@@ -100,7 +105,6 @@ export default function Leitura({ route }: any): JSX.Element {
         setDadosLeituraRetornoApi(data)
         setLoading(false)
         ScrollToTop()
-
     }
     async function NavegaPorSelect(capituloValor: number) {
         setLoading(true)
@@ -110,7 +114,6 @@ export default function Leitura({ route }: any): JSX.Element {
         setLoading(false)
         ScrollToTop()
     }
-
     if (loading) {
         return (<Loading />)
     }

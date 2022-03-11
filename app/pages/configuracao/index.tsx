@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react"
-import { View, Text, Image, SafeAreaView, Switch, ScrollView } from "react-native"
-import RadioGroup, { RadioButtonProps } from 'react-native-radio-buttons-group';
+import React, { useContext, useState } from "react"
+import { View, Text, Image, Switch, ScrollView, TouchableOpacity } from "react-native"
+import { ModalSobre } from "../../components/modal/sobre";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Picker } from '@react-native-picker/picker';
 import { Styles } from "./style"
@@ -14,9 +14,8 @@ interface IValues {
 
 export default function Configuracao(): JSX.Element {
     const { context, setContext }: IValues = useContext(Context) as any
-
+    const [modalSobre, setModalSobre] = useState<boolean>(false)
     const styles = Styles()
-
     async function ChangeTheme(checked: boolean) {
         setContext((prevState: any) => { return { ...prevState, lightTheme: checked } })
         await AsyncStorage.setItem("lightTheme", JSON.stringify(checked))
@@ -31,7 +30,9 @@ export default function Configuracao(): JSX.Element {
     }
     function ChangeFontSizeHino(value: number) {
         setContext((prevState: any) => { return { ...prevState, fonteSizeHino: value } })
-
+    }
+    function OpenCloseModalSobre() {
+        setModalSobre(!modalSobre)
     }
 
     function GerarNumerosFontSize() {
@@ -41,11 +42,9 @@ export default function Configuracao(): JSX.Element {
         }
         return armazena
     }
-
     return (
         < View style={styles.container} >
             <ScrollView >
-
                 <View style={styles.viewOptionTema}>
                     <View style={styles.viewImageThemeHeader}>
                         <Image
@@ -65,16 +64,15 @@ export default function Configuracao(): JSX.Element {
                         />
                     </View>
                 </View>
-                <View style={styles.viewOptionFontSize}>
-
-                    <View style={styles.viewOptionFontSizeImage} >
+                <View style={styles.viewOptionTema}>
+                    <View style={styles.viewImageThemeHeader} >
                         <Image
                             source={require("../../assets/images/fontSize.jpg")}
                             style={styles.imageHeader}
                         />
                     </View>
-                    <View style={styles.viewOptionFonteSizeOptions}>
-                        <Text style={styles.viewOptionFonteSizeText}>Fonte Biblia: </Text>
+                    <View style={styles.viewOptionTemaOptions}>
+                        <Text style={styles.viewOptionTemaText}>Fonte Biblia: </Text>
                         <Picker
                             style={styles.viewOptionFonteSizeOptionsPicker}
                             selectedValue={context.fonteSizeLeituraBiblia}
@@ -83,20 +81,17 @@ export default function Configuracao(): JSX.Element {
                         >
                             {GerarNumerosFontSize()}
                         </Picker>
-
                     </View>
-
                 </View>
-                <View style={styles.viewOptionFontSize}>
-
-                    <View style={styles.viewOptionFontSizeImage} >
+                <View style={styles.viewOptionTema}>
+                    <View style={styles.viewImageThemeHeader} >
                         <Image
                             source={require("../../assets/images/musicFont.jpg")}
                             style={styles.imageHeader}
                         />
                     </View>
-                    <View style={styles.viewOptionFonteSizeOptions}>
-                        <Text style={styles.viewOptionFonteSizeText}>Fonte Hino: </Text>
+                    <View style={styles.viewOptionTemaOptions}>
+                        <Text style={styles.viewOptionTemaText}>Fonte Hino: </Text>
                         <Picker
                             style={styles.viewOptionFonteSizeOptionsPicker}
                             selectedValue={context.fonteSizeHino}
@@ -105,9 +100,7 @@ export default function Configuracao(): JSX.Element {
                         >
                             {GerarNumerosFontSize()}
                         </Picker>
-
                     </View>
-
                 </View>
                 <View style={styles.viewOptionTema}>
 
@@ -117,7 +110,6 @@ export default function Configuracao(): JSX.Element {
                             style={styles.imageHeader}
                         />
                     </View>
-
                     <View style={styles.viewOptionTemaOptions}>
                         <Text style={styles.viewOptionTemaText}>Tela ligada: </Text>
                         <Switch
@@ -128,16 +120,29 @@ export default function Configuracao(): JSX.Element {
                             value={context.keepScreenOn}
                             style={{ transform: [{ scaleX: 1.9 }, { scaleY: 2 }] }}
                         />
+                    </View>
+                </View>
+                <View style={styles.viewOptionTema}>
+
+                    <View style={styles.viewImageThemeHeader} >
+                        <Image
+                            source={require("../../assets/images/about.jpg")}
+                            style={styles.imageHeader}
+                        />
+                    </View>
+                    <View style={[styles.viewOptionTemaOptions, { width: "100%", justifyContent: "center", }]}>
+                        <TouchableOpacity style={styles.viewOptionTemaButtontSobre}>
+                            <Text style={styles.viewOptionTemaTextSobre}
+                                onPress={() => OpenCloseModalSobre()}
+                            >Sobre </Text>
+                        </TouchableOpacity>
 
                     </View>
-
+                    <ModalSobre modalSobre={modalSobre} OpenCloseModalSobre={OpenCloseModalSobre} />
                 </View>
 
             </ScrollView >
-
         </View >
-
-
     )
 }
 
