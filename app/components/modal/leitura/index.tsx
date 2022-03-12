@@ -17,9 +17,6 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
     const [livroFetch, setLivroFetch] = useState([]);
     const [capituloFetch, setCapituloFetch] = useState<any>(false);
     let styles = Styles()
-
-
-
     const [valoresArmazenados, setValoresArmazenados] = useState<IValoresArmazenados>({
         versao: {
             versao_id: undefined,

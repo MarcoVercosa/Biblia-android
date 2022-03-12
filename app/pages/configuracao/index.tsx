@@ -14,27 +14,13 @@ interface IValues {
 
 export default function Configuracao(): JSX.Element {
     const { context, setContext }: IValues = useContext(Context) as any
+    console.log(context)
     const [modalSobre, setModalSobre] = useState<boolean>(false)
     const styles = Styles()
-    async function ChangeTheme(checked: boolean) {
-        setContext((prevState: any) => { return { ...prevState, lightTheme: checked } })
-        await AsyncStorage.setItem("lightTheme", JSON.stringify(checked))
-    }
-    async function ChangeOnOffScreen(checked: boolean) {
-        setContext((prevState: any) => { return { ...prevState, keepScreenOn: checked } })
-        //await AsyncStorage.setItem("ChangeOnOffScreen", JSON.stringify(checked))
-    }
-    function ChangeFontSizeBiblia(value: number) {
-        setContext((prevState: any) => { return { ...prevState, fonteSizeLeituraBiblia: value } })
 
-    }
-    function ChangeFontSizeHino(value: number) {
-        setContext((prevState: any) => { return { ...prevState, fonteSizeHino: value } })
-    }
     function OpenCloseModalSobre() {
         setModalSobre(!modalSobre)
     }
-
     function GerarNumerosFontSize() {
         let armazena = []
         for (let i = 10; i <= 40; i++) {
@@ -56,9 +42,7 @@ export default function Configuracao(): JSX.Element {
                         <Text style={styles.viewOptionTemaText}>Tema LIGHT: </Text>
                         <Switch
                             thumbColor={context.lightTheme ? "#00f689" : "#f4f3f4"}
-                            onValueChange={(value) => {
-                                ChangeTheme(value)
-                            }}
+                            onValueChange={(value: boolean) => setContext(context.ChangeLightTheme(value))}
                             value={context.lightTheme}
                             style={{ transform: [{ scaleX: 1.9 }, { scaleY: 2 }] }}
                         />
@@ -76,7 +60,7 @@ export default function Configuracao(): JSX.Element {
                         <Picker
                             style={styles.viewOptionFonteSizeOptionsPicker}
                             selectedValue={context.fonteSizeLeituraBiblia}
-                            onValueChange={(value: number) => { ChangeFontSizeBiblia(value) }}
+                            onValueChange={(value: number) => setContext(context.ChangeFonteSizeLeituraBiblia(value))}
                             mode="dropdown"
                         >
                             {GerarNumerosFontSize()}
@@ -95,7 +79,7 @@ export default function Configuracao(): JSX.Element {
                         <Picker
                             style={styles.viewOptionFonteSizeOptionsPicker}
                             selectedValue={context.fonteSizeHino}
-                            onValueChange={(value: number) => { ChangeFontSizeHino(value) }}
+                            onValueChange={(value: number) => setContext(context.ChangeFonteSizeHino(value))}
                             mode="dropdown"
                         >
                             {GerarNumerosFontSize()}
@@ -114,13 +98,29 @@ export default function Configuracao(): JSX.Element {
                         <Text style={styles.viewOptionTemaText}>Tela ligada: </Text>
                         <Switch
                             thumbColor={context.keepScreenOn ? "#00f689" : "#f4f3f4"}
-                            onValueChange={(value) => {
-                                ChangeOnOffScreen(value)
-                            }}
+                            onValueChange={(value: boolean) => setContext(context.ChangeKeepScreenOn(value))}
                             value={context.keepScreenOn}
                             style={{ transform: [{ scaleX: 1.9 }, { scaleY: 2 }] }}
                         />
                     </View>
+                </View>
+                <View style={styles.viewOptionTema}>
+
+                    <View style={styles.viewImageThemeHeader} >
+                        <Image
+                            source={require("../../assets/images/default.jpg")}
+                            style={styles.imageHeader}
+                        />
+                    </View>
+                    <View style={[styles.viewOptionTemaOptions, { width: "100%", justifyContent: "center", }]}>
+                        <TouchableOpacity style={styles.viewOptionTemaButtontPadrao}>
+                            <Text style={styles.viewOptionTemaTextPadrao}
+                                onPress={() => setContext(context.Padrao())}
+                            >Config. padrão </Text>
+                        </TouchableOpacity>
+
+                    </View>
+                    <ModalSobre modalSobre={modalSobre} OpenCloseModalSobre={OpenCloseModalSobre} />
                 </View>
                 <View style={styles.viewOptionTema}>
 
@@ -140,7 +140,6 @@ export default function Configuracao(): JSX.Element {
                     </View>
                     <ModalSobre modalSobre={modalSobre} OpenCloseModalSobre={OpenCloseModalSobre} />
                 </View>
-
             </ScrollView >
         </View >
     )

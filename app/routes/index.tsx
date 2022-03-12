@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createContext } from "react";
@@ -15,6 +16,7 @@ import { values } from "../components/contextAPI";
 const Context = createContext({ values })
 
 export default function Routes(): JSX.Element {
+
     const [context, setContext] = useState(values)
     const Tab = createBottomTabNavigator();
 
@@ -43,7 +45,7 @@ export default function Routes(): JSX.Element {
                                     iconName = 'eye';
                                     break;
                                 case 'Sobre':
-                                    iconName = 'thumbs-up';
+                                    iconName = 'bookmark';
                                     break;
                                 default:
                                     iconName = 'circle';
