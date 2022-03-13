@@ -8,5 +8,4 @@ export interface IContext {
     keepScreenOn: boolean;
     ChangeKeepScreenOn: (value: boolean) => IContext
     Padrao: () => IContext,
-    SaveLocalStorage: () => void
 }

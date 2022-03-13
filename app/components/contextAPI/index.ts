@@ -22,9 +22,6 @@ let values: IContext = {
             keepScreenOn: false,
         }
     },
-    SaveLocalStorage: async function () {
-        await AsyncStorage.setItem("contextConfiguracao", JSON.stringify(this))
-    }
 
 }
 
