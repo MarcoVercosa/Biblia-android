@@ -9,28 +9,26 @@ interface IValues {
 
 function Styles() {
     const { context }: IValues = useContext(Context) as any
-    let fontColor = context.lightTheme ? "#747b81" : "#e5e5e5"
-    let lightTheme = context.lightTheme ? "white" : "#13192a"
     const styles = StyleSheet.create({
         safeContainer: {
             flex: 1,
-            backgroundColor: lightTheme,
+            backgroundColor: context.lightThemeColor(),
         },
         viewHeader: {
             marginTop: "1%",
             height: "10%",
             justifyContent: "center",
-            borderWidth: 3,
-            borderColor: "#c7d5e8",
-            borderRadius: 50,
-            backgroundColor: "#c7d5e8"
+            // borderWidth: 3,
+            // borderColor: "#c7d5e8",
+            // borderRadius: 50,
+            // backgroundColor: "#c7d5e8"
         },
         leituraButton: {
             width: "100%",
             alignItems: "center",
         },
         viewHeaderImage: {
-            width: "15%",
+            width: "17%",
             height: "100%",
             marginLeft: "2%",
         },
@@ -43,18 +41,15 @@ function Styles() {
             marginTop: "1%",
             marginBottom: "2%",
             width: "97%"
-
         },
         textContainerLeituraInfo: {
             fontSize: 18,
             fontWeight: "bold",
-            color: fontColor
-
+            color: context.colorFont()
         },
         viewContainerLeituraVersiculos: {
-            width: "93%",
+            width: "97%",
             alignSelf: "center"
-
         },
         viewContainerArrows: {
             height: 160,
@@ -81,7 +76,7 @@ function Styles() {
         arrowsText: {
             textAlign: "center",
             fontSize: 17,
-            color: fontColor
+            color: context.colorFont()
         },
         viewSelectCapitulo: {
             width: "35%",
@@ -108,7 +103,7 @@ function Styles() {
         tituloCuriosidades: {
             marginTop: "5%",
             fontSize: 25,
-            color: fontColor
+            color: context.colorFont()
         },
 
     })

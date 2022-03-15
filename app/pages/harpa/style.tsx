@@ -9,22 +9,20 @@ interface IValues {
 
 function Styles() {
     const { context }: IValues = useContext(Context) as any
-    let fontColor = context.lightTheme ? "#747b81" : "#e5e5e5"
-    let lightTheme = context.lightTheme ? "white" : "#13192a"
     let fontSize = context.fonteSizeHino
 
     const styles = StyleSheet.create({
         safeContainer: {
             flex: 1,
-            backgroundColor: lightTheme
+            backgroundColor: context.lightThemeColor()
         },
         viewHeader: {
             height: "10%",
             justifyContent: "center",
-            borderWidth: 3,
-            borderColor: "#c7d5e8",
-            borderRadius: 50,
-            backgroundColor: "#c7d5e8",
+            // borderWidth: 3,
+            // borderColor: "#c7d5e8",
+            // borderRadius: 50,
+            // backgroundColor: "#c7d5e8",
             marginTop: "0.7%"
         },
         modalPesquisaHino: {
@@ -32,7 +30,7 @@ function Styles() {
             marginTop: "1%",
         },
         viewHinoModalImage: {
-            width: "15%",
+            width: "17%",
             height: "100%",
             marginLeft: "2%",
         },
@@ -47,7 +45,7 @@ function Styles() {
             textAlign: "center",
             marginTop: "5%",
             marginBottom: "2%",
-            color: fontColor
+            color: context.colorFont()
         },
         conteudoLetraHinoButtonShare: {
             height: "8%",
@@ -66,7 +64,7 @@ function Styles() {
             width: "100%",
             textAlign: "center",
             fontSize: fontSize,
-            color: fontColor
+            color: context.colorFont()
         },
 
     })

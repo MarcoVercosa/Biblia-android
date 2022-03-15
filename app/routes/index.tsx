@@ -12,11 +12,11 @@ import Harpa from "../pages/harpa";
 import Favoritos from "../pages/favoritos";
 import Pesquisa from "../pages/pesquisa";
 import Configuracao from "../pages/configuracao";
-import { values } from "../components/contextAPI";
+import { contextConfiguracoes } from "../components/contextAPI/contextAppConfig";
 
-const Context = createContext({ values })
+const Context = createContext({ contextConfiguracoes })
 export default function Routes(): JSX.Element {
-    const [context, setContext] = useState<IContext>(values)
+    const [context, setContext] = useState<IContext>(contextConfiguracoes)
     const Tab = createBottomTabNavigator();
     useEffect(() => {
         AsyncStorage.getItem("contextConfiguracao").then((value) => {
@@ -41,14 +41,13 @@ export default function Routes(): JSX.Element {
         //sempre que houver alguma alteração no context, armazena no local storage
         AsyncStorage.setItem("contextConfiguracao", JSON.stringify(context))
     }, [context])
-
     return (
         <Context.Provider value={{ context, setContext } as any}>
             <NavigationContainer>
-                <Tab.Navigator initialRouteName="Configuracao"
+                <Tab.Navigator initialRouteName="Favoritos"
                     screenOptions={({ route }) => ({
                         tabBarIcon: ({ color, size }) => {
-                            let iconName;
+                            let iconName: string;
 
                             switch (route.name) {
                                 case 'Home':
@@ -63,11 +62,11 @@ export default function Routes(): JSX.Element {
                                 case 'Harpa':
                                     iconName = 'music';
                                     break;
+                                case 'Favoritos':
+                                    iconName = 'bookmark';
+                                    break;
                                 case 'Configuracao':
                                     iconName = 'eye';
-                                    break;
-                                case 'Sobre':
-                                    iconName = 'bookmark';
                                     break;
                                 default:
                                     iconName = 'circle';
@@ -83,51 +82,28 @@ export default function Routes(): JSX.Element {
                     })}
                 >
                     <Tab.Screen name="Home" component={Home}
-                        options={{
-                            title: '',
-                            headerShown: false,
-                        }}
+                        options={{ title: '', headerShown: false, }}
                     />
                     <Tab.Screen name="Leitura" component={Leitura}
-                        options={{
-                            title: '',
-                            headerShown: false,
-
-                        }}
+                        options={{ title: '', headerShown: false, }}
                     />
                     <Tab.Screen name="Pesquisa" component={Pesquisa}
-                        options={{
-                            title: '',
-                            headerShown: false,
-
-                        }}
+                        options={{ title: '', headerShown: false, }}
                     />
                     <Tab.Screen name="Harpa" component={Harpa}
-                        options={{
-                            title: '',
-                            headerShown: false
-                        }}
+                        options={{ title: '', headerShown: false }}
+                    />
+                    <Tab.Screen name="Favoritos" component={Favoritos}
+                        options={{ title: '', headerShown: false }}
                     />
                     <Tab.Screen name="Configuracao" component={Configuracao}
-                        options={{
-                            title: '',
-                            headerShown: false
-                        }}
+                        options={{ title: '', headerShown: false }}
                     />
-                    <Tab.Screen name="Sobre" component={Favoritos}
-                        options={{
-                            title: '',
-                            headerShown: false
-                        }}
-                    />
-
                 </Tab.Navigator>
             </NavigationContainer>
         </Context.Provider>
-
     )
 }
-
 export { Context }
 
 

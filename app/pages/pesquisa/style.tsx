@@ -9,13 +9,12 @@ interface IValues {
 
 function Styles() {
     const { context }: IValues = useContext(Context) as any
-    let lightTheme = context.lightTheme ? "white" : "#13192a"
     let fontSize = context.fonteSizeLeituraBiblia
 
     const styles = StyleSheet.create({
         container: {
             height: "100%",
-            backgroundColor: lightTheme
+            backgroundColor: context.lightThemeColor()
         },
         viewCampoPesquisa: {
             flexDirection: "row",

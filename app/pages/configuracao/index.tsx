@@ -14,7 +14,6 @@ interface IValues {
 
 export default function Configuracao(): JSX.Element {
     const { context, setContext }: IValues = useContext(Context) as any
-    console.log(context)
     const [modalSobre, setModalSobre] = useState<boolean>(false)
     const styles = Styles()
 

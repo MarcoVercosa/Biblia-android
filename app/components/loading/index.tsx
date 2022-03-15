@@ -18,17 +18,13 @@ export default function Loading(): JSX.Element {
         </View>
     )
 }
-
 const styles = StyleSheet.create({
     viewLoadingImage: {
         flex: 1,
         alignContent: "center",
         justifyContent: "center",
         backgroundColor: "#00fff2",
-
-
     },
-
     loadingImage: {
         alignSelf: "center",
         height: 60,

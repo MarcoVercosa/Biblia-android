@@ -6,15 +6,11 @@ import { IContext } from "../../../interface/IContext";
 interface IValues {
     context: IContext
 }
-
 function Styles() {
     const { context }: IValues = useContext(Context) as any
-    let fontColor = context.lightTheme ? "#747b81" : "#e5e5e5"
-    let lightTheme = context.lightTheme ? "white" : "#13192a"
-
     const styles = StyleSheet.create({
         safeContainer: {
-            backgroundColor: lightTheme
+            backgroundColor: context.lightThemeColor()
         },
         titulo: {
             backgroundColor: "#1dcab9",
@@ -27,7 +23,7 @@ function Styles() {
             width: "98%",
             marginTop: "2%",
             marginBottom: "5%",
-            color: fontColor
+            color: context.colorFont()
         },
         viewSobre: {
             width: "95%",
@@ -41,7 +37,7 @@ function Styles() {
             fontSize: 19,
             textAlign: "center",
             marginBottom: "3%",
-            color: fontColor
+            color: context.colorFont()
         }
     })
     return styles

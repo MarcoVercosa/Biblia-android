@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react"
 import { Image, SafeAreaView, View, Text, } from "react-native";
 import ArticlesHome from "../../components/articlesHome";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Context } from "../../routes";
 import { IContext } from "../../interface/IContext";
 import { styles } from "./style"

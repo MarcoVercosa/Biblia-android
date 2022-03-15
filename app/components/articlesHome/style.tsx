@@ -9,7 +9,6 @@ interface IValues {
 
 function Styles() {
     const { context }: IValues = useContext(Context) as any
-    let fontColor = context.lightTheme ? "#747b81" : "#e5e5e5"
     const styles = StyleSheet.create({
         viewArticles: {
             alignItems: "center",
@@ -22,7 +21,7 @@ function Styles() {
         },
         viewArticlesTextHead: {
             fontSize: 27,
-            color: fontColor,
+            color: context.colorFont(),
             marginBottom: "5%",
             fontWeight: "bold",
             justifyContent: "center",
@@ -33,7 +32,7 @@ function Styles() {
 
         },
         viewArticlesText: {
-            color: fontColor,
+            color: context.colorFont(),
             fontSize: 17,
             padding: "1.56%",
             textAlign: "center",

@@ -9,13 +9,10 @@ interface IValues {
 
 function Styles() {
     const { context }: IValues = useContext(Context) as any
-    let fontColor = context.lightTheme ? "#747b81" : "#e5e5e5"
-    let lightTheme = context.lightTheme ? "white" : "#13192a"
-
     const styles = StyleSheet.create({
 
         viewContainer: {
-            backgroundColor: lightTheme,
+            backgroundColor: context.lightThemeColor(),
             flex: 1
         },
         viewHeader: {
@@ -58,7 +55,7 @@ function Styles() {
         textSelectNumeroHino: {
             fontSize: 25,
             width: "45%",
-            color: fontColor
+            color: context.colorFont()
         },
         selectNumeroHino: {
             width: "45%",
@@ -74,7 +71,7 @@ function Styles() {
         textBuscaPorPalavraHino: {
             fontSize: 25,
             width: "45%",
-            color: fontColor
+            color: context.colorFont()
         },
         inputBuscaPorPalavraHino: {
             width: "45%",

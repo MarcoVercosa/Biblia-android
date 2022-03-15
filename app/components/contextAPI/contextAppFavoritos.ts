@@ -1,0 +1,1 @@
+import { IContextAppFavoritos } from "../../interface/IContext";

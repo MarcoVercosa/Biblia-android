@@ -9,13 +9,10 @@ interface IValues {
 
 function Styles() {
     const { context }: IValues = useContext(Context) as any
-    let lightTheme = context.lightTheme ? "white" : "#13192a"
-    let fontColor = context.lightTheme ? "#747b81" : "#e5e5e5"
-
     const styles = StyleSheet.create({
         container: {
             flex: 1,
-            backgroundColor: lightTheme
+            backgroundColor: context.lightThemeColor()
         },
         view_titulo: {
             backgroundColor: "#08a0ff",
@@ -27,7 +24,7 @@ function Styles() {
             fontSize: 23,
             textAlign: "center",
             fontWeight: "bold",
-            color: fontColor
+            color: context.colorFont()
         },
         view_selects: {
             height: "65%",
@@ -40,7 +37,7 @@ function Styles() {
             textAlign: "center",
             marginBottom: "2%",
             fontWeight: "bold",
-            color: fontColor
+            color: context.colorFont()
         },
         picker: {
             backgroundColor: "#e5e5e5",

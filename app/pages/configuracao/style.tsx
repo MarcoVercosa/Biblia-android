@@ -9,9 +9,6 @@ interface IValues {
 
 function Styles() {
     const { context }: IValues = useContext(Context) as any
-    let fontColor = context.lightTheme ? "#747b81" : "#e5e5e5"
-    let lightTheme = context.lightTheme ? "white" : "#13192a"
-
     const styles = StyleSheet.create({
         SafeAreaView: {
             flex: 1,
@@ -19,7 +16,7 @@ function Styles() {
         container: {
             height: "100%",
             width: "100%",
-            backgroundColor: lightTheme
+            backgroundColor: context.lightThemeColor()
         },
         viewOptionTema: {
             height: 125,
@@ -27,8 +24,6 @@ function Styles() {
             justifyContent: "center",
             borderBottomColor: "#e2dfed",
             borderBottomWidth: 2,
-
-
         },
         viewImageThemeHeader: {
 
@@ -43,14 +38,13 @@ function Styles() {
         viewOptionTemaOptions: {
             flexDirection: "row",
             marginBottom: "2%",
-
         },
 
         viewOptionTemaText: {
             fontSize: 25,
             marginLeft: "2%",
             marginRight: "5%",
-            color: fontColor,
+            color: context.colorFont(),
             width: "50%",
         },
         viewOptionFonteSizeOptionsPicker: {
@@ -67,7 +61,7 @@ function Styles() {
         },
         viewOptionTemaTextSobre: {
             fontSize: 25,
-            color: fontColor,
+            color: context.colorFont(),
             justifyContent: "center",
             backgroundColor: "#3fc2ff",
             marginLeft: "0%",
@@ -83,9 +77,9 @@ function Styles() {
         },
         viewOptionTemaTextPadrao: {
             fontSize: 25,
-            color: fontColor,
+            color: context.colorFont(),
             justifyContent: "center",
-            backgroundColor: "#fffb8e",
+            backgroundColor: "#07c297",
             marginLeft: "0%",
             marginRight: "0%",
             marginBottom: "2%",

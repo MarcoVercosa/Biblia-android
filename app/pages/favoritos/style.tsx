@@ -9,40 +9,33 @@ interface IValues {
 
 function Styles() {
     const { context }: IValues = useContext(Context) as any
-    let fontColor = context.lightTheme ? "#747b81" : "#e5e5e5"
-    let lightTheme = context.lightTheme ? "white" : "#13192a"
 
     const styles = StyleSheet.create({
         safeContainer: {
-            backgroundColor: lightTheme
+            backgroundColor: context.lightThemeColor(),
+            flex: 1
         },
-        titulo: {
-            backgroundColor: "#1dcab9",
-            fontSize: 30,
-            alignSelf: "center",
-            textAlign: "center",
-            textAlignVertical: "center",
-            height: "8%",
-            borderRadius: 20,
-            width: "98%",
-            marginTop: "2%",
-            marginBottom: "5%",
-            color: fontColor
+        viewContainer: {
+            flex: 1,
         },
-        viewSobre: {
+        viewImage: {
+            height: "11%",
             width: "95%",
-            height: "87%",
+            // backgroundColor: "blue",
+            // borderRadius: 10,
+            justifyContent: "center",
             alignSelf: "center",
-            backgroundColor: context.lightTheme ? "#fffaf2" : "#27272a",
-            padding: "2%",
-            borderRadius: 30
+            marginTop: "0.7%"
         },
-        viewConteudo: {
-            fontSize: 19,
-            textAlign: "center",
-            marginBottom: "3%",
-            color: fontColor
+        imageButton: {
+
+        },
+        image: {
+            height: 90,
+            width: 90,
+            alignSelf: "center"
         }
+
     })
 
     return styles
