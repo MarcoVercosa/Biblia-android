@@ -13,6 +13,7 @@ import { IValoresArmazenados } from "../../interface/ImodalLeitura"
 import { IRetornoApiLeitura } from "../../interface/IRetornoApiLeitura"
 import { ICuriosidades } from "../../interface/ICuriosidades";
 
+
 import { IContext } from "../../interface/IContext";
 interface IValues {
     context: IContext
@@ -74,6 +75,7 @@ export default function Leitura({ route }: any): JSX.Element {
             setLoading(false)
         }
     }
+
     function RenderizaSelectCapitulo() {
         let renderiza = []
         for (let i = 1; i <= dadosLeituraRetornoApi!.quantidadecapitulo[0].capitulo; i++) {
@@ -143,7 +145,14 @@ export default function Leitura({ route }: any): JSX.Element {
                         </View>
                         <ScrollView ref={scrollRef} >
                             <View style={styles.viewContainerLeituraVersiculos}>
-                                {dadosLeituraRetornoApi.conteudo.map((data, index) => <RenderizaVersiculos data={data} index={index} versiculoPesquisa={dadosSelecionadosModal.versiculo} />)}
+                                {dadosLeituraRetornoApi.conteudo.map((data, index) =>
+                                    //dataParagrafo => usado no componente <RenderizaVersiculos/> para renderizar os versiculos e no modal opcoes
+                                    //versiculoPesquisa se existir, é pq houve uma pesquisa  no componente pesquisa, e será sublinhado no <RenderizaVersiculos/>
+                                    //dataNumeros e dataNomes são usados no <RenderizaVersiculos/>, pois ao segurar o versiculo, irá  habilitar um modal que usará as infromações
+                                    <RenderizaVersiculos dataParagrafo={data} dataNumeros={dadosSelecionadosModal}
+                                        dataNomes={dadosLeituraRetornoApi} index={index} versiculoPesquisa={dadosSelecionadosModal.versiculo}
+                                    />
+                                )}
                             </View>
                             <View style={styles.viewContainerArrows}>
                                 <TouchableOpacity style={styles.arrowsButton}

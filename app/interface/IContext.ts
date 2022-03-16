@@ -15,8 +15,11 @@ export interface IContext {
 
 export interface IContextAppFavoritos {
     conteudo: string;
-    versaoTestamentoLivroCapitulo: string;
-    anotacoes: string;
+    versao: string;
+    testamento: string;
+    livro: string;
+    capitulo: number;
+    versiculo: number;
     color: string;
     dadosUrlApi: string;
 }
