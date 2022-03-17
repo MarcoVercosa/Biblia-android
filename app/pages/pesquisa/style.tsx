@@ -9,7 +9,7 @@ interface IValues {
 
 function Styles() {
     const { context }: IValues = useContext(Context) as any
-    let fontSize = context.fonteSizeLeituraBiblia
+    context.fonteSizeLeituraBiblia
 
     const styles = StyleSheet.create({
         container: {
@@ -60,12 +60,12 @@ function Styles() {
 
         },
         textRenderizaConteudo: {
-            fontSize: fontSize,
+            fontSize: context.fonteSizeLeituraBiblia,
             color: "black",
 
         },
         textRenderizaOrigem: {
-            fontSize: fontSize,
+            fontSize: context.fonteSizeLeituraBiblia,
         }
     })
     return styles

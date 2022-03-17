@@ -25,7 +25,6 @@ function RenderizaVersiculos({ dataParagrafo, dataNumeros, index, versiculoPesqu
     async function OpenCloseModalOpcoes() {
         setModalOpcoes(!modalOpcoes)
     }
-
     return (
 
         <TouchableOpacity
@@ -33,6 +32,7 @@ function RenderizaVersiculos({ dataParagrafo, dataNumeros, index, versiculoPesqu
             onLongPress={() => {
                 OpenCloseModalOpcoes();
             }}
+            delayLongPress={500}
             //se vier valor no versiculoPesquisa, é pq houve uma pesquisa por palavra
             style={{ backgroundColor: versiculoPesquisa == index + 1 ? "#cfafce" : "none", borderRadius: 30 }}
         >
@@ -40,11 +40,8 @@ function RenderizaVersiculos({ dataParagrafo, dataNumeros, index, versiculoPesqu
             >
                 {index + 1} - {dataParagrafo.conteudo}
             </Text>
-            <ModalOpcoes modalOpcoes={modalOpcoes} OpenCloseModalOpcoes={OpenCloseModalOpcoes} dataParagrafo={dataParagrafo.conteudo} dataNumeros={dataNumeros} dataNomes={dataNomes} />
+            <ModalOpcoes modalOpcoes={modalOpcoes} OpenCloseModalOpcoes={OpenCloseModalOpcoes} versiculo={index + 1} dataParagrafo={dataParagrafo.conteudo} dataNumeros={dataNumeros} dataNomes={dataNomes} />
         </TouchableOpacity>
-
-
-
     )
 }
 

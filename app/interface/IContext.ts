@@ -13,13 +13,27 @@ export interface IContext {
 }
 
 
-export interface IContextAppFavoritos {
-    conteudo: string;
-    versao: string;
-    testamento: string;
-    livro: string;
-    capitulo: number;
-    versiculo: number;
-    color: string;
-    dadosUrlApi: string;
+export interface Ifavoritos {
+    conteudo: string,
+    versaoNome: string,
+    testamentoNome: string,
+    livroNome: string,
+    capitulo: number,
+    versiculo: number,
+    color: string,
+    dadosUrlApi: {
+        versao_id: number,
+        livro_testamento_id: number,
+        livro_id: number,
+    },
 }
+
+export interface IContextAppFavoritos {
+    favoritos: Ifavoritos[],
+    SalvarDados: (conteudo: string, versaoNome: string, testamentoNome: string,
+        livroNome: string, capitulo: number, versiculo: number, color: string,
+        dadosUrlApiI: any)
+        => IContextAppFavoritos;
+    ExcluirDados: (value: Ifavoritos) => any
+}
+
