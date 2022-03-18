@@ -1,7 +1,6 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useState, useEffect } from "react"
 import { View, Text, Image, Switch, ScrollView, TouchableOpacity } from "react-native"
 import { ModalSobre } from "../../components/modal/sobre";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Picker } from '@react-native-picker/picker';
 import { Styles } from "./style"
 import { Context } from "../../routes";
@@ -27,6 +26,21 @@ export default function Configuracao(): JSX.Element {
         }
         return armazena
     }
+
+    useEffect(() => {
+        console.log("useefect")
+        //se a aplicação for encerrada e aberta novamente: checa se ha dados ja conf no local storage
+        const DataLocalStorageConfiguracoes = async () => {
+            let retorno = await context.CarregaDadosLocalStorage()
+            if (retorno) { setContext(retorno) }
+        }
+        DataLocalStorageConfiguracoes()
+    }, [])
+    useEffect(() => {
+        console.log("useddddefect")
+        //sempre que houver alguma alteração no context, armazena no local storage
+        context.SalvaDadosLocalStorage(context)
+    }, [context])
     return (
         < View style={styles.container} >
             <ScrollView >

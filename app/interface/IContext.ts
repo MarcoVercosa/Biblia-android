@@ -10,13 +10,14 @@ export interface IContext {
     keepScreenOn: boolean;
     ChangeKeepScreenOn: (value: boolean) => IContext
     Padrao: () => IContext,
+    CarregaDadosLocalStorage: () => Promise<IContext>
+    SalvaDadosLocalStorage: (value: IContext) => any
 }
 
 
 export interface Ifavoritos {
     conteudo: string,
     versaoNome: string,
-    testamentoNome: string,
     livroNome: string,
     capitulo: number,
     versiculo: number,
@@ -30,7 +31,8 @@ export interface Ifavoritos {
 
 export interface IContextAppFavoritos {
     favoritos: Ifavoritos[],
-    SalvarDados: (conteudo: string, versaoNome: string, testamentoNome: string,
+    CarregarDados: () => Promise<IContextAppFavoritos | any>
+    SalvarDados: (conteudo: string, versaoNome: string,
         livroNome: string, capitulo: number, versiculo: number, color: string,
         dadosUrlApiI: any)
         => IContextAppFavoritos;

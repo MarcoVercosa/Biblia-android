@@ -4,9 +4,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 let contextAppFavoritos: IContextAppFavoritos = {
     favoritos: [{
-        conteudo: "Então ele fechou o livro, devolveu-o ao assistente e assentou-se. Na sinagoga todos tinham os olhos fitos nele;",
+        conteudo: "Tendo fechado o livro, Jesus o devolveu ao assistente e sentou-se. Todos na sinagoga tinham os olhos fixos nele.",
         versaoNome: "Nova Versão Internacional",
-        testamentoNome: "Novo",
         livroNome: "Lucas",
         capitulo: 4,
         versiculo: 20,
@@ -14,23 +13,30 @@ let contextAppFavoritos: IContextAppFavoritos = {
         dadosUrlApi: {
             versao_id: 4,
             livro_testamento_id: 2,
-            livro_id: 5,
+            livro_id: 42,
         },
     }],
-    SalvarDados: function (conteudo, versaoNome, testamentoNome, livroNome, capitulo, versiculo, color, dadosUrlApi) {
-        AsyncStorage.setItem("contextFavoritos", JSON.stringify({ ...this, conteudo, versaoNome, testamentoNome, livroNome, capitulo, versiculo, color, dadosUrlApi }))
-        this.favoritos.push({ conteudo, versaoNome, testamentoNome, livroNome, capitulo, versiculo, color, dadosUrlApi })
-        return { ...this }
+    CarregarDados: async function () {
+        let dados = await AsyncStorage.getItem("contextFavoritos")
+        if (dados) {
+            return { ...this, favoritos: JSON.parse(dados) }
+        }
+    },
+    SalvarDados: function (conteudo, versaoNome, livroNome, capitulo, versiculo, color, dadosUrlApi) {
+        let armazenaFavoritosTemp: Ifavoritos[] = this.favoritos
+        armazenaFavoritosTemp.push({ conteudo, versaoNome, livroNome, capitulo, versiculo, color, dadosUrlApi })
+        AsyncStorage.setItem("contextFavoritos", JSON.stringify(armazenaFavoritosTemp))
+        return { ...this, favoritos: armazenaFavoritosTemp }
     },
     ExcluirDados: function (context: any) {
         let data: Ifavoritos[] = this.favoritos.filter((value: Ifavoritos) => {
             if (value.dadosUrlApi.versao_id != context.dadosUrlApi.versao_id
                 || value.capitulo != context.capitulo || value.versiculo != context.versiculo
             ) {
+                AsyncStorage.setItem("contextFavoritos", JSON.stringify(data))
                 return value
             }
         })
-
         return { data }
     }
 }

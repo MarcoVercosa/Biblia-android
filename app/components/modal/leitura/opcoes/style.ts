@@ -30,7 +30,7 @@ function Styles() {
             alignSelf: "center"
         },
         viewContent: {
-            backgroundColor: "#e1e5f6",
+            //backgroundColor: "#e1e5f6",
             width: "97%",
             padding: "5%",
             marginTop: "2%",
@@ -49,6 +49,20 @@ function Styles() {
             fontSize: context.fonteSizeLeituraBiblia - 2,
             fontWeight: "bold"
         },
+        viewInputContainer: {
+            marginTop: "5%"
+        },
+        viewInputImage: {
+
+        },
+        imageInput: {
+            height: 55,
+            width: 55,
+            alignSelf: "center",
+            marginTop: "5%"
+        },
+        viewInput: {
+        },
 
         textInputAnotacao: {
             marginTop: "5%",
@@ -58,19 +72,50 @@ function Styles() {
             borderRadius: 30,
             padding: 10
         },
-        view_botoes: {
-            height: "25%",
-            justifyContent: "space-around",
+        viewColors: {
+            backgroundColor: "#edf3fc",
+            width: "95%",
+            alignSelf: "center",
+            marginTop: "2.7%",
+            borderRadius: 30
+        },
+        viewColorsTitulo: {
+            fontSize: 25,
+            padding: 10
+        },
+
+        viewColorsView: {
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "center",
             alignItems: "center",
-            flexDirection: "row"
+            alignSelf: "center",
+            width: "80%",
+
+        },
+        viewColorsSelect: {
+            width: 40, height: 40,
+            borderRadius: 150,
+            margin: 10
+        },
+        view_botoes: {
+            flexDirection: "row",
+            height: 100,
+            alignItems: "center",
+            justifyContent: "space-around",
         },
         view_botoes_ambos: {
             width: "40%",
             textAlign: "center",
             justifyContent: "center",
             alignItems: "center",
-            height: "25%",
+            alignSelf: "center",
+            alignContent: "center",
+            height: "55%",
+            textAlignVertical: "center",
             borderRadius: 30,
+            marginBottom: "17%",
+            marginTop: "10%"
         },
         view_botoes_Buscar: {
             backgroundColor: "#03fa54",

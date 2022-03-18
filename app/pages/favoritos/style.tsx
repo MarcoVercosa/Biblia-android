@@ -34,7 +34,36 @@ function Styles() {
             height: 90,
             width: 90,
             alignSelf: "center"
-        }
+        },
+        viewContent: {
+            backgroundColor: "#e1e5f6",
+            width: "97%",
+            padding: "5%",
+            marginTop: "2%",
+            borderRadius: 30,
+            alignSelf: "center"
+        },
+        textContent: {
+            fontSize: context.fonteSizeLeituraBiblia,
+        },
+        textVersaoLivro: {
+            marginTop: "2%",
+            fontSize: context.fonteSizeLeituraBiblia - 2,
+            fontWeight: "bold"
+        },
+        textLivroCapituloVersiculo: {
+            fontSize: context.fonteSizeLeituraBiblia - 2,
+            fontWeight: "bold"
+        },
+
+        textInputAnotacao: {
+            marginTop: "5%",
+            width: "100%",
+            backgroundColor: "white",
+            fontSize: 21,
+            borderRadius: 30,
+            padding: 10
+        },
 
     })
 

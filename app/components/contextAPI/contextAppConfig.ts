@@ -1,4 +1,5 @@
 import { IContext } from "../../interface/IContext"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 let contextConfiguracoes: IContext = {
     lightTheme: true,
     ChangeLightTheme: function (value) {
@@ -21,6 +22,24 @@ let contextConfiguracoes: IContext = {
             keepScreenOn: false,
         }
     },
+    CarregaDadosLocalStorage: async function () {
+        let value = await AsyncStorage.getItem("contextConfiguracao")
+        if (value) {
+            let temp: IContext = JSON.parse(value)
+            //as funções não são armazenadas no local storage, somente as keys e values(objs)
+            //então so adiciona os valores abaixo no state e mantem as funções que já estão no state 
+            return {
+                ...this,
+                lightTheme: temp.lightTheme,
+                fonteSizeLeituraBiblia: temp.fonteSizeLeituraBiblia,
+                fonteSizeHino: temp.fonteSizeHino,
+                keepScreenOn: temp.keepScreenOn
+            } as any
+        }
+    },
+    SalvaDadosLocalStorage(context) {
+        AsyncStorage.setItem("contextConfiguracao", JSON.stringify(context))
+    }
 }
 export { contextConfiguracoes }
 
