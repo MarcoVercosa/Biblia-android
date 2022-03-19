@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useContext } from "react"
 import KeepAwake from 'react-native-keep-awake';
-import { View, Text, SafeAreaView, Image, TouchableOpacity, ScrollView } from "react-native"
+import { View, Text, SafeAreaView, Image, TouchableOpacity, ScrollView, Alert } from "react-native"
 import { Picker } from '@react-native-picker/picker';
 import ModalLeitura from "../../components/modal/leitura"
 import { Context } from "../../routes";
@@ -37,27 +37,30 @@ export default function Leitura({ route }: any): JSX.Element {
         }
         async function BuscaPalavraPesquisada() {
             setLoading(true) //chama o componente para loading
-            let { data } = await GetApi(`mais/buscaconteudo/${route.params.versao_id}/${route.params.livro_testamento_id}/${route.params.livro_id}/${route.params.capitulo}`)
-            //aqui montamos um obj não qual as funções de avançar e voltar as utilizam
-            setDadosSelecionadosModal({
-                versao: {
-                    versao_id: route.params.versao_id
-                },
-                testamento: {
-                    testamento_id: route.params.livro_testamento_id
-                },
-                livro: {
-                    livro_id: route.params.livro_id
-                },
-                capitulo: route.params.capitulo,
-                versiculo: route.params.versiculo
+            try {
+                let { data } = await GetApi(`mais/buscaconteudo/${route.params.versao_id}/${route.params.livro_testamento_id}/${route.params.livro_id}/${route.params.capitulo}`)
 
-            })  // armazena a selação para leitura
-            setDadosLeituraRetornoApi(data) // armazena o retorno da api
-            let resultado = await GetApi(`curiosidades/buscacuriosidade/${route.params?.livro_nome}`)
-            setCuriosidades(resultado)
+                //aqui montamos um obj não qual as funções de avançar e voltar as utilizam
+                setDadosSelecionadosModal({
+                    versao: {
+                        versao_id: route.params.versao_id
+                    },
+                    testamento: {
+                        testamento_id: route.params.livro_testamento_id
+                    },
+                    livro: {
+                        livro_id: route.params.livro_id
+                    },
+                    capitulo: route.params.capitulo,
+                    versiculo: route.params.versiculo
 
-            setLoading(false)
+                })  // armazena a selação para leitura
+                setDadosLeituraRetornoApi(data) // armazena o retorno da api
+                let resultado = await GetApi(`curiosidades/buscacuriosidade/${route.params?.livro_nome}`)
+                setCuriosidades(resultado)
+
+                setLoading(false)
+            } catch (err) { Alert.alert("Ocorreu algum erro, tente novamente em instantes") }
         }
         //se houver alteração no params da props (componente pesquisa), o useEffect irá executar
     }, [route.params])

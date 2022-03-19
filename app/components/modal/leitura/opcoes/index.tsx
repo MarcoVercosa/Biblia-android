@@ -1,5 +1,5 @@
 import React, { useState, useContext, memo } from "react"
-import { View, Text, Modal, TouchableOpacity, SafeAreaView, TextInput, Image, ScrollView } from "react-native"
+import { View, Text, Modal, TouchableOpacity, SafeAreaView, TextInput, Image, ScrollView, Alert } from "react-native"
 import { IRetornoApiLeitura } from "../../../../interface/IRetornoApiLeitura"
 import { IValoresArmazenados } from "../../../../interface/ImodalLeitura"
 import { IContextAppFavoritos } from "../../../../interface/IContext"
@@ -27,14 +27,18 @@ function ModalOpcoes({ versiculo, dataParagrafo, dataNomes, dataNumeros, modalOp
 
     function FavoritarVersiculo() {
         setContextFavoritos(contextFavoritos.SalvarDados(dataParagrafo, dataNomes.nomeVersao[0].versao_nome,
-            dataNomes.nomeLivro[0].livro_nome, dataNomes.capituloAtual, versiculo, "red",
+            dataNomes.nomeLivro[0].livro_nome, dataNomes.capituloAtual, versiculo, backGroundColor,
             {
                 dadosUrlApi: {
                     versao_id: dataNumeros.versao.versao_id,
                     livro_testamento_id: dataNumeros.testamento.testamento_id,
                     livro_id: dataNumeros.livro.livro_id
                 },
-            }))
+            }
+        ))
+        Alert.alert("Versículo salvo em seus FAVORITOS")
+        OpenCloseModalOpcoes(false)
+
     }
     return (
         <Modal

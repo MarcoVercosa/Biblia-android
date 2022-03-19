@@ -6,10 +6,8 @@ import { IContext } from "../../interface/IContext";
 interface IValues {
     context: IContext
 }
-
 function Styles() {
     const { context }: IValues = useContext(Context) as any
-
     const styles = StyleSheet.create({
         safeContainer: {
             backgroundColor: context.lightThemeColor(),
@@ -36,7 +34,6 @@ function Styles() {
             alignSelf: "center"
         },
         viewContent: {
-            backgroundColor: "#e1e5f6",
             width: "97%",
             padding: "5%",
             marginTop: "2%",

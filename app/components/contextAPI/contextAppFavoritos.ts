@@ -22,22 +22,25 @@ let contextAppFavoritos: IContextAppFavoritos = {
             return { ...this, favoritos: JSON.parse(dados) }
         }
     },
-    SalvarDados: function (conteudo, versaoNome, livroNome, capitulo, versiculo, color, dadosUrlApi) {
+    SalvarDados: function (conteudo, versaoNome, livroNome, capitulo, versiculo, color, { dadosUrlApi }) {
         let armazenaFavoritosTemp: Ifavoritos[] = this.favoritos
         armazenaFavoritosTemp.push({ conteudo, versaoNome, livroNome, capitulo, versiculo, color, dadosUrlApi })
         AsyncStorage.setItem("contextFavoritos", JSON.stringify(armazenaFavoritosTemp))
         return { ...this, favoritos: armazenaFavoritosTemp }
     },
-    ExcluirDados: function (context: any) {
-        let data: Ifavoritos[] = this.favoritos.filter((value: Ifavoritos) => {
-            if (value.dadosUrlApi.versao_id != context.dadosUrlApi.versao_id
-                || value.capitulo != context.capitulo || value.versiculo != context.versiculo
-            ) {
-                AsyncStorage.setItem("contextFavoritos", JSON.stringify(data))
-                return value
-            }
-        })
-        return { data }
+    ExcluirDados: function (versao_id, livro_id, capitulo, versiculo) {
+        console.log("Me chamou")
+        console.log(versao_id, livro_id, capitulo, versiculo)
+        let data: Ifavoritos[] = this.favoritos.filter((value: Ifavoritos) =>
+            //console.log(value)
+            value.dadosUrlApi.versao_id != versao_id
+            || value.dadosUrlApi.livro_id != livro_id
+            || value.capitulo != capitulo
+            || value.versiculo != versiculo
+        )
+        console.log(data)
+        AsyncStorage.setItem("contextFavoritos", JSON.stringify(data))
+        return { ...this, favoritos: data }
     }
 }
 
