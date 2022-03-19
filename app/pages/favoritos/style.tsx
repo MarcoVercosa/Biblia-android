@@ -61,6 +61,17 @@ function Styles() {
             borderRadius: 30,
             padding: 10
         },
+        viewImagesOptions: {
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginTop: "10%"
+        },
+        imagesOptions: {
+            height: 40,
+            width: 40,
+            //marginLeft: "17%"
+        }
 
     })
 

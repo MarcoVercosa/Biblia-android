@@ -23,22 +23,28 @@ let contextAppFavoritos: IContextAppFavoritos = {
         }
     },
     SalvarDados: function (conteudo, versaoNome, livroNome, capitulo, versiculo, color, { dadosUrlApi }) {
+        let verificaSeJaExiste = this.favoritos.find((value: Ifavoritos) =>
+            value.dadosUrlApi.versao_id == dadosUrlApi.versao_id
+            && value.dadosUrlApi.livro_id == dadosUrlApi.livro_id
+            && value.capitulo == capitulo
+            && value.versiculo == versiculo
+        )
+        if (verificaSeJaExiste) { return this }
+
         let armazenaFavoritosTemp: Ifavoritos[] = this.favoritos
         armazenaFavoritosTemp.push({ conteudo, versaoNome, livroNome, capitulo, versiculo, color, dadosUrlApi })
         AsyncStorage.setItem("contextFavoritos", JSON.stringify(armazenaFavoritosTemp))
         return { ...this, favoritos: armazenaFavoritosTemp }
     },
     ExcluirDados: function (versao_id, livro_id, capitulo, versiculo) {
-        console.log("Me chamou")
-        console.log(versao_id, livro_id, capitulo, versiculo)
+        //se alguma das opcoes abaixo for diferente, retorna, 
+        //pois se alguma é igual deve ser retirada
         let data: Ifavoritos[] = this.favoritos.filter((value: Ifavoritos) =>
-            //console.log(value)
             value.dadosUrlApi.versao_id != versao_id
             || value.dadosUrlApi.livro_id != livro_id
             || value.capitulo != capitulo
             || value.versiculo != versiculo
         )
-        console.log(data)
         AsyncStorage.setItem("contextFavoritos", JSON.stringify(data))
         return { ...this, favoritos: data }
     }
