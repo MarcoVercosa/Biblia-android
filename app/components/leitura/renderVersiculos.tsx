@@ -1,13 +1,19 @@
 import React, { useContext, useState } from 'react';
-import { Text, StyleSheet, TouchableOpacity, Pressable, Alert } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Context } from "../../routes";
+import { ContextFavoritos } from '../../routes';
 import { IContext } from "../../interface/IContext";
+import { IContextAppFavoritos } from '../../interface/IContext';
 import { IRetornoApiLeitura } from '../../interface/IRetornoApiLeitura';
 import { IValoresArmazenados } from '../../interface/ImodalLeitura';
 import ModalOpcoes from "../modal/leitura/opcoes"
 
 interface IValues {
     context: IContext
+}
+interface IValues {
+    contextFavoritos: IContextAppFavoritos;
+    setContextFavoritos: (value: any) => void
 }
 
 interface IRenderizaVersiculos {
@@ -21,6 +27,7 @@ interface IRenderizaVersiculos {
 function RenderizaVersiculos({ dataParagrafo, dataNumeros, index, versiculoPesquisa, dataNomes }: IRenderizaVersiculos): JSX.Element {
     const [modalOpcoes, setModalOpcoes] = useState<boolean>(false)
     const { context }: IValues = useContext(Context) as any
+    const { contextFavoritos, setContextFavoritos }: IValues = useContext(ContextFavoritos) as any
 
     async function OpenCloseModalOpcoes() {
         setModalOpcoes(!modalOpcoes)
@@ -40,6 +47,14 @@ function RenderizaVersiculos({ dataParagrafo, dataNumeros, index, versiculoPesqu
             >
                 {index + 1} - {dataParagrafo.conteudo}
             </Text>
+            {contextFavoritos.VerificaSeHaFavoritos(dataNumeros.versao.versao_id, dataNumeros.livro.livro_id, dataNumeros.capitulo, index + 1) &&
+                <TouchableOpacity style={styles.imageButton}>
+                    <Image
+                        source={require("../../assets/images/favoriteStar.jpg")}
+                        style={styles.imageFavorito}
+                    />
+                </TouchableOpacity>
+            }
             <ModalOpcoes modalOpcoes={modalOpcoes} OpenCloseModalOpcoes={OpenCloseModalOpcoes} versiculo={index + 1} dataParagrafo={dataParagrafo.conteudo} dataNumeros={dataNumeros} dataNomes={dataNomes} />
         </TouchableOpacity>
     )
@@ -54,6 +69,15 @@ const styles = StyleSheet.create({
     buttontContainerLeitura: {
 
     },
+    imageButton: {
+        padding: "2%",
+        alignItems: "center"
+    },
+    imageFavorito: {
+        width: 50,
+        height: 50
+
+    }
 
 })
 

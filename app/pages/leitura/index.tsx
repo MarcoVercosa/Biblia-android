@@ -151,7 +151,7 @@ export default function Leitura({ route }: any): JSX.Element {
                                 {dadosLeituraRetornoApi.conteudo.map((data, index) =>
                                     //dataParagrafo => usado no componente <RenderizaVersiculos/> para renderizar os versiculos e no modal opcoes
                                     //versiculoPesquisa se existir, é pq houve uma pesquisa  no componente pesquisa, e será sublinhado no <RenderizaVersiculos/>
-                                    //dataNumeros e dataNomes são usados no <RenderizaVersiculos/>, pois ao segurar o versiculo, irá  habilitar um modal que usará as infromações
+                                    //dataNumeros e dataNomes são usados no <RenderizaVersiculos/>, pois ao segurar o versiculo, irá  habilitar um modal que usará as informações
                                     <RenderizaVersiculos dataParagrafo={data} dataNumeros={dadosSelecionadosModal}
                                         dataNomes={dadosLeituraRetornoApi} index={index} versiculoPesquisa={dadosSelecionadosModal.versiculo}
                                     />
@@ -199,7 +199,7 @@ export default function Leitura({ route }: any): JSX.Element {
                                     </Text >
                                 </TouchableOpacity>
                             </View>
-                            {curiosidades &&
+                            {curiosidades.data.length > 0 &&
                                 <View style={styles.viewCuriosidades}>
                                     <Text style={styles.tituloCuriosidades} >CURIOSIDADES</Text>
                                     {curiosidades.data.map((data: any) => <RenderizaCuriosidades data={data} />)}

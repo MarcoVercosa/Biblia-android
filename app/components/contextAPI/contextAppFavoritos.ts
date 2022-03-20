@@ -10,6 +10,7 @@ let contextAppFavoritos: IContextAppFavoritos = {
         capitulo: 4,
         versiculo: 20,
         color: "red",
+        anotacao: "Jesus, nosso salvador !!!",
         dadosUrlApi: {
             versao_id: 4,
             livro_testamento_id: 2,
@@ -22,7 +23,7 @@ let contextAppFavoritos: IContextAppFavoritos = {
             return { ...this, favoritos: JSON.parse(dados) }
         }
     },
-    SalvarDados: function (conteudo, versaoNome, livroNome, capitulo, versiculo, color, { dadosUrlApi }) {
+    SalvarDados: function (conteudo, versaoNome, livroNome, capitulo, versiculo, color, { dadosUrlApi }, anotacao) {
         let verificaSeJaExiste = this.favoritos.find((value: Ifavoritos) =>
             value.dadosUrlApi.versao_id == dadosUrlApi.versao_id
             && value.dadosUrlApi.livro_id == dadosUrlApi.livro_id
@@ -32,7 +33,7 @@ let contextAppFavoritos: IContextAppFavoritos = {
         if (verificaSeJaExiste) { return this }
 
         let armazenaFavoritosTemp: Ifavoritos[] = this.favoritos
-        armazenaFavoritosTemp.push({ conteudo, versaoNome, livroNome, capitulo, versiculo, color, dadosUrlApi })
+        armazenaFavoritosTemp.push({ conteudo, versaoNome, livroNome, capitulo, versiculo, color, dadosUrlApi, anotacao })
         AsyncStorage.setItem("contextFavoritos", JSON.stringify(armazenaFavoritosTemp))
         return { ...this, favoritos: armazenaFavoritosTemp }
     },
@@ -47,7 +48,17 @@ let contextAppFavoritos: IContextAppFavoritos = {
         )
         AsyncStorage.setItem("contextFavoritos", JSON.stringify(data))
         return { ...this, favoritos: data }
+    },
+    VerificaSeHaFavoritos: function (versao_id, livro_id, capitulo, versiculo) {
+        let data: Ifavoritos[] = this.favoritos.filter((value: Ifavoritos) =>
+            value.dadosUrlApi.versao_id == versao_id
+            && value.dadosUrlApi.livro_id == livro_id
+            && value.capitulo == capitulo
+            && value.versiculo == versiculo
+        )
+        if (data.length > 0) { return true } else { return false }
     }
+
 }
 
 export { contextAppFavoritos }

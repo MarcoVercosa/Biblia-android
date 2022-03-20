@@ -34,7 +34,9 @@ function ModalOpcoes({ versiculo, dataParagrafo, dataNomes, dataNumeros, modalOp
                     livro_testamento_id: dataNumeros.testamento.testamento_id,
                     livro_id: dataNumeros.livro.livro_id
                 },
-            }
+
+            },
+            anotacao
         ))
         Alert.alert("Versículo salvo em seus FAVORITOS")
         OpenCloseModalOpcoes(false)

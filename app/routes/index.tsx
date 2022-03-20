@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -21,6 +21,18 @@ export default function Routes(): JSX.Element {
     const [context, setContext] = useState<IContext>(contextConfiguracoes)
     const [contextFavoritos, setContextFavoritos] = useState<IContextAppFavoritos>(contextAppFavoritos)
     const Tab = createBottomTabNavigator();
+    useEffect(() => {
+        //se a aplicação for encerrada e aberta novamente: checa se ha dados ja conf no local storage
+        const DataLocalStorageConfiguracoes = async () => {
+            let retorno = await context.CarregaDadosLocalStorage()
+            if (retorno) { setContext(retorno) }
+        }
+        DataLocalStorageConfiguracoes()
+    }, [])
+    useEffect(() => {
+        //sempre que houver alguma alteração no context, armazena no local storage
+        context.SalvaDadosLocalStorage(context)
+    }, [context])
     return (
         <Context.Provider value={{ context, setContext } as any}>
             <ContextFavoritos.Provider value={{ contextFavoritos, setContextFavoritos } as any}>

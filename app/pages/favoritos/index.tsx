@@ -83,7 +83,7 @@ export default function Favoritos({ navigation }: any): JSX.Element {
                                     <TextInput
                                         style={styles.textInputAnotacao}
                                         //onChangeText={(value: string) => setAnotacao(value)}
-                                        //value={anotacao}
+                                        value={data.anotacao}
                                         placeholder="Anotação"
                                         maxLength={200}
                                         multiline

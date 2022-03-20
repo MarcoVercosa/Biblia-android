@@ -22,6 +22,7 @@ export interface Ifavoritos {
     capitulo: number,
     versiculo: number,
     color: string,
+    anotacao: string;
     dadosUrlApi: {
         versao_id: number,
         livro_testamento_id: number,
@@ -34,8 +35,9 @@ export interface IContextAppFavoritos {
     CarregarDados: () => Promise<IContextAppFavoritos | any>
     SalvarDados: (conteudo: string, versaoNome: string,
         livroNome: string, capitulo: number, versiculo: number, color: string,
-        dadosUrlApiI: any)
+        dadosUrlApiI: any, anotacao: string)
         => IContextAppFavoritos;
     ExcluirDados: (versao_id: number, livro_id: number, capitulo: number, versiculo: number) => any
+    VerificaSeHaFavoritos: (versao_id: number, livro_id: number, capitulo: number, versiculo: number) => boolean
 }
 
