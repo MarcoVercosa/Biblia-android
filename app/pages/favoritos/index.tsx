@@ -12,11 +12,11 @@ interface IValues {
     setContextFavoritos: (value: any) => void
 }
 
-export default function Favoritos({ navigation }: any): JSX.Element {
+export default function Favoritos({ navigation, route }: any): JSX.Element {
     const { contextFavoritos, setContextFavoritos }: IValues = useContext(ContextFavoritos) as any
     let styles = Styles()
 
-    useEffect(() => {
+    useEffect(() => {//se gouver dados no localstorage, guarde no Context
         const CarregaDadosLocalStorage = async () => {
             let dados = await contextAppFavoritos.CarregarDados()
             if (dados) {
@@ -26,6 +26,12 @@ export default function Favoritos({ navigation }: any): JSX.Element {
         }
         CarregaDadosLocalStorage()
     }, [])
+
+    useEffect(() => {
+        if (route.params != undefined) {
+
+        }
+    }, [route.params])
 
     function DirecionaParaLeitura(livro_nome: string, versao_id: number, livro_testamento_id: number, livro_id: number, capitulo: number, versiculo: number) {
         navigation.navigate("Leitura", { livro_nome, versao_id, livro_testamento_id, livro_id, capitulo, versiculo })
@@ -63,8 +69,6 @@ export default function Favoritos({ navigation }: any): JSX.Element {
                         />
                     </TouchableOpacity>
                 </View>
-
-
                 <ScrollView>
                     {contextFavoritos.favoritos.map((data: Ifavoritos, index: number) => {
                         return (

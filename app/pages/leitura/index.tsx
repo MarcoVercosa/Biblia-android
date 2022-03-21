@@ -18,7 +18,7 @@ import { IContext } from "../../interface/IContext";
 interface IValues {
     context: IContext
 }
-export default function Leitura({ route }: any): JSX.Element {
+export default function Leitura({ route, navigation }: any): JSX.Element {
     const { context }: IValues = useContext(Context) as any
     context.keepScreenOn ? KeepAwake.activate() : KeepAwake.deactivate()//tela sempre ligada ou não    
     let styles = Styles()
@@ -146,13 +146,13 @@ export default function Leitura({ route }: any): JSX.Element {
                                 {dadosLeituraRetornoApi.nomeVersao[0].versao_nome}
                             </Text>
                         </View>
-                        <ScrollView ref={scrollRef} >
+                        <ScrollView ref={scrollRef}>
                             <View style={styles.viewContainerLeituraVersiculos}>
                                 {dadosLeituraRetornoApi.conteudo.map((data, index) =>
                                     //dataParagrafo => usado no componente <RenderizaVersiculos/> para renderizar os versiculos e no modal opcoes
                                     //versiculoPesquisa se existir, é pq houve uma pesquisa  no componente pesquisa, e será sublinhado no <RenderizaVersiculos/>
                                     //dataNumeros e dataNomes são usados no <RenderizaVersiculos/>, pois ao segurar o versiculo, irá  habilitar um modal que usará as informações
-                                    <RenderizaVersiculos dataParagrafo={data} dataNumeros={dadosSelecionadosModal}
+                                    <RenderizaVersiculos navigation={navigation} dataParagrafo={data} dataNumeros={dadosSelecionadosModal}
                                         dataNomes={dadosLeituraRetornoApi} index={index} versiculoPesquisa={dadosSelecionadosModal.versiculo}
                                     />
                                 )}

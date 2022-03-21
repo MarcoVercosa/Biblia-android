@@ -1,5 +1,5 @@
-import React, { useContext, useState, useEffect } from "react"
-import { View, Text, Image, Switch, ScrollView, TouchableOpacity } from "react-native"
+import React, { useContext, useState } from "react"
+import { View, Text, Image, Switch, ScrollView, TouchableOpacity, Alert } from "react-native"
 import { ModalSobre } from "../../components/modal/sobre";
 import { Picker } from '@react-native-picker/picker';
 import { Styles } from "./style"
@@ -113,12 +113,14 @@ export default function Configuracao(): JSX.Element {
                     <View style={[styles.viewOptionTemaOptions, { width: "100%", justifyContent: "center", }]}>
                         <TouchableOpacity style={styles.viewOptionTemaButtontPadrao}>
                             <Text style={styles.viewOptionTemaTextPadrao}
-                                onPress={() => setContext(context.Padrao())}
+                                onPress={() => {
+                                    setContext(context.Padrao())
+                                    Alert.alert("As configurações retornaram ao padrão do APP.")
+                                }}
                             >Config. padrão </Text>
                         </TouchableOpacity>
 
                     </View>
-                    <ModalSobre modalSobre={modalSobre} OpenCloseModalSobre={OpenCloseModalSobre} />
                 </View>
                 <View style={styles.viewOptionTema}>
 

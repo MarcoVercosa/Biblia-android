@@ -17,20 +17,25 @@ interface IValues {
 }
 
 interface IRenderizaVersiculos {
+    navigation: any;
     dataParagrafo: any;
     index: number;
     versiculoPesquisa: number;
-    dataNumeros: IValoresArmazenados,
-    dataNomes: IRetornoApiLeitura
+    dataNumeros: IValoresArmazenados;
+    dataNomes: IRetornoApiLeitura;
 }
 
-function RenderizaVersiculos({ dataParagrafo, dataNumeros, index, versiculoPesquisa, dataNomes }: IRenderizaVersiculos): JSX.Element {
+function RenderizaVersiculos({ navigation, dataParagrafo, dataNumeros, index, versiculoPesquisa, dataNomes }: IRenderizaVersiculos): JSX.Element {
     const [modalOpcoes, setModalOpcoes] = useState<boolean>(false)
     const { context }: IValues = useContext(Context) as any
     const { contextFavoritos, setContextFavoritos }: IValues = useContext(ContextFavoritos) as any
 
     async function OpenCloseModalOpcoes() {
         setModalOpcoes(!modalOpcoes)
+    }
+
+    function DirecionaFavoritos() {
+        navigation.navigate("Favoritos")
     }
     return (
 
@@ -47,8 +52,10 @@ function RenderizaVersiculos({ dataParagrafo, dataNumeros, index, versiculoPesqu
             >
                 {index + 1} - {dataParagrafo.conteudo}
             </Text>
-            {contextFavoritos.VerificaSeHaFavoritos(dataNumeros.versao.versao_id, dataNumeros.livro.livro_id, dataNumeros.capitulo, index + 1) &&
-                <TouchableOpacity style={styles.imageButton}>
+            {contextFavoritos.VerificaSeHaFavoritos(dataNumeros.versao.versao_id, dataNumeros.livro.livro_id, dataNomes.capituloAtual, index + 1) &&
+                <TouchableOpacity style={styles.imageButton}
+                    onPress={() => { DirecionaFavoritos() }}
+                >
                     <Image
                         source={require("../../assets/images/favoriteStar.jpg")}
                         style={styles.imageFavorito}
