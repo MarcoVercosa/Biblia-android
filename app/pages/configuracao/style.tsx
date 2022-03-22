@@ -43,12 +43,12 @@ function Styles() {
         viewOptionTemaText: {
             fontSize: 25,
             marginLeft: "2%",
-            marginRight: "5%",
+            marginRight: "0%",
             color: context.colorFont(),
             width: "50%",
         },
         viewOptionFonteSizeOptionsPicker: {
-            width: "35%",
+            width: "47%",
             backgroundColor: "#e5e5e5",
             justifyContent: "center",
             alignContent: "center",

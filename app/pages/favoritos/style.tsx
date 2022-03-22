@@ -42,15 +42,16 @@ function Styles() {
         },
         textContent: {
             fontSize: context.fonteSizeLeituraBiblia,
+            fontFamily: context.fontTipo
         },
         textVersaoLivro: {
             marginTop: "2%",
             fontSize: context.fonteSizeLeituraBiblia - 2,
-            fontWeight: "bold"
+            fontWeight: "bold",
         },
         textLivroCapituloVersiculo: {
             fontSize: context.fonteSizeLeituraBiblia - 2,
-            fontWeight: "bold"
+            fontWeight: "bold",
         },
 
         textInputAnotacao: {

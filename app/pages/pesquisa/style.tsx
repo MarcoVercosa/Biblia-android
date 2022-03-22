@@ -62,10 +62,12 @@ function Styles() {
         textRenderizaConteudo: {
             fontSize: context.fonteSizeLeituraBiblia,
             color: "black",
+            fontFamily: context.fontTipo
 
         },
         textRenderizaOrigem: {
             fontSize: context.fonteSizeLeituraBiblia,
+            fontFamily: context.fontTipo
         }
     })
     return styles

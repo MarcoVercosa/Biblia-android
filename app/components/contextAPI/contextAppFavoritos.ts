@@ -9,7 +9,7 @@ let contextAppFavoritos: IContextAppFavoritos = {
         livroNome: "Lucas",
         capitulo: 4,
         versiculo: 20,
-        color: "red",
+        color: "white",
         anotacao: "Jesus, nosso salvador !!!",
         dadosUrlApi: {
             versao_id: 4,

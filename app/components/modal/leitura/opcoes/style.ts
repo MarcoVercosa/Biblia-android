@@ -39,6 +39,7 @@ function Styles() {
         },
         textContent: {
             fontSize: context.fonteSizeLeituraBiblia,
+            fontFamily: context.fontTipo
         },
         textVersaoLivro: {
             marginTop: "2%",

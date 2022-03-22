@@ -5,6 +5,7 @@ import { Picker } from '@react-native-picker/picker';
 import { Styles } from "./style"
 import { Context } from "../../routes";
 import { IContext } from "../../interface/IContext";
+import { GerarNumerosFontSize, GerarFontTipo } from "./pickersComponents"
 
 interface IValues {
     context: IContext
@@ -18,13 +19,6 @@ export default function Configuracao(): JSX.Element {
 
     function OpenCloseModalSobre() {
         setModalSobre(!modalSobre)
-    }
-    function GerarNumerosFontSize() {
-        let armazena = []
-        for (let i = 10; i <= 40; i++) {
-            armazena.push(<Picker.Item key={i} label={String(i)} value={i} />)
-        }
-        return armazena
     }
     return (
         < View style={styles.container} >
@@ -81,6 +75,25 @@ export default function Configuracao(): JSX.Element {
                             mode="dropdown"
                         >
                             {GerarNumerosFontSize()}
+                        </Picker>
+                    </View>
+                </View>
+                <View style={styles.viewOptionTema}>
+                    <View style={styles.viewImageThemeHeader} >
+                        <Image
+                            source={require("../../assets/images/fontTipo.jpg")}
+                            style={styles.imageHeader}
+                        />
+                    </View>
+                    <View style={styles.viewOptionTemaOptions}>
+                        <Text style={styles.viewOptionTemaText}>Fonte Tipo: </Text>
+                        <Picker
+                            style={styles.viewOptionFonteSizeOptionsPicker}
+                            selectedValue={context.fontTipo}
+                            onValueChange={(value: string) => setContext(context.ChangeFontTipo(value))}
+                            mode="dropdown"
+                        >
+                            {GerarFontTipo()}
                         </Picker>
                     </View>
                 </View>

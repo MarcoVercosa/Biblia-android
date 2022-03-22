@@ -1,17 +1,19 @@
 export interface IContext {
     lightTheme: boolean;
-    colorFont: () => string
-    lightThemeColor: () => string
-    ChangeLightTheme: (value: boolean) => IContext
-    fonteSizeLeituraBiblia: number,
-    ChangeFonteSizeLeituraBiblia: (value: number) => IContext
-    fonteSizeHino: number,
-    ChangeFonteSizeHino: (value: number) => IContext
+    colorFont: () => string;
+    lightThemeColor: () => string;
+    ChangeLightTheme: (value: boolean) => IContext;
+    fonteSizeLeituraBiblia: number;
+    ChangeFonteSizeLeituraBiblia: (value: number) => IContext;
+    fonteSizeHino: number;
+    ChangeFonteSizeHino: (value: number) => IContext;
+    fontTipo: string;
+    ChangeFontTipo: (value: string) => IContext;
     keepScreenOn: boolean;
-    ChangeKeepScreenOn: (value: boolean) => IContext
-    Padrao: () => IContext,
-    CarregaDadosLocalStorage: () => Promise<IContext>
-    SalvaDadosLocalStorage: (value: IContext) => any
+    ChangeKeepScreenOn: (value: boolean) => IContext;
+    Padrao: () => IContext;
+    CarregaDadosLocalStorage: () => Promise<IContext>;
+    SalvaDadosLocalStorage: (value: IContext) => any;
 }
 
 

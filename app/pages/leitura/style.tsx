@@ -18,10 +18,6 @@ function Styles() {
             marginTop: "1%",
             height: "10%",
             justifyContent: "center",
-            // borderWidth: 3,
-            // borderColor: "#c7d5e8",
-            // borderRadius: 50,
-            // backgroundColor: "#c7d5e8"
         },
         leituraButton: {
             width: "100%",

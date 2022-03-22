@@ -30,6 +30,20 @@
 		9CB589C079474AB0B24D5A29 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A473C0A3EA74142A4685CFA /* Octicons.ttf */; };
 		2E6C126C24194657BA031C37 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FFC4F6B3CBD4EBA8DB29641 /* SimpleLineIcons.ttf */; };
 		D8AFF213789C4292B9F5D60B /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD78EF50A4344CD5BE997256 /* Zocial.ttf */; };
+		EAA059D0550A4FA983A836E3 /* Hurricane-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0DF1335574C1444F8A78AA78 /* Hurricane-Regular.ttf */; };
+		8CE9D89BABCA428AA06DED7B /* Lobster-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22BC2FD39F634A8ABCDCE875 /* Lobster-Regular.ttf */; };
+		817770A48F194B748F1E5A4A /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D96D21408C449D69F321534 /* Montserrat-Regular.ttf */; };
+		594DA533255E442AA99FEAB4 /* Oswald-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF5C90C0E6B441A1B360064D /* Oswald-Regular.ttf */; };
+		EB6EA94B6D134569946067F8 /* Pacifico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 719FD10092B84B93A8818E6D /* Pacifico-Regular.ttf */; };
+		99D7729BE6BE4B818B35B386 /* Ramaraja-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E263A59A24B246FD96A030B4 /* Ramaraja-Regular.ttf */; };
+		258117A893364179AD89E737 /* RedHatMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA6EA876E39C4B28A80E9C65 /* RedHatMono-Regular.ttf */; };
+		A30C0F6D90C44A02A0E6A687 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E028CE1856364B1882D3431D /* Roboto-Regular.ttf */; };
+		4274781CA04D4B66B32E60AD /* Satisfy-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC5A57089A3142D7AB9F7FC1 /* Satisfy-Regular.ttf */; };
+		FAE4747536B14E9EB823244D /* SecularOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A3748FDAE30F43DF80038E04 /* SecularOne-Regular.ttf */; };
+		C8BD9D048ED44848AF4CE37E /* ShadowsIntoLight-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B79FD1AB92FC46EAAF9AA052 /* ShadowsIntoLight-Regular.ttf */; };
+		0AA1835C88C849549EDACA9B /* Smokum-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 97A97798EA4F422AB49E3E50 /* Smokum-Regular.ttf */; };
+		756F9F1AEF9B440C94AB4A5E /* StintUltraCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FB49DD8114BE43F1B15752B3 /* StintUltraCondensed-Regular.ttf */; };
+		69D11181EDD742EB92E4F494 /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FAF8E1944004A20BF411D0F /* Ubuntu-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +90,20 @@
 		0A473C0A3EA74142A4685CFA /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		0FFC4F6B3CBD4EBA8DB29641 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		CD78EF50A4344CD5BE997256 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0DF1335574C1444F8A78AA78 /* Hurricane-Regular.ttf */ = {isa = PBXFileReference; name = "Hurricane-Regular.ttf"; path = "../app/assets/fonts/Hurricane-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		22BC2FD39F634A8ABCDCE875 /* Lobster-Regular.ttf */ = {isa = PBXFileReference; name = "Lobster-Regular.ttf"; path = "../app/assets/fonts/Lobster-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1D96D21408C449D69F321534 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; name = "Montserrat-Regular.ttf"; path = "../app/assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BF5C90C0E6B441A1B360064D /* Oswald-Regular.ttf */ = {isa = PBXFileReference; name = "Oswald-Regular.ttf"; path = "../app/assets/fonts/Oswald-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		719FD10092B84B93A8818E6D /* Pacifico-Regular.ttf */ = {isa = PBXFileReference; name = "Pacifico-Regular.ttf"; path = "../app/assets/fonts/Pacifico-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E263A59A24B246FD96A030B4 /* Ramaraja-Regular.ttf */ = {isa = PBXFileReference; name = "Ramaraja-Regular.ttf"; path = "../app/assets/fonts/Ramaraja-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BA6EA876E39C4B28A80E9C65 /* RedHatMono-Regular.ttf */ = {isa = PBXFileReference; name = "RedHatMono-Regular.ttf"; path = "../app/assets/fonts/RedHatMono-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E028CE1856364B1882D3431D /* Roboto-Regular.ttf */ = {isa = PBXFileReference; name = "Roboto-Regular.ttf"; path = "../app/assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FC5A57089A3142D7AB9F7FC1 /* Satisfy-Regular.ttf */ = {isa = PBXFileReference; name = "Satisfy-Regular.ttf"; path = "../app/assets/fonts/Satisfy-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A3748FDAE30F43DF80038E04 /* SecularOne-Regular.ttf */ = {isa = PBXFileReference; name = "SecularOne-Regular.ttf"; path = "../app/assets/fonts/SecularOne-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B79FD1AB92FC46EAAF9AA052 /* ShadowsIntoLight-Regular.ttf */ = {isa = PBXFileReference; name = "ShadowsIntoLight-Regular.ttf"; path = "../app/assets/fonts/ShadowsIntoLight-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		97A97798EA4F422AB49E3E50 /* Smokum-Regular.ttf */ = {isa = PBXFileReference; name = "Smokum-Regular.ttf"; path = "../app/assets/fonts/Smokum-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FB49DD8114BE43F1B15752B3 /* StintUltraCondensed-Regular.ttf */ = {isa = PBXFileReference; name = "StintUltraCondensed-Regular.ttf"; path = "../app/assets/fonts/StintUltraCondensed-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2FAF8E1944004A20BF411D0F /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; name = "Ubuntu-Regular.ttf"; path = "../app/assets/fonts/Ubuntu-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +229,20 @@
 				0A473C0A3EA74142A4685CFA /* Octicons.ttf */,
 				0FFC4F6B3CBD4EBA8DB29641 /* SimpleLineIcons.ttf */,
 				CD78EF50A4344CD5BE997256 /* Zocial.ttf */,
+				0DF1335574C1444F8A78AA78 /* Hurricane-Regular.ttf */,
+				22BC2FD39F634A8ABCDCE875 /* Lobster-Regular.ttf */,
+				1D96D21408C449D69F321534 /* Montserrat-Regular.ttf */,
+				BF5C90C0E6B441A1B360064D /* Oswald-Regular.ttf */,
+				719FD10092B84B93A8818E6D /* Pacifico-Regular.ttf */,
+				E263A59A24B246FD96A030B4 /* Ramaraja-Regular.ttf */,
+				BA6EA876E39C4B28A80E9C65 /* RedHatMono-Regular.ttf */,
+				E028CE1856364B1882D3431D /* Roboto-Regular.ttf */,
+				FC5A57089A3142D7AB9F7FC1 /* Satisfy-Regular.ttf */,
+				A3748FDAE30F43DF80038E04 /* SecularOne-Regular.ttf */,
+				B79FD1AB92FC46EAAF9AA052 /* ShadowsIntoLight-Regular.ttf */,
+				97A97798EA4F422AB49E3E50 /* Smokum-Regular.ttf */,
+				FB49DD8114BE43F1B15752B3 /* StintUltraCondensed-Regular.ttf */,
+				2FAF8E1944004A20BF411D0F /* Ubuntu-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -318,6 +360,20 @@
 				9CB589C079474AB0B24D5A29 /* Octicons.ttf in Resources */,
 				2E6C126C24194657BA031C37 /* SimpleLineIcons.ttf in Resources */,
 				D8AFF213789C4292B9F5D60B /* Zocial.ttf in Resources */,
+				EAA059D0550A4FA983A836E3 /* Hurricane-Regular.ttf in Resources */,
+				8CE9D89BABCA428AA06DED7B /* Lobster-Regular.ttf in Resources */,
+				817770A48F194B748F1E5A4A /* Montserrat-Regular.ttf in Resources */,
+				594DA533255E442AA99FEAB4 /* Oswald-Regular.ttf in Resources */,
+				EB6EA94B6D134569946067F8 /* Pacifico-Regular.ttf in Resources */,
+				99D7729BE6BE4B818B35B386 /* Ramaraja-Regular.ttf in Resources */,
+				258117A893364179AD89E737 /* RedHatMono-Regular.ttf in Resources */,
+				A30C0F6D90C44A02A0E6A687 /* Roboto-Regular.ttf in Resources */,
+				4274781CA04D4B66B32E60AD /* Satisfy-Regular.ttf in Resources */,
+				FAE4747536B14E9EB823244D /* SecularOne-Regular.ttf in Resources */,
+				C8BD9D048ED44848AF4CE37E /* ShadowsIntoLight-Regular.ttf in Resources */,
+				0AA1835C88C849549EDACA9B /* Smokum-Regular.ttf in Resources */,
+				756F9F1AEF9B440C94AB4A5E /* StintUltraCondensed-Regular.ttf in Resources */,
+				69D11181EDD742EB92E4F494 /* Ubuntu-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

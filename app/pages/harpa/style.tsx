@@ -19,10 +19,6 @@ function Styles() {
         viewHeader: {
             height: "10%",
             justifyContent: "center",
-            // borderWidth: 3,
-            // borderColor: "#c7d5e8",
-            // borderRadius: 50,
-            // backgroundColor: "#c7d5e8",
             marginTop: "0.7%"
         },
         modalPesquisaHino: {
@@ -45,7 +41,8 @@ function Styles() {
             textAlign: "center",
             marginTop: "5%",
             marginBottom: "2%",
-            color: context.colorFont()
+            color: context.colorFont(),
+            fontFamily: context.fontTipo
         },
         conteudoLetraHinoButtonShare: {
             height: "8%",
@@ -64,7 +61,8 @@ function Styles() {
             width: "100%",
             textAlign: "center",
             fontSize: fontSize,
-            color: context.colorFont()
+            color: context.colorFont(),
+            fontFamily: context.fontTipo
         },
 
     })

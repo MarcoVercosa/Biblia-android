@@ -48,7 +48,7 @@ function RenderizaVersiculos({ navigation, dataParagrafo, dataNumeros, index, ve
             //se vier valor no versiculoPesquisa, é pq houve uma pesquisa por palavra
             style={{ backgroundColor: versiculoPesquisa == index + 1 ? "#cfafce" : "none", borderRadius: 30 }}
         >
-            <Text key={index} style={[styles.textContainerLeituraVersiculos, { color: context.colorFont(), fontSize: context.fonteSizeLeituraBiblia }]}
+            <Text key={index} style={[styles.textContainerLeituraVersiculos, { color: context.colorFont(), fontSize: context.fonteSizeLeituraBiblia, fontFamily: context.fontTipo }]}
             >
                 {index + 1} - {dataParagrafo.conteudo}
             </Text>
@@ -70,8 +70,7 @@ function RenderizaVersiculos({ navigation, dataParagrafo, dataNumeros, index, ve
 const styles = StyleSheet.create({
     textContainerLeituraVersiculos: {
         marginBottom: "0%",
-        fontFamily: "Open Sans",
-        padding: 8
+        padding: 8,
     },
     buttontContainerLeitura: {
 

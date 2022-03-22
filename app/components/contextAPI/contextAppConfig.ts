@@ -11,6 +11,8 @@ let contextConfiguracoes: IContext = {
     ChangeFonteSizeLeituraBiblia: function (value) { return { ...this, fonteSizeLeituraBiblia: value } },
     fonteSizeHino: 22,
     ChangeFonteSizeHino: function (value) { return { ...this, fonteSizeHino: value } },
+    fontTipo: 'Roboto-Regular',
+    ChangeFontTipo: function (value: string) { return { ...this, fontTipo: value } },
     keepScreenOn: false,
     ChangeKeepScreenOn: function (value) { return { ...this, keepScreenOn: value } },
     Padrao: function () {
@@ -19,6 +21,7 @@ let contextConfiguracoes: IContext = {
             lightTheme: true,
             fonteSizeLeituraBiblia: 20,
             fonteSizeHino: 22,
+            fontTipo: 'Roboto-Regular',
             keepScreenOn: false,
         }
     },
@@ -33,6 +36,7 @@ let contextConfiguracoes: IContext = {
                 lightTheme: temp.lightTheme,
                 fonteSizeLeituraBiblia: temp.fonteSizeLeituraBiblia,
                 fonteSizeHino: temp.fonteSizeHino,
+                fontTipo: temp.fontTipo,
                 keepScreenOn: temp.keepScreenOn
             } as any
         }
