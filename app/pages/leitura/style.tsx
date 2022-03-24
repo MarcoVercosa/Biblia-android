@@ -29,7 +29,7 @@ function Styles() {
             marginLeft: "2%",
         },
         viewContainerLeitura: {
-            height: "90%"
+            height: "88.5%"
         },
         viewContainerLeituraInfo: {
             justifyContent: "center",

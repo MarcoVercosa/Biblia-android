@@ -1,6 +1,10 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useEffect } from "react"
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import KeepAwake from 'react-native-keep-awake';
 import { View, Text, SafeAreaView, Image, TouchableOpacity, FlatList, Share } from "react-native"
 import { GetApi } from "../../api";
+import { Context } from "../../routes";
+import { IContext } from "../../interface/IContext";
 import { ModalHino } from "../../components/modal/hino";
 import { Styles } from "./style"
 import Loading from "../../components/loading/index"
@@ -13,23 +17,26 @@ interface IRetorno {
     titulo: string,
     numero: Number
 }
+interface IValues {
+    context: IContext
+}
 
 export default function Harpa(): JSX.Element {
+    const { context }: IValues = useContext(Context) as any
     const [modalHinoSelect, setModalHinoSelect] = useState<boolean>(false)
     const [letraBuscaAPI, setLetraBuscaAPI] = useState<Array<IRetorno>>([])
     const [loading, setLoading] = useState<boolean>(false)
     const styles = Styles()
+    context.keepScreenOn ? KeepAwake.activate() : KeepAwake.deactivate()//tela sempre ligada ou não    
 
-    function onClick(titulo: string, nmeroHino: string) {
+    function Compartilhar(titulo: string, numeroHino: string) {
         Share.share({
-            message: `Hino da harpa: ${titulo} - ${nmeroHino}`,
-            url: 'http://vidadafonte.com.br/harpacrista',
-            title: `${titulo} - ${nmeroHino}`
-        },
-        )
+            message: `http://vidadafonte.com.br/harpacrista \n Hino da harpa: ${titulo} - ${numeroHino}`,
+            title: 'http://vidadafonte.com.br/harpacrista',
+        })
     }
-    async function OpenCloseModalHino(numeroHino: boolean | Number) {
-        setModalHinoSelect(!modalHinoSelect)
+    async function OpenCloseModalHino(numeroHino: boolean | Number, openCLoseModal: boolean) {
+        setModalHinoSelect(openCLoseModal)
         if (numeroHino) {
             setLoading(true)
             let { data }: { data: IResultado[] } = await GetApi(`hinoharpa/buscatitulopornumero/${numeroHino}`)
@@ -37,8 +44,18 @@ export default function Harpa(): JSX.Element {
             let resultado: Array<any> = data.map((dados: any) => { return { letra: separaLinhas, titulo: dados.titulo, numero: numeroHino } })
             setLetraBuscaAPI(resultado)
             setLoading(false)
+            AsyncStorage.setItem("UltimoHino", JSON.stringify(numeroHino))
         }
     }
+    useEffect(() => {
+        let UltimoHinoLocalStorage = async () => {
+            let data = await AsyncStorage.getItem("UltimoHino")
+            if (data) {
+                OpenCloseModalHino(JSON.parse(data), false)
+            }
+        }
+        UltimoHinoLocalStorage()
+    }, [])
 
     if (loading) {
         return (<Loading />)
@@ -47,7 +64,7 @@ export default function Harpa(): JSX.Element {
         <SafeAreaView style={styles.safeContainer}>
             <View style={styles.viewHeader}>
                 <TouchableOpacity style={styles.modalPesquisaHino}
-                    onPressOut={() => OpenCloseModalHino(false)}
+                    onPressOut={() => OpenCloseModalHino(false, true)}
                 >
                     <Image
                         source={require("../../assets/images/music.jpg")}
@@ -65,7 +82,7 @@ export default function Harpa(): JSX.Element {
 
                         </Text>
                         <TouchableOpacity style={styles.conteudoLetraHinoButtonShare}
-                            onPress={() => { onClick(letraBuscaAPI[0].titulo, String(letraBuscaAPI[0].numero)) }}
+                            onPress={() => { Compartilhar(letraBuscaAPI[0].titulo, String(letraBuscaAPI[0].numero)) }}
                         >
                             <Image
                                 source={require("../../assets/images/share.jpg")}

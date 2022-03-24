@@ -5,7 +5,7 @@ import { IResutadoPorPalavra } from "../../../interface/IResultadoPorPalavra"
 interface IRenderizaHinoPorPalavra {
     item: IResutadoPorPalavra;
     index: number;
-    OpenCloseModalHino: (numeroHino: boolean | Number) => void
+    OpenCloseModalHino: (numeroHino: boolean | Number, openCLoseModal: boolean) => void
 }
 
 export default function RenderizaHinoPorPalavra({ item, index, OpenCloseModalHino }: IRenderizaHinoPorPalavra) {
@@ -13,7 +13,7 @@ export default function RenderizaHinoPorPalavra({ item, index, OpenCloseModalHin
         <TouchableOpacity
             style={styles.renderizaPorPalavra}
             key={index}
-            onPress={() => OpenCloseModalHino(item.numero)}
+            onPress={() => OpenCloseModalHino(item.numero, false)}
         >
             <Text style={styles.numeroRenderizaPorPalavra}>
                 {item.numero}

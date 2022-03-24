@@ -7,7 +7,7 @@ import { IValoresArmazenados } from "../../../interface/ImodalLeitura"
 
 interface IModalLeitura {
     modalLeitura: boolean;
-    OpenCloseModalLeitura: (dadosSelecionadosModal?: IValoresArmazenados | boolean) => void
+    OpenCloseModalLeitura: (dadosSelecionadosModal?: IValoresArmazenados | boolean, openCloseModal?: boolean) => void
 }
 
 export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IModalLeitura): JSX.Element {
@@ -84,7 +84,7 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
             transparent={false}
             visible={modalLeitura}
             onRequestClose={() => {
-                OpenCloseModalLeitura
+                OpenCloseModalLeitura(undefined, false)
             }}
         >
             <View style={styles.container}>
@@ -157,7 +157,7 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
                 <View style={styles.view_botoes}>
                     <TouchableOpacity
                         style={[styles.view_botoes_Cancelar, styles.view_botoes_ambos]}
-                        onPressOut={() => OpenCloseModalLeitura(false)}
+                        onPressOut={() => OpenCloseModalLeitura(undefined, false)}
                     >
                         <Text style={styles.view_botoes_text}>SAIR</Text>
                     </TouchableOpacity>
@@ -165,7 +165,7 @@ export default function ModalLeitura({ modalLeitura, OpenCloseModalLeitura }: IM
                     <TouchableOpacity
                         style={[styles.view_botoes_Buscar, styles.view_botoes_ambos]}
                         disabled={!valoresArmazenados.capitulo}
-                        onPressOut={() => { OpenCloseModalLeitura(valoresArmazenados) }}
+                        onPressOut={() => { OpenCloseModalLeitura(valoresArmazenados, false) }}
                     >
                         <Text style={styles.view_botoes_text}>BUSCAR</Text>
                     </TouchableOpacity>

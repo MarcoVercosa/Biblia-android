@@ -37,6 +37,13 @@ let contextAppFavoritos: IContextAppFavoritos = {
         AsyncStorage.setItem("contextFavoritos", JSON.stringify(armazenaFavoritosTemp))
         return { ...this, favoritos: armazenaFavoritosTemp }
     },
+    EditarDados: function (index, color, anotacao) {
+        let armazenaFavoritosUpdate: Ifavoritos[] = this.favoritos
+        armazenaFavoritosUpdate[index].color = color
+        armazenaFavoritosUpdate[index].anotacao = anotacao
+        AsyncStorage.setItem("contextFavoritos", JSON.stringify(armazenaFavoritosUpdate))
+        return { ...this, favoritos: armazenaFavoritosUpdate }
+    },
     ExcluirDados: function (versao_id, livro_id, capitulo, versiculo) {
         //se alguma das opcoes abaixo for diferente, retorna, 
         //pois se alguma é igual deve ser retirada
@@ -60,5 +67,4 @@ let contextAppFavoritos: IContextAppFavoritos = {
     }
 
 }
-
 export { contextAppFavoritos }

@@ -12,9 +12,9 @@ import Loading from "../../components/loading";
 import { IValoresArmazenados } from "../../interface/ImodalLeitura"
 import { IRetornoApiLeitura } from "../../interface/IRetornoApiLeitura"
 import { ICuriosidades } from "../../interface/ICuriosidades";
-
-
 import { IContext } from "../../interface/IContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 interface IValues {
     context: IContext
 }
@@ -41,7 +41,7 @@ export default function Leitura({ route, navigation }: any): JSX.Element {
                 let { data } = await GetApi(`mais/buscaconteudo/${route.params.versao_id}/${route.params.livro_testamento_id}/${route.params.livro_id}/${route.params.capitulo}`)
 
                 //aqui montamos um obj não qual as funções de avançar e voltar as utilizam
-                setDadosSelecionadosModal({
+                let modal = {
                     versao: {
                         versao_id: route.params.versao_id
                     },
@@ -49,25 +49,40 @@ export default function Leitura({ route, navigation }: any): JSX.Element {
                         testamento_id: route.params.livro_testamento_id
                     },
                     livro: {
-                        livro_id: route.params.livro_id
+                        livro_id: route.params.livro_id,
+                        livro_nome: route.params.livro_nome
                     },
                     capitulo: route.params.capitulo,
                     versiculo: route.params.versiculo
-
+                }
+                let { versao, testamento, livro, capitulo, versiculo } = modal
+                setDadosSelecionadosModal({
+                    versao, testamento, livro, capitulo, versiculo
                 })  // armazena a selação para leitura
                 setDadosLeituraRetornoApi(data) // armazena o retorno da api
                 let resultado = await GetApi(`curiosidades/buscacuriosidade/${route.params?.livro_nome}`)
                 setCuriosidades(resultado)
-
                 setLoading(false)
+                AsyncStorage.setItem("ultimaLeitura", JSON.stringify({ modal }))
             } catch (err) { Alert.alert("Ocorreu algum erro, tente novamente em instantes") }
         }
         //se houver alteração no params da props (componente pesquisa), o useEffect irá executar
     }, [route.params])
 
-    async function OpenCloseModalLeitura(dataToFetch?: IValoresArmazenados | any) {
-        //fecha o modal
-        setModalLeitura(!modalLeitura)
+    useEffect(() => {
+        const UtimaLeituraLocalStorage = async () => {
+            let resultado: any = await (AsyncStorage.getItem("ultimaLeitura"))
+            if (resultado) {
+                let data = JSON.parse(resultado)
+                let { versao, testamento, livro, capitulo, versiculo } = data.modal
+                OpenCloseModalLeitura({ versao, testamento, livro, capitulo, versiculo }, false)
+            }
+        }
+        UtimaLeituraLocalStorage()
+    }, [])
+
+    async function OpenCloseModalLeitura(dataToFetch?: IValoresArmazenados | any, openCloseModal?: boolean) {
+        setModalLeitura(openCloseModal!)
         if (dataToFetch) {
             setLoading(true) //chama o componente para loading
             let { data } = await GetApi(`mais/buscaconteudo/${dataToFetch.versao.versao_id}/${dataToFetch.testamento.testamento_id}/${dataToFetch.livro.livro_id}/${dataToFetch.capitulo}`)
@@ -76,9 +91,9 @@ export default function Leitura({ route, navigation }: any): JSX.Element {
             let resultado = await GetApi(`curiosidades/buscacuriosidade/${dataToFetch?.livro.livro_nome}`)
             setCuriosidades(resultado)
             setLoading(false)
+            AsyncStorage.setItem("ultimaLeitura", JSON.stringify({ modal: dataToFetch }))
         }
     }
-
     function RenderizaSelectCapitulo() {
         let renderiza = []
         for (let i = 1; i <= dadosLeituraRetornoApi!.quantidadecapitulo[0].capitulo; i++) {
@@ -126,7 +141,7 @@ export default function Leitura({ route, navigation }: any): JSX.Element {
         <SafeAreaView style={styles.safeContainer}>
             <View style={styles.viewHeader}>
                 <TouchableOpacity style={styles.leituraButton}
-                    onPressOut={() => (OpenCloseModalLeitura())}
+                    onPressOut={() => (OpenCloseModalLeitura(undefined, true))}
                 >
                     <Image
                         source={require("../../assets/images/find_book.jpg")}

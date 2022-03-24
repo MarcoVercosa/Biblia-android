@@ -38,6 +38,8 @@ export default function Pesquisa({ navigation }: any): JSX.Element {
                         value={palavraDigitada}
                         onChangeText={(value: string) => { setPalavraDigitada(value) }}
                         placeholder="Digite"
+                        returnKeyType="search"
+                        onSubmitEditing={BuscarPesquisa}
                     />
                     <TouchableOpacity style={styles.buttonPesquisar}
                         onPress={BuscarPesquisa}

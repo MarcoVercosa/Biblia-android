@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { View, Text, Modal, TouchableOpacity, SafeAreaView, TextInput, Image, Alert, FlatList } from "react-native"
+import { View, Text, Modal, TouchableOpacity, SafeAreaView, TextInput, Image, Alert, FlatList, } from "react-native"
 import { Picker } from '@react-native-picker/picker';
 import { GetApi } from "../../../api/index"
 import { IResutadoPorPalavra } from "../../../interface/IResultadoPorPalavra";
@@ -7,7 +7,7 @@ import RenderizaHinoPorPalavra from "../../harpa/renderizaPesquisaporPalavra";
 import Loading from "../../loading";
 import { Styles } from "./style"
 
-function ModalHino({ modalHinoSelect, OpenCloseModalHino }: { modalHinoSelect: boolean, OpenCloseModalHino: (numeroHino: boolean | Number) => void }) {
+function ModalHino({ modalHinoSelect, OpenCloseModalHino }: { modalHinoSelect: boolean, OpenCloseModalHino: (numeroHino: boolean | Number, openCLoseModal: boolean) => void }) {
     const [numerosHinoAPI, setNumerosHinoAPI] = useState<Array<number>>([])
     const [hinosBuscaPorPalavraAPI, setHinosBuscaPorPalavraAPI] = useState<Array<IResutadoPorPalavra>>()
     const [numeroHinoSelect, setNumeroHinoSelect] = useState<number>(1)
@@ -46,7 +46,7 @@ function ModalHino({ modalHinoSelect, OpenCloseModalHino }: { modalHinoSelect: b
                 animationType="slide"
                 transparent={false}
                 visible={modalHinoSelect}
-                onRequestClose={() => OpenCloseModalHino(false)}
+                onRequestClose={() => OpenCloseModalHino(false, false)}
             >
                 <Loading />
             </Modal>
@@ -58,13 +58,13 @@ function ModalHino({ modalHinoSelect, OpenCloseModalHino }: { modalHinoSelect: b
                 animationType="slide"
                 transparent={false}
                 visible={modalHinoSelect}
-                onRequestClose={() => OpenCloseModalHino(false)}
+                onRequestClose={() => OpenCloseModalHino(false, false)}
             >
                 <View style={styles.viewContainer}>
                     <View style={styles.viewHeader}>
                         <TouchableOpacity
                             style={[styles.botaoSair]}
-                            onPress={() => OpenCloseModalHino(false)}
+                            onPress={() => OpenCloseModalHino(false, false)}
                         >
                             <Image
                                 source={require("../../../assets/images/back.jpg")}
@@ -85,7 +85,7 @@ function ModalHino({ modalHinoSelect, OpenCloseModalHino }: { modalHinoSelect: b
                             selectedValue={numeroHinoSelect}
                             onValueChange={(value: number) => {
                                 setNumeroHinoSelect(value)
-                                OpenCloseModalHino(value)
+                                OpenCloseModalHino(value, false)
                             }}
 
                             mode="dropdown"
@@ -95,10 +95,7 @@ function ModalHino({ modalHinoSelect, OpenCloseModalHino }: { modalHinoSelect: b
                             }
                         </Picker>
                     </View>
-
-
                     <View style={styles.viewBuscaPorPalavra}>
-
                         <Text style={styles.textBuscaPorPalavraHino} >
                             Por Palavra
                         </Text>
@@ -107,9 +104,10 @@ function ModalHino({ modalHinoSelect, OpenCloseModalHino }: { modalHinoSelect: b
                             onChangeText={(value: string) => setLetraHinoBusca(value)}
                             value={letraHinoBusca}
                             placeholder="Digite"
+                            returnKeyType="search"
+                            onSubmitEditing={BuscaHinosPorPalavra}
                         />
                     </View>
-
                     <View style={styles.viewRenderizaHinos}>
                         <FlatList
                             numColumns={2}
@@ -119,7 +117,6 @@ function ModalHino({ modalHinoSelect, OpenCloseModalHino }: { modalHinoSelect: b
                             keyExtractor={(_, index): any => index}
                         />
                     </View>
-
                     <TouchableOpacity
                         style={styles.botaoBuscaPorPalavraHino}
                         onPressOut={BuscaHinosPorPalavra}

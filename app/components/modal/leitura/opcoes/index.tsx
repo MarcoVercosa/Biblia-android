@@ -1,5 +1,5 @@
 import React, { useState, useContext, memo } from "react"
-import { View, Text, Modal, TouchableOpacity, SafeAreaView, TextInput, Image, ScrollView, Alert } from "react-native"
+import { View, Text, Modal, TouchableOpacity, SafeAreaView, TextInput, Image, ScrollView, Alert, Share } from "react-native"
 import { IRetornoApiLeitura } from "../../../../interface/IRetornoApiLeitura"
 import { IValoresArmazenados } from "../../../../interface/ImodalLeitura"
 import { IContextAppFavoritos } from "../../../../interface/IContext"
@@ -40,7 +40,14 @@ function ModalOpcoes({ versiculo, dataParagrafo, dataNomes, dataNumeros, modalOp
         ))
         Alert.alert("Versículo salvo em seus FAVORITOS")
         OpenCloseModalOpcoes(false)
-
+    }
+    function Compartilhar(versao_id: number, testamento_id: number, livro_id: number, capitulo: number, versiculo: number, livro_nome: string) {
+        Share.share({
+            message: `http://vidadafonte.com.br/biblia/painelleitura/${versao_id}/${testamento_id}/${livro_id}/${capitulo}/${versiculo}#${versiculo} \n
+            ${livro_nome}:${capitulo} - ${versiculo}`,
+            title: `${livro_nome}:${capitulo} - ${versiculo}`,
+        })
+        dataNumeros.versao.versao_id, dataNumeros.testamento.testamento_id, dataNumeros.livro.livro_id, capitulo, versiculo
     }
     return (
         <Modal
@@ -104,14 +111,22 @@ function ModalOpcoes({ versiculo, dataParagrafo, dataNomes, dataNumeros, modalOp
 
                         <TouchableOpacity
                             style={[styles.view_botoes_Cancelar, styles.view_botoes_ambos]}
-                            onPressOut={() => OpenCloseModalOpcoes(false)}
+                            onPress={() => OpenCloseModalOpcoes(false)}
                         >
                             <Text style={styles.view_botoes_text}>SAIR</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
+                            onPress={() => Compartilhar(dataNumeros.versao.versao_id, dataNumeros.testamento.testamento_id, dataNumeros.livro.livro_id, dataNomes.capituloAtual, versiculo, dataNomes.nomeLivro[0].livro_nome)}
+                        >
+                            <Image
+                                source={require("../../../../assets/images/share.jpg")}
+                                style={styles.imageInput}
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity
                             style={[styles.view_botoes_Buscar, styles.view_botoes_ambos]}
                             //disabled={!valoresArmazenados.capitulo}
-                            onPressOut={FavoritarVersiculo}
+                            onPress={FavoritarVersiculo}
                         >
                             <Text style={styles.view_botoes_text}>SALVAR</Text>
                         </TouchableOpacity>

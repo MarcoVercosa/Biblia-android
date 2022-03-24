@@ -1,6 +1,6 @@
 Afinar curiosidades por livro - DONE
 implantar pesquisar na biblia por palavra - DONE
-aba opções: tema escuro, tamanho da fonte, não deixar a tela apagar
+aba opções: tema escuro, tamanho da fonte, não deixar a tela apagar - DONE
 colocar mais curiosidades no BD
-ao segurar algum capitulo, dar a opção de compartilhar
+ao segurar algum capitulo, Hino e favortos, dar a opção de compartilhar  - DONE
 testar lib para textfield e ver se o bug do teclado se resolve

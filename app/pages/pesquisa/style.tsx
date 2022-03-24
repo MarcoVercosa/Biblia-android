@@ -44,10 +44,10 @@ function Styles() {
             alignSelf: "center",
         },
         viewConteudo: {
-            height: "85%",
+            height: "82%",
             width: "95%",
             alignSelf: "center",
-            marginTop: "2%"
+            marginTop: "2%",
         },
         flatListRenderizaConteudo: {
 
