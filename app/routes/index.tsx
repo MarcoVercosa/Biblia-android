@@ -33,11 +33,12 @@ export default function Routes(): JSX.Element {
         //sempre que houver alguma alteração no context, armazena no local storage
         context.SalvaDadosLocalStorage(context)
     }, [context])
+
     return (
         <Context.Provider value={{ context, setContext } as any}>
             <ContextFavoritos.Provider value={{ contextFavoritos, setContextFavoritos } as any}>
                 <NavigationContainer>
-                    <Tab.Navigator initialRouteName="Favoritos"
+                    <Tab.Navigator initialRouteName="Home"
                         screenOptions={({ route }) => ({
                             tabBarIcon: ({ color, size }) => {
                                 let iconName: string;

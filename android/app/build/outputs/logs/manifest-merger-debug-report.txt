@@ -1,13 +1,14 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:1:1-25:12
-INJECTED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:1:1-25:12
-INJECTED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:1:1-25:12
-INJECTED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:1:1-25:12
-MERGED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:1:1-25:12
+ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:1:1-36:12
+INJECTED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:1:1-36:12
+INJECTED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:1:1-36:12
+INJECTED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:1:1-36:12
+MERGED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:1:1-36:12
 MERGED from [com.facebook.flipper:flipper:0.99.0] C:\Users\marco\.gradle\caches\transforms-3\df7b208c45426f45016d16c0c3a6a059\transformed\jetified-flipper-0.99.0\AndroidManifest.xml:8:1-18:12
 MERGED from [com.facebook.flipper:flipper-network-plugin:0.99.0] C:\Users\marco\.gradle\caches\transforms-3\24c7b3b7628557c2352d51b3335f48b6\transformed\jetified-flipper-network-plugin-0.99.0\AndroidManifest.xml:8:1-15:12
 MERGED from [com.facebook.flipper:flipper-fresco-plugin:0.99.0] C:\Users\marco\.gradle\caches\transforms-3\d1f78a3bfe608333c8a8682ec4347618\transformed\jetified-flipper-fresco-plugin-0.99.0\AndroidManifest.xml:8:1-15:12
+MERGED from [:react-native-splash-screen] C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\node_modules\react-native-splash-screen\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-async-storage_async-storage] C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\node_modules\@react-native-async-storage\async-storage\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-clipboard_clipboard] C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\node_modules\@react-native-clipboard\clipboard\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-picker_picker] C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\node_modules\@react-native-picker\picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
@@ -82,13 +83,13 @@ INJECTED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\Bib
 		INJECTED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\debug\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:1:1-25:12
+		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:1:1-36:12
 		INJECTED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\debug\AndroidManifest.xml
 	xmlns:tools
 		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\debug\AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:1:1-25:12
+		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:1:1-36:12
 		INJECTED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\debug\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:1:11-69
@@ -99,9 +100,9 @@ MERGED from [com.facebook.flipper:flipper:0.99.0] C:\Users\marco\.gradle\caches\
 	android:name
 		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:4:22-64
 application
-ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:6:5-24:19
-MERGED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:6:5-24:19
-MERGED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:6:5-24:19
+ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:6:5-34:19
+MERGED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:6:5-34:19
+MERGED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:6:5-34:19
 MERGED from [com.facebook.react:react-native:0.67.2] C:\Users\marco\.gradle\caches\transforms-3\e6d0898a74320d34d15c5decc8322fa1\transformed\jetified-react-native-0.67.2\AndroidManifest.xml:9:5-20
 MERGED from [com.facebook.react:react-native:0.67.2] C:\Users\marco\.gradle\caches\transforms-3\e6d0898a74320d34d15c5decc8322fa1\transformed\jetified-react-native-0.67.2\AndroidManifest.xml:9:5-20
 MERGED from [com.facebook.soloader:soloader:0.10.1] C:\Users\marco\.gradle\caches\transforms-3\e4029841d7aaf407dba19c713be08024\transformed\jetified-soloader-0.10.1\AndroidManifest.xml:11:5-20
@@ -120,13 +121,13 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\ma
 	tools:ignore
 		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\debug\AndroidManifest.xml:10:9-48
 	android:roundIcon
-		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:10:7-52
-		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:10:7-52
+		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:10:7-48
+		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:10:7-48
 	tools:targetApi
 		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\debug\AndroidManifest.xml:9:9-29
 	android:icon
-		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:9:7-41
-		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:9:7-41
+		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:9:7-43
+		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:9:7-43
 	android:allowBackup
 		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:11:7-34
 		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:11:7-34
@@ -138,28 +139,44 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\ma
 	android:name
 		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:7:7-38
 		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:7:7-38
-activity#com.bibliaforandroid.MainActivity
-ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:13:7-23:18
+activity#com.bibliaforandroid.SplashActivity
+ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:15:9-23:20
 	android:label
-		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:15:9-41
-	android:launchMode
-		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:17:9-40
-	android:windowSoftInputMode
-		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:18:9-51
-	android:configChanges
-		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:16:9-86
+		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:18:11-43
+	android:theme
+		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:17:11-45
 	android:name
-		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:14:9-37
+		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:16:11-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:19:9-22:25
+ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:19:11-22:27
 action#android.intent.action.MAIN
-ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:20:13-65
+ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:20:15-67
 	android:name
-		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:20:21-62
+		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:20:23-64
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:21:13-73
+ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:21:15-75
 	android:name
-		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:21:23-70
+		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:21:25-72
+activity#com.bibliaforandroid.MainActivity
+ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:26:7-32:34
+	android:label
+		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:28:9-41
+	android:launchMode
+		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:30:9-39
+	android:windowSoftInputMode
+		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:31:9-51
+	android:exported
+		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:32:9-32
+	android:configChanges
+		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:29:9-86
+	android:name
+		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:27:9-37
+activity#com.facebook.react.devsupport.DevSettingsActivity
+ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:33:7-84
+MERGED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:33:7-84
+MERGED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:33:7-84
+	android:name
+		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml:33:17-81
 uses-sdk
 INJECTED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\main\AndroidManifest.xml
@@ -170,6 +187,8 @@ MERGED from [com.facebook.flipper:flipper-network-plugin:0.99.0] C:\Users\marco\
 MERGED from [com.facebook.flipper:flipper-network-plugin:0.99.0] C:\Users\marco\.gradle\caches\transforms-3\24c7b3b7628557c2352d51b3335f48b6\transformed\jetified-flipper-network-plugin-0.99.0\AndroidManifest.xml:11:5-13:41
 MERGED from [com.facebook.flipper:flipper-fresco-plugin:0.99.0] C:\Users\marco\.gradle\caches\transforms-3\d1f78a3bfe608333c8a8682ec4347618\transformed\jetified-flipper-fresco-plugin-0.99.0\AndroidManifest.xml:11:5-13:41
 MERGED from [com.facebook.flipper:flipper-fresco-plugin:0.99.0] C:\Users\marco\.gradle\caches\transforms-3\d1f78a3bfe608333c8a8682ec4347618\transformed\jetified-flipper-fresco-plugin-0.99.0\AndroidManifest.xml:11:5-13:41
+MERGED from [:react-native-splash-screen] C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\node_modules\react-native-splash-screen\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-splash-screen] C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\node_modules\react-native-splash-screen\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-async-storage_async-storage] C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\node_modules\@react-native-async-storage\async-storage\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-async-storage_async-storage] C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\node_modules\@react-native-async-storage\async-storage\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-clipboard_clipboard] C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\node_modules\@react-native-clipboard\clipboard\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
@@ -310,10 +329,6 @@ uses-permission#android.permission.SYSTEM_ALERT_WINDOW
 ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\debug\AndroidManifest.xml:5:5-77
 	android:name
 		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\debug\AndroidManifest.xml:5:22-75
-activity#com.facebook.react.devsupport.DevSettingsActivity
-ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\debug\AndroidManifest.xml:11:9-86
-	android:name
-		ADDED from C:\Users\marco\Documents\projetos\reactNative\BibliaForAndroid\BibliaForAndroid\android\app\src\debug\AndroidManifest.xml:11:19-83
 uses-permission#android.permission.ACCESS_WIFI_STATE
 ADDED from [com.facebook.flipper:flipper:0.99.0] C:\Users\marco\.gradle\caches\transforms-3\df7b208c45426f45016d16c0c3a6a059\transformed\jetified-flipper-0.99.0\AndroidManifest.xml:16:5-76
 	android:name

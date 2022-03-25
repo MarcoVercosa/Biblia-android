@@ -5,9 +5,8 @@ import { Styles } from "./styles"
 
 function ModalSobre({ modalSobre, OpenCloseModalSobre }: { modalSobre: boolean, OpenCloseModalSobre: (OpenCloseModalSobre: boolean | Number) => void }) {
     let styles = Styles()
+
     return (
-
-
         <Modal
             animationType="slide"
             transparent={false}

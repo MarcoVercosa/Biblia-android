@@ -1,12 +1,12 @@
 import React, { useContext } from "react"
-import { View, StyleSheet, Image, } from "react-native"
+import { View, StyleSheet, Image, Text, } from "react-native"
 import { Context } from "../../routes";
 import { IContext } from "../../interface/IContext";
 
 interface IValues {
     context: IContext
 }
-export default function Loading(): JSX.Element {
+function Loading({ motivo }: any): JSX.Element {
     const { context }: IValues = useContext(Context) as any
 
     return (
@@ -15,6 +15,7 @@ export default function Loading(): JSX.Element {
                 source={require("../../assets/images/loading.gif")}
                 style={styles.loadingImage}
             />
+            <Text style={styles.motivo}>{motivo}</Text>
         </View>
     )
 }
@@ -30,4 +31,19 @@ const styles = StyleSheet.create({
         height: 60,
         width: 60
     },
+    motivo: {
+        width: "95%",
+        marginTop: "20%",
+        color: "#837870",
+        alignItems: "center",
+        textAlign: "center",
+        justifyContent: "center",
+        fontSize: 25,
+        backgroundColor: "white",
+        alignSelf: "center",
+        borderRadius: 50,
+        padding: 20
+    }
 })
+
+export { Loading }

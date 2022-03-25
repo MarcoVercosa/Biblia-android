@@ -22,6 +22,7 @@ let contextAppFavoritos: IContextAppFavoritos = {
         if (dados) {
             return { ...this, favoritos: JSON.parse(dados) }
         }
+        return this
     },
     SalvarDados: function (conteudo, versaoNome, livroNome, capitulo, versiculo, color, { dadosUrlApi }, anotacao) {
         let verificaSeJaExiste = this.favoritos.find((value: Ifavoritos) =>
@@ -63,7 +64,7 @@ let contextAppFavoritos: IContextAppFavoritos = {
             && value.capitulo == capitulo
             && value.versiculo == versiculo
         )
-        if (data.length > 0) { return true } else { return false }
+        if (data.length > 0) { return data } else { return false }
     }
 
 }

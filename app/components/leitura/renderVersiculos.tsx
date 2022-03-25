@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
-import { Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
 import { Context } from "../../routes";
 import { ContextFavoritos } from '../../routes';
-import { IContext } from "../../interface/IContext";
+import { IContext, Ifavoritos } from "../../interface/IContext";
 import { IContextAppFavoritos } from '../../interface/IContext';
 import { IRetornoApiLeitura } from '../../interface/IRetornoApiLeitura';
 import { IValoresArmazenados } from '../../interface/ImodalLeitura';
@@ -33,12 +33,27 @@ function RenderizaVersiculos({ navigation, dataParagrafo, dataNumeros, index, ve
     async function OpenCloseModalOpcoes() {
         setModalOpcoes(!modalOpcoes)
     }
-
     function DirecionaFavoritos() {
         navigation.navigate("Favoritos")
     }
+    function ViewAnotacao(versao_id: number, livro_id: number, capituloAtual: number, index: number) {
+        let data: Ifavoritos[] | any = contextFavoritos.VerificaSeHaFavoritos(versao_id, livro_id, capituloAtual, index)
+        Alert.alert(
+            "Anotação:",
+            `${data[0].anotacao}`,
+            [{
+                text: "Ir Para favoritos",
+                onPress: () => { DirecionaFavoritos() }
+            },
+            {
+                text: "OK",
+                onPress: () => {
+                    return
+                }
+            }]
+        )
+    }
     return (
-
         <TouchableOpacity
             key={index}
             onLongPress={() => {
@@ -54,7 +69,7 @@ function RenderizaVersiculos({ navigation, dataParagrafo, dataNumeros, index, ve
             </Text>
             {contextFavoritos.VerificaSeHaFavoritos(dataNumeros.versao.versao_id, dataNumeros.livro.livro_id, dataNomes.capituloAtual, index + 1) &&
                 <TouchableOpacity style={styles.imageButton}
-                    onPress={() => { DirecionaFavoritos() }}
+                    onPress={() => { ViewAnotacao(dataNumeros.versao.versao_id, dataNumeros.livro.livro_id, dataNomes.capituloAtual, index + 1) }}
                 >
                     <Image
                         source={require("../../assets/images/favoriteStar.jpg")}

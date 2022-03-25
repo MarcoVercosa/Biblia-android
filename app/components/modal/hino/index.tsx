@@ -4,7 +4,7 @@ import { Picker } from '@react-native-picker/picker';
 import { GetApi } from "../../../api/index"
 import { IResutadoPorPalavra } from "../../../interface/IResultadoPorPalavra";
 import RenderizaHinoPorPalavra from "../../harpa/renderizaPesquisaporPalavra";
-import Loading from "../../loading";
+import { Loading } from "../../loading";
 import { Styles } from "./style"
 
 function ModalHino({ modalHinoSelect, OpenCloseModalHino }: { modalHinoSelect: boolean, OpenCloseModalHino: (numeroHino: boolean | Number, openCLoseModal: boolean) => void }) {
@@ -12,7 +12,7 @@ function ModalHino({ modalHinoSelect, OpenCloseModalHino }: { modalHinoSelect: b
     const [hinosBuscaPorPalavraAPI, setHinosBuscaPorPalavraAPI] = useState<Array<IResutadoPorPalavra>>()
     const [numeroHinoSelect, setNumeroHinoSelect] = useState<number>(1)
     const [letraHinoBusca, setLetraHinoBusca] = useState<string>("")
-    const [loading, setLoading] = useState<boolean>(false)
+    const [loading, setLoading] = useState<string>("")
     const styles = Styles()
 
     useEffect(() => {
@@ -28,16 +28,21 @@ function ModalHino({ modalHinoSelect, OpenCloseModalHino }: { modalHinoSelect: b
             Alert.alert("Digite ao menos 2 letras ou no máximo 20 letras")
             return
         }
-        setLoading(true)
-        let { data } = await GetApi(`hinoharpa/buscatituloporpalavra/${letraHinoBusca}`)
-        if (await data.length < 1) {// se não retornar nada
-            setLoading(false)
-            Alert.alert(`Não foi encontrado nenhum hino com a palavra ${letraHinoBusca}`)
-            setHinosBuscaPorPalavraAPI([])
-            return
+        setLoading("Buscando hino de acordo com palavra")
+        try {
+            let { data } = await GetApi(`hinoharpa/buscatituloporpalavra/${letraHinoBusca}`)
+            if (await data.length < 1) {// se não retornar nada
+                setLoading("")
+                Alert.alert(`Não foi encontrado nenhum hino com a palavra ${letraHinoBusca}`)
+                setHinosBuscaPorPalavraAPI([])
+                return
+            }
+            setHinosBuscaPorPalavraAPI(await data)
+            setLoading("")
+        } catch (err) {
+            Alert.alert("Houve alguma dificuldade no caminho.")
+            setLoading("")
         }
-        setHinosBuscaPorPalavraAPI(await data)
-        setLoading(false)
     }
 
     if (loading) {
@@ -48,7 +53,7 @@ function ModalHino({ modalHinoSelect, OpenCloseModalHino }: { modalHinoSelect: b
                 visible={modalHinoSelect}
                 onRequestClose={() => OpenCloseModalHino(false, false)}
             >
-                <Loading />
+                <Loading motivo={loading} />
             </Modal>
         )
     }

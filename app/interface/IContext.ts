@@ -41,6 +41,6 @@ export interface IContextAppFavoritos {
         => IContextAppFavoritos;
     EditarDados: (index: number, color: string, anotacao: string) => IContextAppFavoritos,
     ExcluirDados: (versao_id: number, livro_id: number, capitulo: number, versiculo: number) => IContextAppFavoritos
-    VerificaSeHaFavoritos: (versao_id: number, livro_id: number, capitulo: number, versiculo: number) => boolean
+    VerificaSeHaFavoritos: (versao_id: number, livro_id: number, capitulo: number, versiculo: number) => Ifavoritos[] | boolean
 }
 

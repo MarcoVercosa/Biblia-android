@@ -1,13 +1,13 @@
 import React, { useState } from "react"
 import { View, Text, SafeAreaView, TouchableOpacity, TextInput, FlatList, Alert } from "react-native"
 import { GetApi } from "../../api"
-import Loading from "../../components/loading/index"
+import { Loading } from "../../components/loading/index"
 import { IResultadoAPI, IFlatListConteudo } from "../../interface/IRetornoApiPesquisa"
 import { Styles } from "./style"
 
 export default function Pesquisa({ navigation }: any): JSX.Element {
     const [palavraDigitada, setPalavraDigitada] = useState<string>("")
-    const [loading, setLoading] = useState<boolean>(false)
+    const [loading, setLoading] = useState<string>("")
     const [dataApi, setDataApi] = useState<Array<IResultadoAPI>>()
     let styles = Styles()
 
@@ -16,17 +16,22 @@ export default function Pesquisa({ navigation }: any): JSX.Element {
             Alert.alert("Digite ao menos 2 letras ou no máximo 20 letras")
             return
         }
-        setLoading(true)
-        let { data }: any = await GetApi(`mais/pesquisa/${palavraDigitada}`)
-        if (data.length < 1) { Alert.alert("Não foi encontrado nada relacionado a palavra " + palavraDigitada) }
-        setDataApi(data)
-        setLoading(false)
+        setLoading("Buscando dados para sua pesquisa")
+        try {
+            let { data }: any = await GetApi(`mais/pesquisa/${palavraDigitada}`)
+            if (data.length < 1) { Alert.alert("Não foi encontrado nada relacionado a palavra " + palavraDigitada) }
+            setDataApi(data)
+            setLoading("")
+        } catch (err) {
+            Alert.alert("Houve alguma dificuldade no caminho.")
+            setLoading("")
+        }
     }
     function DirecionaParaLeitura(livro_nome: string, versao_id: number, livro_testamento_id: number, livro_id: number, capitulo: number, versiculo: number) {
         navigation.navigate("Leitura", { livro_nome, versao_id, livro_testamento_id, livro_id, capitulo, versiculo })
     }
     if (loading) {
-        return <Loading />
+        return <Loading motivo={loading} />
     }
 
     return (

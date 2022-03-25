@@ -30,7 +30,6 @@ export default function Favoritos({ navigation }: any): JSX.Element {
     }, [])
 
     function DirecionaParaLeitura(livro_nome: string, versao_id: number, livro_testamento_id: number, livro_id: number, capitulo: number, versiculo: number) {
-        console.log(livro_nome, versao_id, livro_testamento_id, livro_id, capitulo, versiculo)
         navigation.navigate("Leitura", { livro_nome, versao_id, livro_testamento_id, livro_id, capitulo, versiculo })
     }
     function Copiar(value: string) {
@@ -93,7 +92,6 @@ export default function Favoritos({ navigation }: any): JSX.Element {
                                     <Text style={styles.textLivroCapituloVersiculo}>{data.livroNome}: {data.capitulo} - {data.versiculo}</Text>
                                     <TextInput
                                         style={styles.textInputAnotacao}
-                                        //onChangeText={(value: string) => setAnotacao(value)}
                                         value={data.anotacao}
                                         placeholder="Anotação"
                                         maxLength={200}
@@ -147,7 +145,6 @@ export default function Favoritos({ navigation }: any): JSX.Element {
                     })}
                 </ScrollView>
             </View>
-
         </SafeAreaView>
     )
 }

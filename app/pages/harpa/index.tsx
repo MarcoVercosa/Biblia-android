@@ -1,13 +1,13 @@
 import React, { useState, useContext, useEffect } from "react"
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import KeepAwake from 'react-native-keep-awake';
-import { View, Text, SafeAreaView, Image, TouchableOpacity, FlatList, Share } from "react-native"
+import { View, Text, SafeAreaView, Image, TouchableOpacity, FlatList, Share, Alert } from "react-native"
 import { GetApi } from "../../api";
 import { Context } from "../../routes";
 import { IContext } from "../../interface/IContext";
 import { ModalHino } from "../../components/modal/hino";
 import { Styles } from "./style"
-import Loading from "../../components/loading/index"
+import { Loading } from "../../components/loading/index"
 interface IResultado {
     letra: string;
     titulo: string,
@@ -25,9 +25,9 @@ export default function Harpa(): JSX.Element {
     const { context }: IValues = useContext(Context) as any
     const [modalHinoSelect, setModalHinoSelect] = useState<boolean>(false)
     const [letraBuscaAPI, setLetraBuscaAPI] = useState<Array<IRetorno>>([])
-    const [loading, setLoading] = useState<boolean>(false)
+    const [loading, setLoading] = useState<string>("")
     const styles = Styles()
-    context.keepScreenOn ? KeepAwake.activate() : KeepAwake.deactivate()//tela sempre ligada ou não    
+    context.keepScreenOn ? KeepAwake.activate() : KeepAwake.deactivate()//tela sempre ligada ou não  
 
     function Compartilhar(titulo: string, numeroHino: string) {
         Share.share({
@@ -38,13 +38,18 @@ export default function Harpa(): JSX.Element {
     async function OpenCloseModalHino(numeroHino: boolean | Number, openCLoseModal: boolean) {
         setModalHinoSelect(openCLoseModal)
         if (numeroHino) {
-            setLoading(true)
-            let { data }: { data: IResultado[] } = await GetApi(`hinoharpa/buscatitulopornumero/${numeroHino}`)
-            let separaLinhas: Array<any> = data[0].letra.split("%")
-            let resultado: Array<any> = data.map((dados: any) => { return { letra: separaLinhas, titulo: dados.titulo, numero: numeroHino } })
-            setLetraBuscaAPI(resultado)
-            setLoading(false)
-            AsyncStorage.setItem("UltimoHino", JSON.stringify(numeroHino))
+            setLoading("Buscando louvor para Deus")
+            try {
+                let { data }: { data: IResultado[] } = await GetApi(`hinoharpa/buscatitulopornumero/${numeroHino}`)
+                let separaLinhas: Array<any> = data[0].letra.split("%")
+                let resultado: Array<any> = data.map((dados: any) => { return { letra: separaLinhas, titulo: dados.titulo, numero: numeroHino } })
+                setLetraBuscaAPI(resultado)
+                setLoading("")
+                AsyncStorage.setItem("UltimoHino", JSON.stringify(numeroHino))
+            } catch (err) {
+                Alert.alert("Houve alguma dificuldade no caminho.")
+                setLoading("")
+            }
         }
     }
     useEffect(() => {
@@ -58,7 +63,7 @@ export default function Harpa(): JSX.Element {
     }, [])
 
     if (loading) {
-        return (<Loading />)
+        return (<Loading motivo={loading} />)
     }
     return (
         <SafeAreaView style={styles.safeContainer}>

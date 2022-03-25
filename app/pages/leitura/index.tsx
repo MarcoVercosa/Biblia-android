@@ -2,31 +2,40 @@ import React, { useState, useRef, useEffect, useContext } from "react"
 import KeepAwake from 'react-native-keep-awake';
 import { View, Text, SafeAreaView, Image, TouchableOpacity, ScrollView, Alert } from "react-native"
 import { Picker } from '@react-native-picker/picker';
+import GestureRecognizer from 'react-native-swipe-gestures';
 import ModalLeitura from "../../components/modal/leitura"
 import { Context } from "../../routes";
+import { ContextFavoritos } from "../../routes";
 import { Styles } from "./style";
 import { GetApi } from "../../api"
 import { RenderizaVersiculos } from "../../components/leitura/renderVersiculos";
 import { RenderizaCuriosidades } from "../../components/leitura/renderizaCuriosidades";
-import Loading from "../../components/loading";
+import { Loading } from "../../components/loading";
 import { IValoresArmazenados } from "../../interface/ImodalLeitura"
 import { IRetornoApiLeitura } from "../../interface/IRetornoApiLeitura"
 import { ICuriosidades } from "../../interface/ICuriosidades";
-import { IContext } from "../../interface/IContext";
+import { IContext, IContextAppFavoritos } from "../../interface/IContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { CarregaUtimaLeituraLocalStorage, CarregaFavoritosLocalStorage } from "../../components/leitura/services/carregaDataLocalStorage"
 
 interface IValues {
     context: IContext
 }
+
+interface IValuesFavoritos {
+    contextFavoritos: IContextAppFavoritos;
+    setContextFavoritos: (value: any) => void
+}
 export default function Leitura({ route, navigation }: any): JSX.Element {
     const { context }: IValues = useContext(Context) as any
+    const { contextFavoritos, setContextFavoritos }: IValuesFavoritos = useContext(ContextFavoritos) as any
     context.keepScreenOn ? KeepAwake.activate() : KeepAwake.deactivate()//tela sempre ligada ou não    
     let styles = Styles()
     const [modalLeitura, setModalLeitura] = useState<boolean>(false)
     const [dadosLeituraRetornoApi, setDadosLeituraRetornoApi] = useState<IRetornoApiLeitura>()
     const [dadosSelecionadosModal, setDadosSelecionadosModal] = useState<any | IValoresArmazenados>()
     const [curiosidades, setCuriosidades] = useState<any | Array<ICuriosidades>>(false)
-    const [loading, setLoading] = useState<boolean>(false)
+    const [loading, setLoading] = useState<string>("")
     const scrollRef: any = useRef();
 
     useEffect(() => {
@@ -36,7 +45,7 @@ export default function Leitura({ route, navigation }: any): JSX.Element {
             BuscaPalavraPesquisada()
         }
         async function BuscaPalavraPesquisada() {
-            setLoading(true) //chama o componente para loading
+            setLoading("Encontrando sua pesquisa ...") //chama o componente para loading
             try {
                 let { data } = await GetApi(`mais/buscaconteudo/${route.params.versao_id}/${route.params.livro_testamento_id}/${route.params.livro_id}/${route.params.capitulo}`)
 
@@ -62,7 +71,7 @@ export default function Leitura({ route, navigation }: any): JSX.Element {
                 setDadosLeituraRetornoApi(data) // armazena o retorno da api
                 let resultado = await GetApi(`curiosidades/buscacuriosidade/${route.params?.livro_nome}`)
                 setCuriosidades(resultado)
-                setLoading(false)
+                setLoading("")
                 AsyncStorage.setItem("ultimaLeitura", JSON.stringify({ modal }))
             } catch (err) { Alert.alert("Ocorreu algum erro, tente novamente em instantes") }
         }
@@ -70,28 +79,29 @@ export default function Leitura({ route, navigation }: any): JSX.Element {
     }, [route.params])
 
     useEffect(() => {
-        const UtimaLeituraLocalStorage = async () => {
-            let resultado: any = await (AsyncStorage.getItem("ultimaLeitura"))
-            if (resultado) {
-                let data = JSON.parse(resultado)
-                let { versao, testamento, livro, capitulo, versiculo } = data.modal
-                OpenCloseModalLeitura({ versao, testamento, livro, capitulo, versiculo }, false)
-            }
+        const FavoritosEUltimaLeituraLocalStorage = async () => {
+            setContextFavoritos(await CarregaFavoritosLocalStorage(contextFavoritos))//verifica se há favoritos guardado no LocalStorage e armazena
+            OpenCloseModalLeitura(await CarregaUtimaLeituraLocalStorage(), false) ///se houve leitura guardada no LocalStorage, chama OpenCloseModalLeitura com os params
         }
-        UtimaLeituraLocalStorage()
+        FavoritosEUltimaLeituraLocalStorage()
     }, [])
 
     async function OpenCloseModalLeitura(dataToFetch?: IValoresArmazenados | any, openCloseModal?: boolean) {
         setModalLeitura(openCloseModal!)
         if (dataToFetch) {
-            setLoading(true) //chama o componente para loading
-            let { data } = await GetApi(`mais/buscaconteudo/${dataToFetch.versao.versao_id}/${dataToFetch.testamento.testamento_id}/${dataToFetch.livro.livro_id}/${dataToFetch.capitulo}`)
-            setDadosSelecionadosModal(dataToFetch) // armazena a selação para leitura
-            setDadosLeituraRetornoApi(data) // armazena o retorno da api
-            let resultado = await GetApi(`curiosidades/buscacuriosidade/${dataToFetch?.livro.livro_nome}`)
-            setCuriosidades(resultado)
-            setLoading(false)
-            AsyncStorage.setItem("ultimaLeitura", JSON.stringify({ modal: dataToFetch }))
+            setLoading("Buscando sua leitura ...") //chama o componente para loading
+            try {
+                let { data } = await GetApi(`mais/buscaconteudo/${dataToFetch.versao.versao_id}/${dataToFetch.testamento.testamento_id}/${dataToFetch.livro.livro_id}/${dataToFetch.capitulo}`)
+                setDadosSelecionadosModal(dataToFetch) // armazena a selação para leitura
+                setDadosLeituraRetornoApi(data) // armazena o retorno da api
+                let resultado = await GetApi(`curiosidades/buscacuriosidade/${dataToFetch?.livro.livro_nome}`)
+                setCuriosidades(resultado)
+                setLoading("")
+                AsyncStorage.setItem("ultimaLeitura", JSON.stringify({ modal: dataToFetch }))
+            } catch (err) {
+                Alert.alert("Houve alguma dificuldade no caminho.")
+                setLoading("")
+            }
         }
     }
     function RenderizaSelectCapitulo() {
@@ -109,33 +119,50 @@ export default function Leitura({ route, navigation }: any): JSX.Element {
         });
     }
     async function AvancaCapitulo() {
-        setLoading(true)
-        let { data } = await GetApi(`mais/buscaconteudo/${dadosSelecionadosModal!.versao.versao_id}/${dadosSelecionadosModal!.testamento.testamento_id}/${dadosSelecionadosModal!.livro.livro_id}/${dadosLeituraRetornoApi!.capituloAtual + 1}`)
-        setDadosSelecionadosModal((prevState: IValoresArmazenados) => { return { ...prevState, versiculo: 0 } })
-        //versiculo = 0 // > se houver dados nos params da rota,significa que houve um direcionamento do componente Pesquisa
-        //ao avançar ou voltar, não precisamos mais do versiculo chamativo, então para avançar ou voltar garantimos que a versiculo fique 0 (null)
-        setDadosLeituraRetornoApi(data)
-        setLoading(false)
-        ScrollToTop()
+        if (dadosLeituraRetornoApi!.capituloAtual == dadosLeituraRetornoApi!.quantidadecapitulo[0].capitulo) { return }
+        setLoading("Avançando para o próximo versiculo")
+        try {
+            let { data } = await GetApi(`mais/buscaconteudo/${dadosSelecionadosModal!.versao.versao_id}/${dadosSelecionadosModal!.testamento.testamento_id}/${dadosSelecionadosModal!.livro.livro_id}/${dadosLeituraRetornoApi!.capituloAtual + 1}`)
+            setDadosSelecionadosModal((prevState: IValoresArmazenados) => { return { ...prevState, versiculo: 0 } })
+            //versiculo = 0 // > se houver dados nos params da rota,significa que houve um direcionamento do componente Pesquisa
+            //ao avançar ou voltar, não precisamos mais do versiculo chamativo, então para avançar ou voltar garantimos que a versiculo fique 0 (null)
+            setDadosLeituraRetornoApi(data)
+            setLoading("")
+            ScrollToTop()
+        } catch (err) {
+            Alert.alert("Houve alguma dificuldade no caminho.")
+            setLoading("")
+        }
     }
     async function RetornaCapitulo() {
-        setLoading(true)
-        let { data } = await GetApi(`mais/buscaconteudo/${dadosSelecionadosModal!.versao.versao_id}/${dadosSelecionadosModal!.testamento.testamento_id}/${dadosSelecionadosModal!.livro.livro_id}/${dadosLeituraRetornoApi!.capituloAtual - 1}`)
-        setDadosSelecionadosModal((prevState: IValoresArmazenados) => { return { ...prevState, versiculo: 0 } })
-        setDadosLeituraRetornoApi(data)
-        setLoading(false)
-        ScrollToTop()
+        if (dadosLeituraRetornoApi!.capituloAtual == 1) { return }
+        setLoading("Retornando para o versiculo anterior")
+        try {
+            let { data } = await GetApi(`mais/buscaconteudo/${dadosSelecionadosModal!.versao.versao_id}/${dadosSelecionadosModal!.testamento.testamento_id}/${dadosSelecionadosModal!.livro.livro_id}/${dadosLeituraRetornoApi!.capituloAtual - 1}`)
+            setDadosSelecionadosModal((prevState: IValoresArmazenados) => { return { ...prevState, versiculo: 0 } })
+            setDadosLeituraRetornoApi(data)
+            setLoading("")
+            ScrollToTop()
+        } catch (err) {
+            Alert.alert("Houve alguma dificuldade no caminho.")
+            setLoading("")
+        }
     }
     async function NavegaPorSelect(capituloValor: number) {
-        setLoading(true)
-        let { data } = await GetApi(`mais/buscaconteudo/${dadosSelecionadosModal!.versao.versao_id}/${dadosSelecionadosModal!.testamento.testamento_id}/${dadosSelecionadosModal!.livro.livro_id}/${capituloValor}`)
-        setDadosSelecionadosModal((prevState: IValoresArmazenados) => { return { ...prevState, versiculo: 0 } })
-        setDadosLeituraRetornoApi(data)
-        setLoading(false)
-        ScrollToTop()
+        setLoading("Indo até o capítulo selecionado")
+        try {
+            let { data } = await GetApi(`mais/buscaconteudo/${dadosSelecionadosModal!.versao.versao_id}/${dadosSelecionadosModal!.testamento.testamento_id}/${dadosSelecionadosModal!.livro.livro_id}/${capituloValor}`)
+            setDadosSelecionadosModal((prevState: IValoresArmazenados) => { return { ...prevState, versiculo: 0 } })
+            setDadosLeituraRetornoApi(data)
+            setLoading("")
+            ScrollToTop()
+        } catch (err) {
+            Alert.alert("Houve alguma dificuldade no caminho.")
+            setLoading("")
+        }
     }
     if (loading) {
-        return (<Loading />)
+        return (<Loading motivo={loading} />)
     }
     return (
         <SafeAreaView style={styles.safeContainer}>
@@ -163,14 +190,24 @@ export default function Leitura({ route, navigation }: any): JSX.Element {
                         </View>
                         <ScrollView ref={scrollRef}>
                             <View style={styles.viewContainerLeituraVersiculos}>
-                                {dadosLeituraRetornoApi.conteudo.map((data, index) =>
-                                    //dataParagrafo => usado no componente <RenderizaVersiculos/> para renderizar os versiculos e no modal opcoes
-                                    //versiculoPesquisa se existir, é pq houve uma pesquisa  no componente pesquisa, e será sublinhado no <RenderizaVersiculos/>
-                                    //dataNumeros e dataNomes são usados no <RenderizaVersiculos/>, pois ao segurar o versiculo, irá  habilitar um modal que usará as informações
-                                    <RenderizaVersiculos navigation={navigation} dataParagrafo={data} dataNumeros={dadosSelecionadosModal}
-                                        dataNomes={dadosLeituraRetornoApi} index={index} versiculoPesquisa={dadosSelecionadosModal.versiculo}
-                                    />
-                                )}
+                                <GestureRecognizer
+                                    onSwipeLeft={() => AvancaCapitulo()}
+                                    onSwipeRight={() => RetornaCapitulo()}
+                                    config={{
+                                        velocityThreshold: 0.5,
+                                        directionalOffsetThreshold: 500,
+                                    }} style={{
+                                        flex: 1, width: "100%"
+                                    }}>
+                                    {dadosLeituraRetornoApi.conteudo.map((data, index) =>
+                                        //dataParagrafo => usado no componente <RenderizaVersiculos/> para renderizar os versiculos e no modal opcoes
+                                        //versiculoPesquisa se existir, é pq houve uma pesquisa  no componente pesquisa, e será sublinhado no <RenderizaVersiculos/>
+                                        //dataNumeros e dataNomes são usados no <RenderizaVersiculos/>, pois ao segurar o versiculo, irá  habilitar um modal que usará as informações
+                                        <RenderizaVersiculos navigation={navigation} dataParagrafo={data} dataNumeros={dadosSelecionadosModal}
+                                            dataNomes={dadosLeituraRetornoApi} index={index} versiculoPesquisa={dadosSelecionadosModal.versiculo}
+                                        />
+                                    )}
+                                </GestureRecognizer>
                             </View>
                             <View style={styles.viewContainerArrows}>
                                 <TouchableOpacity style={styles.arrowsButton}

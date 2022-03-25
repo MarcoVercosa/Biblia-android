@@ -12,6 +12,7 @@ interface IValues {
 export default function Home(): JSX.Element {
     const { context }: IValues = useContext(Context) as any
     let lightTheme = context.lightTheme ? "white" : "#13192a"
+
     return (
         <SafeAreaView style={[styles.safeContainer, { backgroundColor: lightTheme }]}>
             <View style={styles.viewImage}>

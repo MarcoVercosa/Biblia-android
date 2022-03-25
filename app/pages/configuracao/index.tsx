@@ -31,7 +31,8 @@ export default function Configuracao(): JSX.Element {
                         />
                     </View>
                     <View style={styles.viewOptionTemaOptions}>
-                        <Text style={styles.viewOptionTemaText}>Tema LIGHT: </Text>
+                        <Text style={styles.viewOptionTemaText}>Tema LIGHT: <Text style={styles.viewOptionTemaTextInfo}>       Seu tema perfeito</Text></Text>
+
                         <Switch
                             thumbColor={context.lightTheme ? "#00f689" : "#f4f3f4"}
                             onValueChange={(value: boolean) => setContext(context.ChangeLightTheme(value))}
@@ -48,7 +49,7 @@ export default function Configuracao(): JSX.Element {
                         />
                     </View>
                     <View style={styles.viewOptionTemaOptions}>
-                        <Text style={styles.viewOptionTemaText}>Fonte Biblia: </Text>
+                        <Text style={styles.viewOptionTemaText}>Fonte Biblia: <Text style={styles.viewOptionTemaTextInfo}>       Para sua leitura</Text></Text>
                         <Picker
                             style={styles.viewOptionFonteSizeOptionsPicker}
                             selectedValue={context.fonteSizeLeituraBiblia}
@@ -67,7 +68,7 @@ export default function Configuracao(): JSX.Element {
                         />
                     </View>
                     <View style={styles.viewOptionTemaOptions}>
-                        <Text style={styles.viewOptionTemaText}>Fonte Hino: </Text>
+                        <Text style={styles.viewOptionTemaText}>Fonte Hino: <Text style={styles.viewOptionTemaTextInfo}>       Para o louvor a Deus</Text></Text>
                         <Picker
                             style={styles.viewOptionFonteSizeOptionsPicker}
                             selectedValue={context.fonteSizeHino}
@@ -86,7 +87,7 @@ export default function Configuracao(): JSX.Element {
                         />
                     </View>
                     <View style={styles.viewOptionTemaOptions}>
-                        <Text style={styles.viewOptionTemaText}>Fonte Tipo: </Text>
+                        <Text style={styles.viewOptionTemaText}>Fonte Tipo: <Text style={styles.viewOptionTemaTextInfo}>       Para o seu tipo de ser</Text></Text>
                         <Picker
                             style={styles.viewOptionFonteSizeOptionsPicker}
                             selectedValue={context.fontTipo}
@@ -106,7 +107,7 @@ export default function Configuracao(): JSX.Element {
                         />
                     </View>
                     <View style={styles.viewOptionTemaOptions}>
-                        <Text style={styles.viewOptionTemaText}>Tela ligada: </Text>
+                        <Text style={styles.viewOptionTemaText}>Tela ligada: <Text style={styles.viewOptionTemaTextInfo}>       Para sua concentração</Text></Text>
                         <Switch
                             thumbColor={context.keepScreenOn ? "#00f689" : "#f4f3f4"}
                             onValueChange={(value: boolean) => setContext(context.ChangeKeepScreenOn(value))}
@@ -124,13 +125,13 @@ export default function Configuracao(): JSX.Element {
                         />
                     </View>
                     <View style={[styles.viewOptionTemaOptions, { width: "100%", justifyContent: "center", }]}>
-                        <TouchableOpacity style={styles.viewOptionTemaButtontPadrao}>
-                            <Text style={styles.viewOptionTemaTextPadrao}
-                                onPress={() => {
-                                    setContext(context.Padrao())
-                                    Alert.alert("As configurações retornaram ao padrão do APP.")
-                                }}
-                            >Config. padrão </Text>
+                        <TouchableOpacity style={styles.viewOptionTemaButtontPadrao}
+                            onPress={() => {
+                                setContext(context.Padrao())
+                                Alert.alert("As configurações retornaram ao padrão do APP.")
+                            }}
+                        >
+                            <Text style={styles.viewOptionTemaTextPadrao}>Config. padrão </Text>
                         </TouchableOpacity>
 
                     </View>
@@ -144,10 +145,10 @@ export default function Configuracao(): JSX.Element {
                         />
                     </View>
                     <View style={[styles.viewOptionTemaOptions, { width: "100%", justifyContent: "center", }]}>
-                        <TouchableOpacity style={styles.viewOptionTemaButtontSobre}>
-                            <Text style={styles.viewOptionTemaTextSobre}
-                                onPress={() => OpenCloseModalSobre()}
-                            >Sobre </Text>
+                        <TouchableOpacity style={styles.viewOptionTemaButtontSobre}
+                            onPress={() => OpenCloseModalSobre()}
+                        >
+                            <Text style={styles.viewOptionTemaTextSobre}>Sobre </Text>
                         </TouchableOpacity>
 
                     </View>

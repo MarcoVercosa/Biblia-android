@@ -47,6 +47,10 @@ function Styles() {
             color: context.colorFont(),
             width: "50%",
         },
+        viewOptionTemaTextInfo: {
+            fontSize: 10,
+            color: context.colorFont(),
+        },
         viewOptionFonteSizeOptionsPicker: {
             width: "47%",
             backgroundColor: "#e5e5e5",

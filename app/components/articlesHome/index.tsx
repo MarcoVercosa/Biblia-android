@@ -3,9 +3,7 @@ import { Text, View, StyleSheet, ScrollView, Image } from "react-native"
 import { Styles } from "./style"
 
 export default function ArticlesHome(): JSX.Element {
-
     const styles = Styles()
-
     return (
         <ScrollView >
             <View style={styles.viewArticles}>
